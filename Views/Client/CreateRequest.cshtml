@@ -1,0 +1,259 @@
+﻿@model SolarConnect.Models.ViewModels.CreateRequestViewModel
+
+@{
+    ViewData["Title"] = "Create Solar Request - SolarConnect";
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+<style>
+    body {
+        background: linear-gradient(135deg, #fff9e6 0%, #ffe8cc 100%);
+        font-family: 'Poppins', sans-serif;
+        min-height: 100vh;
+        padding: 2rem;
+    }
+
+    .form-container {
+        max-width: 800px;
+        margin: 0 auto;
+        background-color: white;
+        padding: 3rem;
+        border-radius: 20px;
+        box-shadow: 0 10px 40px rgba(255, 140, 0, 0.15);
+    }
+
+    .header-section {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+        .header-section i {
+            font-size: 3rem;
+            color: #ff8c00;
+            margin-bottom: 1rem;
+        }
+
+    h2 {
+        color: #ff6b00;
+        margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+        color: #666;
+    }
+
+    .info-box {
+        background-color: #d1ecf1;
+        border-left: 4px solid #17a2b8;
+        padding: 1rem;
+        border-radius: 8px;
+        margin-bottom: 2rem;
+    }
+
+    .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .form-floating {
+        position: relative;
+        margin-bottom: 1.5rem;
+    }
+
+        .form-floating input,
+        .form-floating select,
+        .form-floating textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            outline: none;
+            background: #fafafa;
+            transition: all 0.3s ease;
+        }
+
+        .form-floating textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-floating label {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            pointer-events: none;
+            transition: 0.2s ease all;
+            color: #777;
+            background-color: #fff;
+            padding: 0 5px;
+        }
+
+        .form-floating input:focus + label,
+        .form-floating input:not(:placeholder-shown) + label,
+        .form-floating select:focus + label,
+        .form-floating textarea:focus + label,
+        .form-floating textarea:not(:placeholder-shown) + label {
+            top: -0.5rem;
+            left: 0.75rem;
+            font-size: 0.8rem;
+            color: #ff8c00;
+        }
+
+        .form-floating input:focus,
+        .form-floating select:focus,
+        .form-floating textarea:focus {
+            border-color: #ff8c00;
+            background-color: #fff;
+            box-shadow: 0 0 0 3px rgba(255, 140, 0, 0.1);
+        }
+
+    .input-unit {
+        position: absolute;
+        right: 1rem;
+        top: 1rem;
+        color: #999;
+        font-size: 0.9rem;
+    }
+
+    .text-danger {
+        font-size: 0.85rem;
+        margin-top: 0.3rem;
+        display: block;
+        color: #dc3545;
+    }
+
+    .btn {
+        padding: 1rem 2rem;
+        border-radius: 10px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border: none;
+    }
+
+    .btn-primary {
+        width: 100%;
+        background: linear-gradient(135deg, #ff8c00, #ffa500);
+        color: white;
+    }
+
+        .btn-primary:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 20px rgba(255, 140, 0, 0.3);
+        }
+
+    .btn-secondary {
+        background: white;
+        color: #ff6b00;
+        border: 2px solid #ff8c00;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+        .btn-secondary:hover {
+            background: #fff4d6;
+        }
+
+    .actions {
+        display: flex;
+        gap: 1rem;
+        margin-top: 2rem;
+    }
+
+    @@media (max-width: 768px) {
+        .form-row {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
+<div class="form-container">
+    <a asp-action="Dashboard" class="btn btn-secondary" style="margin-bottom: 2rem;">
+        <i class="fas fa-arrow-left"></i> Back to Dashboard
+    </a>
+
+    <div class="header-section">
+        <i class="fas fa-solar-panel"></i>
+        <h2>Request Solar Installation</h2>
+        <p class="subtitle">Tell us about your property and energy needs</p>
+    </div>
+
+    <div class="info-box">
+        <i class="fas fa-lightbulb"></i> <strong>How it works:</strong> Fill out this form with your property details.
+        Our approved vendors will review your request and send you personalized quotes!
+    </div>
+
+    <form asp-action="CreateRequest" method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+        <h3 style="color: #ff6b00; margin-bottom: 1rem;">
+            <i class="fas fa-home"></i> Property Information
+        </h3>
+
+        <div class="form-floating">
+            <input asp-for="PropertyAddress" class="form-control" placeholder="Address" />
+            <label asp-for="PropertyAddress">Property Address</label>
+            <span asp-validation-for="PropertyAddress" class="text-danger"></span>
+        </div>
+
+        <div class="form-row">
+            <div class="form-floating">
+                <select asp-for="PropertyType" class="form-control">
+                    <option value="">Select Type</option>
+                    <option value="Residential">Residential</option>
+                    <option value="Commercial">Commercial</option>
+                    <option value="Industrial">Industrial</option>
+                    <option value="Agricultural">Agricultural</option>
+                </select>
+                <label asp-for="PropertyType">Property Type</label>
+                <span asp-validation-for="PropertyType" class="text-danger"></span>
+            </div>
+
+            <div class="form-floating" style="position: relative;">
+                <input asp-for="RoofArea" class="form-control" type="number" step="0.1" placeholder="Roof Area" />
+                <label asp-for="RoofArea">Available Roof Area</label>
+                <span class="input-unit">m²</span>
+                <span asp-validation-for="RoofArea" class="text-danger"></span>
+            </div>
+        </div>
+
+        <h3 style="color: #ff6b00; margin: 2rem 0 1rem 0;">
+            <i class="fas fa-bolt"></i> Energy Requirements
+        </h3>
+
+        <div class="form-row">
+            <div class="form-floating" style="position: relative;">
+                <input asp-for="MonthlyConsumption" class="form-control" type="number" step="0.1" placeholder="Consumption" />
+                <label asp-for="MonthlyConsumption">Monthly Consumption</label>
+                <span class="input-unit">kWh</span>
+                <span asp-validation-for="MonthlyConsumption" class="text-danger"></span>
+            </div>
+
+            <div class="form-floating" style="position: relative;">
+                <input asp-for="MonthlyBill" class="form-control" type="number" step="0.01" placeholder="Bill" />
+                <label asp-for="MonthlyBill">Monthly Bill (Optional)</label>
+                <span class="input-unit">USD</span>
+                <span asp-validation-for="MonthlyBill" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-floating">
+            <textarea asp-for="AdditionalNotes" class="form-control" placeholder="Notes"></textarea>
+            <label asp-for="AdditionalNotes">Additional Notes (Optional)</label>
+            <span asp-validation-for="AdditionalNotes" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">
+            <i class="fas fa-paper-plane"></i> Submit Request
+        </button>
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

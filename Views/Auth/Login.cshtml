@@ -1,0 +1,254 @@
+﻿@model SolarConnect.Models.ViewModels.LoginViewModel
+
+@{
+    ViewData["Title"] = "Login - SolarConnect";
+}
+
+<style>
+    body {
+        background: linear-gradient(135deg, #fff9e6 0%, #ffe8cc 100%);
+        font-family: 'Poppins', sans-serif;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .login-container {
+        max-width: 450px;
+        width: 100%;
+        margin: 2rem auto;
+        background-color: #fff;
+        padding: 3rem;
+        border-radius: 20px;
+        box-shadow: 0 10px 40px rgba(255, 140, 0, 0.15);
+        animation: fadeIn 0.5s ease;
+    }
+
+    @@keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .header-section {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+        .header-section i {
+            font-size: 3.5rem;
+            color: #ff8c00;
+            margin-bottom: 1rem;
+        }
+
+    h2 {
+        color: #ff6b00;
+        font-weight: bold;
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+        color: #666;
+        font-size: 0.95rem;
+    }
+
+    .form-floating {
+        position: relative;
+        margin-bottom: 1.5rem;
+    }
+
+        .form-floating input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            outline: none;
+            background: #fafafa;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+            .form-floating input:focus {
+                border-color: #ff8c00;
+                background-color: #fff;
+                box-shadow: 0 0 0 3px rgba(255, 140, 0, 0.1);
+            }
+
+        .form-floating label {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            pointer-events: none;
+            transition: 0.2s ease all;
+            color: #777;
+            background-color: #fff;
+            padding: 0 5px;
+        }
+
+        .form-floating input:focus + label,
+        .form-floating input:not(:placeholder-shown) + label {
+            top: -0.5rem;
+            left: 0.75rem;
+            font-size: 0.8rem;
+            color: #ff8c00;
+        }
+
+    .remember-me {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+        .remember-me input {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+    .text-danger {
+        font-size: 0.85rem;
+        margin-top: 0.3rem;
+        display: block;
+        color: #dc3545;
+    }
+
+    .btn-login {
+        width: 100%;
+        padding: 1rem;
+        background: linear-gradient(135deg, #ff8c00, #ffa500);
+        color: white;
+        font-weight: 600;
+        border: none;
+        border-radius: 12px;
+        transition: all 0.3s ease;
+        font-size: 1.1rem;
+        cursor: pointer;
+    }
+
+        .btn-login:hover {
+            background: linear-gradient(135deg, #ff6b00, #ff8c00);
+            transform: scale(1.02);
+            box-shadow: 0 8px 20px rgba(255, 140, 0, 0.3);
+        }
+
+    .divider {
+        text-align: center;
+        margin: 2rem 0;
+        color: #999;
+        position: relative;
+    }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 40%;
+            height: 1px;
+            background-color: #e0e0e0;
+        }
+
+        .divider::before {
+            left: 0;
+        }
+
+        .divider::after {
+            right: 0;
+        }
+
+    .register-link {
+        text-align: center;
+        margin-top: 1.5rem;
+        color: #666;
+    }
+
+        .register-link a {
+            color: #ff6b00;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+            .register-link a:hover {
+                text-decoration: underline;
+            }
+
+    .alert {
+        padding: 1rem;
+        border-radius: 8px;
+        margin-bottom: 1.5rem;
+    }
+
+    .alert-danger {
+        background-color: #ffe6e6;
+        border-left: 4px solid #dc3545;
+        color: #721c24;
+    }
+
+    .alert-success {
+        background-color: #d4edda;
+        border-left: 4px solid #28a745;
+        color: #155724;
+    }
+</style>
+
+<div class="login-container">
+    <div class="header-section">
+        <i class="fas fa-solar-panel"></i>
+        <h2>Welcome Back</h2>
+        <p class="subtitle">Login to access your SolarConnect account</p>
+    </div>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["Success"]
+        </div>
+    }
+
+    <form asp-action="Login" asp-controller="Auth" method="post">
+        <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+        <div class="form-floating">
+            <input asp-for="Email" class="form-control" placeholder="Email" />
+            <label asp-for="Email">Email Address</label>
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+
+        <div class="form-floating">
+            <input asp-for="Password" class="form-control" type="password" placeholder="Password" />
+            <label asp-for="Password">Password</label>
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+
+        <div class="remember-me">
+            <input asp-for="RememberMe" type="checkbox" />
+            <label asp-for="RememberMe">Remember Me</label>
+        </div>
+
+        <button type="submit" class="btn-login">
+            <i class="fas fa-sign-in-alt"></i> Login
+        </button>
+    </form>
+
+    <div class="divider">OR</div>
+
+    <div class="register-link">
+        Don't have an account?
+        <a asp-controller="Auth" asp-action="Register">Register Here</a>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

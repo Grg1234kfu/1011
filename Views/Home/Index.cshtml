@@ -1,0 +1,339 @@
+﻿@{
+    ViewData["Title"] = "Home - SolarConnect Lebanon";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SolarConnect Lebanon - Solar Power Solutions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background-color: #fff9e6;
+            color: #2e2e2e;
+        }
+
+        header {
+            background: linear-gradient(135deg, #ff8c00, #ffa500);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+            header .logo {
+                font-size: 1.8rem;
+                font-weight: bold;
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+            }
+
+                header .logo i {
+                    color: #ffeb3b;
+                }
+
+            header nav a {
+                color: white;
+                text-decoration: none;
+                margin-left: 1.5rem;
+                font-weight: 500;
+                transition: opacity 0.3s;
+            }
+
+                header nav a:hover {
+                    opacity: 0.8;
+                }
+
+        .hero {
+            padding: 5rem 2rem;
+            text-align: center;
+            background: linear-gradient(135deg, #ffa500, #ff6b00);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+            .hero::before {
+                content: '☀️';
+                position: absolute;
+                font-size: 20rem;
+                opacity: 0.1;
+                top: -5rem;
+                right: -5rem;
+            }
+
+            .hero h1 {
+                font-size: 3.5rem;
+                margin-bottom: 1rem;
+                position: relative;
+                z-index: 1;
+            }
+
+            .hero p {
+                font-size: 1.3rem;
+                position: relative;
+                z-index: 1;
+            }
+
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 2rem;
+            padding: 4rem 2rem;
+            background-color: #fffbf0;
+        }
+
+        .feature-card {
+            background-color: #ffffff;
+            border-left: 6px solid #ff8c00;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(255, 140, 0, 0.15);
+            padding: 2rem;
+            width: 280px;
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+            .feature-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 8px 20px rgba(255, 140, 0, 0.25);
+            }
+
+            .feature-card i {
+                font-size: 2.5rem;
+                color: #ff8c00;
+                margin-bottom: 0.5rem;
+            }
+
+            .feature-card h3 {
+                margin-top: 0.2rem;
+                font-size: 1.4rem;
+                color: #ff6b00;
+            }
+
+        .actions {
+            background-color: #fff4d6;
+            padding: 4rem 2rem;
+        }
+
+            .actions h2 {
+                text-align: center;
+                color: #ff6b00;
+                font-size: 2.2rem;
+                margin-bottom: 3rem;
+            }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .action-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            width: 280px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease;
+        }
+
+            .action-card:hover {
+                transform: translateY(-5px);
+            }
+
+            .action-card i {
+                font-size: 3rem;
+                color: #ff8c00;
+                margin-bottom: 1rem;
+            }
+
+            .action-card h4 {
+                color: #ff6b00;
+                font-size: 1.3rem;
+                margin-bottom: 0.8rem;
+            }
+
+            .action-card p {
+                font-size: 0.95rem;
+                margin-bottom: 1.5rem;
+                color: #666;
+            }
+
+            .action-card .btn {
+                background: linear-gradient(135deg, #ff8c00, #ffa500);
+                color: white;
+                border: none;
+                padding: 0.8rem 1.6rem;
+                border-radius: 6px;
+                cursor: pointer;
+                font-weight: 600;
+                text-decoration: none;
+                display: inline-block;
+                transition: transform 0.2s, box-shadow 0.2s;
+            }
+
+                .action-card .btn:hover {
+                    transform: scale(1.05);
+                    box-shadow: 0 4px 12px rgba(255, 140, 0, 0.3);
+                }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.9rem;
+            background: linear-gradient(135deg, #ff8c00, #ffa500);
+            color: white;
+        }
+
+            footer a {
+                color: #ffeb3b;
+                text-decoration: none;
+            }
+
+                footer a:hover {
+                    text-decoration: underline;
+                }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <i class="fas fa-solar-panel"></i>
+            SolarConnect
+        </div>
+        <nav>
+            <a href="/">Home</a>
+            <a href="#">About</a>
+            @if (User?.Identity?.IsAuthenticated == true)
+            {
+                <form asp-controller="Auth" asp-action="Logout" method="post" style="display: inline;">
+                    <button type="submit" style="background: none; border: none; color: white; cursor: pointer; font-weight: 500; margin-left: 1.5rem;">
+                        Logout
+                    </button>
+                </form>
+            }
+            else
+            {
+                <a asp-controller="Auth" asp-action="Login">Login</a>
+                <a asp-controller="Auth" asp-action="Register">Register</a>
+            }
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>Power Lebanon with Solar Energy</h1>
+        <p>Compare quotes. Choose trusted suppliers. Track your solar installation.</p>
+    </section>
+
+    <section class="features">
+        <div class="feature-card">
+            <i class="fas fa-calculator"></i>
+            <h3>Smart Energy Calculator</h3>
+            <p>Get accurate sizing recommendations based on your consumption patterns and location in Lebanon.</p>
+        </div>
+        <div class="feature-card">
+            <i class="fas fa-handshake"></i>
+            <h3>Multiple Quotes</h3>
+            <p>Receive competitive offers from verified solar vendors and installers across Lebanon.</p>
+        </div>
+        <div class="feature-card">
+            <i class="fas fa-chart-line"></i>
+            <h3>Track Installation</h3>
+            <p>Monitor your solar project from approval to completion with real-time updates and photos.</p>
+        </div>
+        <div class="feature-card">
+            <i class="fas fa-star"></i>
+            <h3>Verified Reviews</h3>
+            <p>Read authentic reviews from Lebanese customers about suppliers and system performance.</p>
+        </div>
+        <div class="feature-card">
+            <i class="fas fa-shield-alt"></i>
+            <h3>Transparent Pricing</h3>
+            <p>Access market analytics, pricing trends, and supplier performance data to make informed decisions.</p>
+        </div>
+        <div class="feature-card">
+            <i class="fas fa-leaf"></i>
+            <h3>Green Future</h3>
+            <p>Join Lebanon's energy transition and reduce your dependence on traditional power sources.</p>
+        </div>
+    </section>
+
+    <section class="actions">
+        <h2>Get Started Today</h2>
+        <div class="row">
+            @if (User?.Identity?.IsAuthenticated != true)
+            {
+                <div class="action-card">
+                    <i class="fas fa-user"></i>
+                    <h4>Homeowner / Business</h4>
+                    <p>Request solar quotes and compare suppliers</p>
+                    <a asp-controller="Auth" asp-action="RegisterClient" class="btn">Register as Client</a>
+                </div>
+                <div class="action-card">
+                    <i class="fas fa-tools"></i>
+                    <h4>Solar Vendor / Installer</h4>
+                    <p>Join our network and grow your business</p>
+                    <a asp-controller="Auth" asp-action="RegisterVendor" class="btn">Register as Vendor</a>
+                </div>
+                <div class="action-card">
+                    <i class="fas fa-sign-in-alt"></i>
+                    <h4>Already Have an Account?</h4>
+                    <p>Access your dashboard and manage requests</p>
+                    <a asp-controller="Auth" asp-action="Login" class="btn">Login</a>
+                </div>
+            }
+            else
+            {
+                @if (User.IsInRole("Client"))
+                {
+                    <div class="action-card">
+                        <i class="fas fa-file-alt"></i>
+                        <h4>My Solar Requests</h4>
+                        <p>View all your solar system requests and quotes</p>
+                        <a asp-controller="Client" asp-action="Dashboard" class="btn">Go to Dashboard</a>
+                    </div>
+                }
+                else if (User.IsInRole("Vendor"))
+                {
+                    <div class="action-card">
+                        <i class="fas fa-inbox"></i>
+                        <h4>Vendor Dashboard</h4>
+                        <p>Browse and respond to client requests</p>
+                        <a asp-controller="Vendor" asp-action="Dashboard" class="btn">Go to Dashboard</a>
+                    </div>
+                }
+                else if (User.IsInRole("Admin"))
+                {
+                    <div class="action-card">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <h4>Admin Dashboard</h4>
+                        <p>View platform statistics and analytics</p>
+                        <a asp-controller="Admin" asp-action="Dashboard" class="btn">Go to Dashboard</a>
+                    </div>
+                }
+            }
+        </div>
+    </section>
+
+    <footer>
+        &copy; 2025 SolarConnect Lebanon. Powering Lebanon's Green Future. |
+        <a href="#">Privacy Policy</a>
+    </footer>
+
+</body>
+</html>

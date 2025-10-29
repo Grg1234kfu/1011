@@ -1,0 +1,172 @@
+﻿@{
+    ViewData["Title"] = "Registration - SolarConnect";
+}
+
+<style>
+    body {
+        background: linear-gradient(135deg, #fff9e6 0%, #ffe8cc 100%);
+        font-family: 'Poppins', sans-serif;
+        min-height: 100vh;
+        padding: 2rem;
+    }
+
+    .container {
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+
+    header {
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+
+        header h1 {
+            font-size: 2.75rem;
+            font-weight: 800;
+            color: #ff8c00;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            color: #666;
+        }
+
+    .choice-cards {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .card-badge {
+        display: inline-block;
+        background: linear-gradient(135deg, #ffc107, #ff8c00);
+        color: white;
+        padding: 0.3rem 0.8rem;
+        border-radius: 15px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        margin-top: 0.5rem;
+    }
+
+    .card {
+        background-color: white;
+        border-radius: 20px;
+        padding: 2.5rem;
+        width: 100%;
+        max-width: 400px;
+        box-shadow: 0 10px 30px rgba(255, 140, 0, 0.15);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        text-align: center;
+    }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(255, 140, 0, 0.25);
+        }
+
+        .card i {
+            font-size: 4rem;
+            color: #ff8c00;
+            margin-bottom: 1.5rem;
+        }
+
+        .card h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #ff6b00;
+            margin-bottom: 1rem;
+        }
+
+        .card p {
+            color: #666;
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+        }
+
+    .btn {
+        display: inline-block;
+        width: 100%;
+        padding: 1rem;
+        background: linear-gradient(135deg, #ff8c00, #ffa500);
+        color: white;
+        text-decoration: none;
+        border-radius: 12px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+        .btn:hover {
+            background: linear-gradient(135deg, #ff6b00, #ff8c00);
+            transform: scale(1.02);
+            box-shadow: 0 8px 20px rgba(255, 140, 0, 0.3);
+        }
+
+    .login-link {
+        text-align: center;
+        margin-top: 2rem;
+        color: #666;
+    }
+
+        .login-link a {
+            color: #ff6b00;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+            .login-link a:hover {
+                text-decoration: underline;
+            }
+
+    @@media (max-width: 768px) {
+        .choice-cards {
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+</style>
+
+<div class="container">
+    <header>
+        <h1>Join SolarConnect Lebanon</h1>
+        <p>Choose your role and start your solar journey today</p>
+    </header>
+
+    <div class="choice-cards">
+        <div class="card">
+            <i class="fas fa-home"></i>
+            <h2>Homeowner / Business</h2>
+            <p>Get solar quotes, compare vendors, and track your installation project from start to finish.</p>
+            <a asp-controller="Auth" asp-action="RegisterClient" class="btn">
+                <i class="fas fa-user-plus"></i> Register as Client
+            </a>
+        </div>
+
+        <div class="card">
+            <i class="fas fa-solar-panel"></i>
+            <h2>Solar Vendor / Installer</h2>
+            <p>Grow your business by connecting with customers looking for solar solutions across Lebanon.</p>
+            <a asp-controller="Auth" asp-action="RegisterVendor" class="btn">
+                <i class="fas fa-briefcase"></i> Register as Vendor
+            </a>
+        </div>
+    </div>
+
+    <div class="login-link">
+        Already have an account?
+        <a asp-controller="Auth" asp-action="Login">Log in</a>
+    </div>
+</div>
+<!-- Admin Card - ADD THIS -->
+<a asp-action="RegisterAdmin" class="card-link">
+    <div class="card">
+        <div class="card-icon">
+            <i class="fas fa-user-shield"></i>
+        </div>
+        <h3>Administrator</h3>
+        <p>Platform administrator with full access</p>
+        <span class="card-badge">Team Members Only</span>
+        <button class="card-button">Register as Admin</button>
+    </div>
+</a>
