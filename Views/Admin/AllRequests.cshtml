@@ -1,0 +1,40 @@
+﻿@model IEnumerable<SolarConnect.Models.Request>
+@{
+    ViewData["Title"] = "All Requests - SolarConnect";
+}
+
+<div class="dashboard-container">
+    <h1><i class="fas fa-file-invoice"></i> All Requests</h1>
+
+    <table class="table table-striped mt-4">
+        <thead style="color:#ff6b00;">
+            <tr>
+                <th>#</th>
+                <th>Client</th>
+                <th>Address</th>
+                <th>Type</th>
+                <th>Monthly (kWh)</th>
+                <th>Status</th>
+                <th>Created</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var r in Model)
+            {
+                <tr>
+                    <td>@r.Id</td>
+                    <td>@r.Client?.User?.Email</td>
+                    <td>@r.PropertyAddress</td>
+                    <td>@r.PropertyType</td>
+                    <td>@r.MonthlyConsumption</td>
+                    <td>@r.Status</td>
+                    <td>@r.CreatedAt.ToLocalTime()</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="actions mt-3">
+        <a asp-action="Dashboard" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Back</a>
+    </div>
+</div>

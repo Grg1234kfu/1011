@@ -1,0 +1,75 @@
+﻿@model SolarConnect.Models.Request
+@{
+    ViewData["Title"] = "New Solar Request";
+}
+
+<div class="dashboard-container">
+    <h1><i class="fas fa-plus-circle"></i> New Solar Request</h1>
+
+    <!-- Validation and TempData messages -->
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger">@TempData["Error"]</div>
+    }
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success">@TempData["Success"]</div>
+    }
+
+    <form asp-action="NewRequest" method="post" class="mt-4">
+        @Html.AntiForgeryToken()
+
+        <div asp-validation-summary="All" class="text-danger"></div>
+
+        <div class="form-group mb-3">
+            <label asp-for="PropertyAddress"></label>
+            <input asp-for="PropertyAddress" class="form-control" required />
+            <span asp-validation-for="PropertyAddress" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="PropertyType"></label>
+            <select asp-for="PropertyType" class="form-control" required>
+                <option value="">-- Select Property Type --</option>
+                <option>Residential</option>
+                <option>Commercial</option>
+                <option>Industrial</option>
+                <option>Institutional</option>
+                <option>Agricultural</option>
+            </select>
+            <span asp-validation-for="PropertyType" class="text-danger"></span>
+        </div>
+
+
+        <div class="form-group mb-3">
+            <label asp-for="RoofArea"></label>
+            <input asp-for="RoofArea" class="form-control" type="number" required />
+            <span asp-validation-for="RoofArea" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="MonthlyConsumption"></label>
+            <input asp-for="MonthlyConsumption" class="form-control" type="number" required />
+            <span asp-validation-for="MonthlyConsumption" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="MonthlyBill"></label>
+            <input asp-for="MonthlyBill" class="form-control" type="number" required />
+            <span asp-validation-for="MonthlyBill" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="AdditionalNotes"></label>
+            <textarea asp-for="AdditionalNotes" class="form-control"></textarea>
+            <span asp-validation-for="AdditionalNotes" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit Request</button>
+        <a asp-action="Dashboard" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

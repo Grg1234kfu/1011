@@ -1,0 +1,55 @@
+﻿@{
+    ViewData["Title"] = "Verified Reviews - SolarConnect";
+}
+<style>
+    body {
+        background: #fff9e6;
+        font-family: 'Poppins';
+    }
+
+    .review-container {
+        max-width: 700px;
+        margin: 3rem auto;
+        background: white;
+        padding: 3rem;
+        border-radius: 20px;
+        box-shadow: 0 8px 25px rgba(255,140,0,0.15);
+    }
+
+    h2 {
+        color: #ff6b00;
+        text-align: center;
+    }
+
+    .review {
+        background: #fff4d6;
+        padding: 1rem;
+        border-radius: 10px;
+        margin-top: 1rem;
+    }
+</style>
+
+<div class="review-container">
+    <h2><i class="fas fa-star"></i> Verified Reviews</h2>
+
+    <form asp-action="VerifiedReviews" method="post">
+        <label>Vendor Name</label>
+        <input type="text" name="VendorName" required />
+        <label>Rating (1–5)</label>
+        <input type="number" name="Rating" min="1" max="5" required />
+        <label>Comment</label>
+        <input type="text" name="Comment" required />
+        <button type="submit">Submit Review</button>
+    </form>
+
+    @if (ViewBag.Reviews != null)
+    {
+        foreach (var r in ViewBag.Reviews)
+        {
+            <div class="review">
+                <strong>@r.Vendor</strong> — <span style="color:#ff8c00;">⭐ @r.Rating</span>
+                <p>@r.Comment</p>
+            </div>
+        }
+    }
+</div>

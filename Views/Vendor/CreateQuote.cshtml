@@ -1,0 +1,44 @@
+﻿@model SolarConnect.Models.Quote
+@{
+    ViewData["Title"] = "Submit Quote - SolarConnect";
+}
+
+<div class="dashboard-container">
+    <h1><i class="fas fa-file-invoice"></i> Submit Quote</h1>
+
+    <p>For client: <strong>@ViewBag.ClientName</strong></p>
+
+    <form asp-action="CreateQuote" method="post" class="mt-4">
+        <input type="hidden" asp-for="RequestId" value="@ViewBag.RequestId" />
+
+        <div class="form-group mb-3">
+            <label>System Size (kW)</label>
+            <input asp-for="SystemSize" class="form-control" type="number" step="0.01" required />
+            <span asp-validation-for="SystemSize" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label>Total Price ($)</label>
+            <input asp-for="TotalPrice" class="form-control" type="number" step="0.01" required />
+            <span asp-validation-for="TotalPrice" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label>Warranty (years)</label>
+            <input asp-for="WarrantyYears" class="form-control" type="number" min="0" required />
+            <span asp-validation-for="WarrantyYears" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label>Details / Notes</label>
+            <textarea asp-for="Details" class="form-control" rows="4"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit Quote</button>
+        <a asp-action="ClientRequests" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,64 @@
+﻿@model IEnumerable<SolarConnect.Models.Project>
+
+@{
+    ViewData["Title"] = "My Installation Projects - SolarConnect";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center text-warning mb-4">My Installation Projects</h2>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success">@TempData["Success"]</div>
+    }
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info text-center">
+            No projects found yet. Once a quote is accepted, the project will appear here.
+        </div>
+    }
+    else
+    {
+        <div class="card shadow-sm rounded-4">
+            <div class="table-responsive">
+                <table class="table table-bordered align-middle mb-0">
+                    <thead class="table-warning text-center">
+                        <tr>
+                            <th>Client</th>
+                            <th>Status</th>
+                            <th>Progress Stage</th>
+                            <th>Materials Used</th>
+                            <th>Start Date</th>
+                            <th>Completion Date</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var project in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @project.Quote.Request.Client.User.FirstName
+                                    @project.Quote.Request.Client.User.LastName
+                                </td>
+                                <td class="text-center">
+                                    <span class="badge bg-warning text-dark">@project.Status</span>
+                                </td>
+                                <td>@(project.ProgressStage ?? "-")</td>
+                                <td>@(project.MaterialsUsed ?? "-")</td>
+                                <td>@project.StartDate.ToShortDateString()</td>
+                                <td>@(project.CompletionDate?.ToShortDateString() ?? "-")</td>
+                                <td class="text-center">
+                                    <a asp-action="Update" asp-route-id="@project.Id" class="btn btn-sm btn-primary">
+                                        <i class="fas fa-edit"></i> Update
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+</div>

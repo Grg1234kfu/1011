@@ -1,0 +1,35 @@
+﻿@{
+    ViewData["Title"] = "Green Future - SolarConnect";
+}
+<style>
+    body {
+        background: #fff9e6;
+        font-family: 'Poppins';
+        text-align: center;
+    }
+
+    .green-box {
+        max-width: 700px;
+        margin: 3rem auto;
+        background: white;
+        padding: 3rem;
+        border-radius: 20px;
+        box-shadow: 0 8px 25px rgba(255,140,0,0.15);
+    }
+
+    h2 {
+        color: #ff6b00;
+    }
+
+    .stat {
+        font-size: 1.4rem;
+        margin: 1rem 0;
+    }
+</style>
+
+<div class="green-box">
+    <h2><i class="fas fa-leaf"></i> Green Future</h2>
+    <p class="stat">Total Installed Capacity: <strong>@ViewBag.TotalKW</strong> kW</p>
+    <p class="stat">Estimated CO₂ Saved: <strong>@ViewBag.CO2</strong> tons/year</p>
+    <p class="stat">Equivalent Trees Planted: <strong>@ViewBag.Trees</strong></p>
+</div>

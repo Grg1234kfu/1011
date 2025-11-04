@@ -1,0 +1,50 @@
+﻿@model IEnumerable<SolarConnect.Models.Quote>
+@{
+    ViewData["Title"] = "My Quotes - SolarConnect";
+}
+
+<div class="dashboard-container">
+    <h1><i class="fas fa-file-invoice-dollar"></i> My Quotes</h1>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert-success">
+            <i class="fas fa-check-circle"></i> @TempData["Success"]
+        </div>
+    }
+
+    @if (!Model.Any())
+    {
+        <p>You haven’t submitted any quotes yet.</p>
+    }
+    else
+    {
+        <table class="table table-striped mt-4">
+            <thead style="color:#ff6b00;">
+                <tr>
+                    <th>Client</th>
+                    <th>System Size (kW)</th>
+                    <th>Total Price ($)</th>
+                    <th>Warranty (years)</th>
+                    <th>Status</th>
+                    <th>Submitted</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var q in Model)
+                {
+                    <tr>
+                        <td>@q.Request.Client.User.FirstName @q.Request.Client.User.LastName</td>
+                        <td>@q.SystemSize</td>
+                        <td>@q.TotalPrice</td>
+                        <td>@q.WarrantyYears</td>
+                        <td>@q.Status</td>
+                        <td>@q.SubmittedAt.ToLocalTime()</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+
+    <a asp-action="Dashboard" class="btn btn-secondary mt-3"><i class="fas fa-arrow-left"></i> Back</a>
+</div>

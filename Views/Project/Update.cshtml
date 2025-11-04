@@ -1,0 +1,51 @@
+﻿@model SolarConnect.Models.Project
+
+@{
+    ViewData["Title"] = "Update Project - SolarConnect";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center text-warning mb-4">Update Project</h2>
+
+    <div class="card shadow p-4 rounded-4">
+        <form asp-action="UpdateProject" method="post">
+            <input type="hidden" asp-for="Id" />
+
+            <div class="form-group mb-3">
+                <label class="fw-semibold">Status</label>
+                <select asp-for="Status" class="form-control">
+                    <option>Pending</option>
+                    <option>In Progress</option>
+                    <option>Installed</option>
+                    <option>Completed</option>
+                    <option>Cancelled</option>
+                </select>
+            </div>
+
+            <div class="form-group mb-3">
+                <label class="fw-semibold">Progress Stage</label>
+                <input asp-for="ProgressStage" class="form-control" placeholder="e.g. Panels Installed, Wiring Complete" />
+            </div>
+
+            <div class="form-group mb-3">
+                <label class="fw-semibold">Materials / Products Used</label>
+                <input asp-for="MaterialsUsed" class="form-control" placeholder="e.g. JA Solar 450W, Huawei Inverter 10kW" />
+            </div>
+
+            <div class="form-group mb-3">
+                <label class="fw-semibold">Installation Notes</label>
+                <textarea asp-for="InstallationNotes" class="form-control" rows="4"
+                          placeholder="Enter details about installation progress or client updates..."></textarea>
+            </div>
+
+            <div class="d-flex justify-content-end mt-4">
+                <button type="submit" class="btn btn-warning me-2">💾 Save Changes</button>
+                <a asp-action="MyProjects" class="btn btn-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

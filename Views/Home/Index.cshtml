@@ -101,6 +101,7 @@
             width: 280px;
             position: relative;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
         }
 
             .feature-card:hover {
@@ -240,33 +241,39 @@
         <p>Compare quotes. Choose trusted suppliers. Track your solar installation.</p>
     </section>
 
+    <!-- ✅ CLICKABLE FEATURES -->
     <section class="features">
-        <div class="feature-card">
+        <div class="feature-card" onclick="location.href='@Url.Action("SmartEnergyCalculator", "Home")'">
             <i class="fas fa-calculator"></i>
             <h3>Smart Energy Calculator</h3>
             <p>Get accurate sizing recommendations based on your consumption patterns and location in Lebanon.</p>
         </div>
-        <div class="feature-card">
+
+        <div class="feature-card" onclick="location.href='@Url.Action("MultipleQuotes", "Home")'">
             <i class="fas fa-handshake"></i>
             <h3>Multiple Quotes</h3>
             <p>Receive competitive offers from verified solar vendors and installers across Lebanon.</p>
         </div>
-        <div class="feature-card">
+
+        <div class="feature-card" onclick="location.href='@Url.Action("TrackInstallation", "Home")'">
             <i class="fas fa-chart-line"></i>
             <h3>Track Installation</h3>
             <p>Monitor your solar project from approval to completion with real-time updates and photos.</p>
         </div>
-        <div class="feature-card">
+
+        <div class="feature-card" onclick="location.href='@Url.Action("VerifiedReviews", "Home")'">
             <i class="fas fa-star"></i>
             <h3>Verified Reviews</h3>
             <p>Read authentic reviews from Lebanese customers about suppliers and system performance.</p>
         </div>
-        <div class="feature-card">
+
+        <div class="feature-card" onclick="location.href='@Url.Action("TransparentPricing", "Home")'">
             <i class="fas fa-shield-alt"></i>
             <h3>Transparent Pricing</h3>
             <p>Access market analytics, pricing trends, and supplier performance data to make informed decisions.</p>
         </div>
-        <div class="feature-card">
+
+        <div class="feature-card" onclick="location.href='@Url.Action("GreenFuture", "Home")'">
             <i class="fas fa-leaf"></i>
             <h3>Green Future</h3>
             <p>Join Lebanon's energy transition and reduce your dependence on traditional power sources.</p>

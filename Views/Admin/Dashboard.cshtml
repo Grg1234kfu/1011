@@ -1,10 +1,12 @@
-﻿@{
+﻿@model SolarConnect.Models.ViewModels.AdminDashboardViewModel
+@{
     ViewData["Title"] = "Admin Dashboard - SolarConnect";
 }
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
 <style>
+    /* keep your entire CSS exactly as you sent before */
     body {
         background: linear-gradient(135deg, #fff9e6 0%, #ffe8cc 100%);
         font-family: 'Poppins', sans-serif;
@@ -139,7 +141,7 @@
 
         .btn-primary:hover {
             transform: scale(1.05);
-            box-shadow: 0 4px 12px rgba(255, 140, 0, 0.3);
+            box-shadow: 0 4px 12px rgba(255,140,0,0.3);
         }
 
     .btn-secondary {
@@ -166,34 +168,36 @@
     <div class="stats">
         <div class="stat-card">
             <i class="fas fa-users"></i>
-            <h2>0</h2>
+            <h2>@Model.TotalClients</h2>
             <p>Total Clients</p>
         </div>
         <div class="stat-card">
             <i class="fas fa-briefcase"></i>
-            <h2>0</h2>
+            <h2>@Model.TotalVendors</h2>
             <p>Total Vendors</p>
         </div>
         <div class="stat-card">
             <i class="fas fa-clock"></i>
-            <h2>0</h2>
+            <h2>@Model.PendingApprovals</h2>
             <p>Pending Approvals</p>
         </div>
         <div class="stat-card">
             <i class="fas fa-file-alt"></i>
-            <h2>0</h2>
+            <h2>@Model.ActiveRequests</h2>
             <p>Active Requests</p>
         </div>
     </div>
 
-    <h2 style="color: #ff6b00; margin-bottom: 1.5rem;">Quick Actions</h2>
+    <h2 style="color:#ff6b00; margin-bottom:1.5rem;">Quick Actions</h2>
 
     <div class="cards">
-        <div class="card">
-            <i class="fas fa-users-cog"></i>
-            <h3>Manage Users</h3>
-            <p>View and manage all users</p>
-        </div>
+        <a asp-action="ManageUsers" class="card-link">
+            <div class="card">
+                <i class="fas fa-users-cog"></i>
+                <h3>Manage Users</h3>
+                <p>View and manage all users</p>
+            </div>
+        </a>
 
         <a asp-action="PendingVendors" class="card-link">
             <div class="card">
@@ -203,36 +207,44 @@
             </div>
         </a>
 
-        <div class="card">
-            <i class="fas fa-box"></i>
-            <h3>Products</h3>
-            <p>Manage solar products catalog</p>
-        </div>
+        <a asp-action="Products" class="card-link">
+            <div class="card">
+                <i class="fas fa-box"></i>
+                <h3>Products</h3>
+                <p>Manage solar products catalog</p>
+            </div>
+        </a>
 
-        <div class="card">
-            <i class="fas fa-file-invoice"></i>
-            <h3>All Requests</h3>
-            <p>View all client requests</p>
-        </div>
+        <a asp-action="AllRequests" class="card-link">
+            <div class="card">
+                <i class="fas fa-file-invoice"></i>
+                <h3>All Requests</h3>
+                <p>View all client requests</p>
+            </div>
+        </a>
 
-        <div class="card">
-            <i class="fas fa-tasks"></i>
-            <h3>Projects</h3>
-            <p>Monitor installation projects</p>
-        </div>
+        <a asp-action="Projects" class="card-link">
+            <div class="card">
+                <i class="fas fa-tasks"></i>
+                <h3>Projects</h3>
+                <p>Monitor installation projects</p>
+            </div>
+        </a>
 
-        <div class="card">
-            <i class="fas fa-chart-bar"></i>
-            <h3>Reports & Analytics</h3>
-            <p>Pricing trends and statistics</p>
-        </div>
+        <a asp-action="Reports" class="card-link">
+            <div class="card">
+                <i class="fas fa-chart-bar"></i>
+                <h3>Reports & Analytics</h3>
+                <p>Pricing trends and statistics</p>
+            </div>
+        </a>
     </div>
 
     <div class="actions">
         <a href="/" class="btn btn-secondary">
             <i class="fas fa-home"></i> Home
         </a>
-        <form asp-controller="Auth" asp-action="Logout" method="post" style="display: inline;">
+        <form asp-controller="Auth" asp-action="Logout" method="post" style="display:inline;">
             <button type="submit" class="btn btn-primary">
                 <i class="fas fa-sign-out-alt"></i> Logout
             </button>

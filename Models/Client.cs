@@ -15,25 +15,24 @@ namespace SolarConnect.Models
         [ForeignKey("UserId")]
         public User User { get; set; }
 
-        // Property Information (ALL NULLABLE - filled when creating requests)
+        // Property Information
         [StringLength(500)]
-        public string? Address { get; set; }  // Added ?
+        public string Address { get; set; }
 
         [StringLength(100)]
-        public string? PropertyType { get; set; }  // Added ?
+        public string PropertyType { get; set; } // Residential, Commercial, Industrial, Agricultural
 
         [Column(TypeName = "decimal(18,2)")]
-        public decimal? RoofArea { get; set; }
-
-        // Energy Consumption (NULLABLE)
-        [Column(TypeName = "decimal(18,2)")]
-        public decimal? MonthlyConsumption { get; set; }
+        public decimal? RoofArea { get; set; } // in m²
 
         [Column(TypeName = "decimal(18,2)")]
-        public decimal? MonthlyElectricityBill { get; set; }
+        public decimal? MonthlyConsumption { get; set; } // in kWh
+
+        [Column(TypeName = "decimal(18,2)")]
+        public decimal? MonthlyElectricityBill { get; set; } // in USD
 
         [StringLength(1000)]
-        public string? AdditionalNotes { get; set; }  // Added ?
+        public string AdditionalNotes { get; set; }
 
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     }

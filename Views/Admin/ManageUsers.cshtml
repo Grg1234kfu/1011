@@ -1,0 +1,34 @@
+﻿@model IEnumerable<SolarConnect.Models.User>
+@{
+    ViewData["Title"] = "Manage Users - SolarConnect";
+}
+
+<div class="dashboard-container">
+    <h1><i class="fas fa-users-cog"></i> Manage Users</h1>
+    <table class="table table-striped mt-4">
+        <thead style="color:#ff6b00;">
+            <tr>
+                <th>Email</th>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Role</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var u in Model)
+            {
+                <tr>
+                    <td>@u.Email</td>
+                    <td>@u.FirstName @u.LastName</td>
+                    <td>@u.PhoneNumber</td>
+                    <td>@u.Role</td>
+                    <td>@(u.IsActive ? "Active" : "Disabled")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="actions mt-3">
+        <a asp-action="Dashboard" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Back</a>
+    </div>
+</div>

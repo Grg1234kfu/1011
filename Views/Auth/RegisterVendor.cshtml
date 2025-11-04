@@ -79,60 +79,34 @@
         margin-bottom: 1.5rem;
     }
 
-    .form-floating {
-        position: relative;
-        margin-bottom: 1.5rem;
+    label {
+        font-weight: 600;
+        color: #444;
+        margin-bottom: 0.4rem;
+        display: block;
     }
 
-        .form-floating input,
-        .form-floating select,
-        .form-floating textarea {
-            width: 100%;
-            padding: 1rem 1rem 0.5rem;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
-            outline: none;
-            background: #fafafa;
-            transition: all 0.3s ease;
-            font-size: 1rem;
-        }
+    input, select, textarea {
+        width: 100%;
+        padding: 0.8rem 1rem;
+        border: 2px solid #e0e0e0;
+        border-radius: 10px;
+        font-size: 1rem;
+        color: #000;
+        background-color: transparent;
+        outline: none;
+        transition: all 0.3s ease;
+    }
 
-        .form-floating textarea {
-            min-height: 100px;
-            resize: vertical;
-            padding-top: 1.5rem;
-        }
-
-        .form-floating label {
-            position: absolute;
-            top: 1rem;
-            left: 1rem;
-            pointer-events: none;
-            transition: 0.2s ease all;
-            color: #777;
-            background-color: #fff;
-            padding: 0 5px;
-        }
-
-        .form-floating input:focus + label,
-        .form-floating input:not(:placeholder-shown) + label,
-        .form-floating select:focus + label,
-        .form-floating select:not([value=""]) + label,
-        .form-floating textarea:focus + label,
-        .form-floating textarea:not(:placeholder-shown) + label {
-            top: -0.5rem;
-            left: 0.75rem;
-            font-size: 0.8rem;
-            color: #ff8c00;
-        }
-
-        .form-floating input:focus,
-        .form-floating select:focus,
-        .form-floating textarea:focus {
+        input:focus, select:focus, textarea:focus {
             border-color: #ff8c00;
-            background-color: #fff;
-            box-shadow: 0 0 0 3px rgba(255, 140, 0, 0.1);
+            box-shadow: 0 0 6px rgba(255, 140, 0, 0.2);
         }
+
+    textarea {
+        resize: vertical;
+        min-height: 100px;
+    }
 
     .text-danger {
         font-size: 0.85rem;
@@ -219,44 +193,40 @@
     <form asp-action="RegisterVendor" asp-controller="Auth" method="post" autocomplete="off">
         <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
 
-        <!-- Personal Information Section -->
+        <!-- Personal Information -->
         <div class="section-title">
-            <i class="fas fa-user"></i>
-            Personal Information
+            <i class="fas fa-user"></i> Personal Information
         </div>
 
         <div class="form-row">
-            <div class="form-floating">
-                <input asp-for="FirstName" class="form-control" placeholder="First Name" />
-                <label asp-for="FirstName">First Name</label>
+            <div>
+                <label asp-for="FirstName"></label>
+                <input asp-for="FirstName" class="form-control" placeholder="Enter first name" />
                 <span asp-validation-for="FirstName" class="text-danger"></span>
             </div>
-
-            <div class="form-floating">
-                <input asp-for="LastName" class="form-control" placeholder="Last Name" />
-                <label asp-for="LastName">Last Name</label>
+            <div>
+                <label asp-for="LastName"></label>
+                <input asp-for="LastName" class="form-control" placeholder="Enter last name" />
                 <span asp-validation-for="LastName" class="text-danger"></span>
             </div>
         </div>
 
         <div class="form-row">
-            <div class="form-floating">
-                <input asp-for="Email" class="form-control" type="email" placeholder="Email" />
-                <label asp-for="Email">Email Address</label>
+            <div>
+                <label asp-for="Email"></label>
+                <input asp-for="Email" class="form-control" type="email" placeholder="example@email.com" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
-
-            <div class="form-floating">
-                <input asp-for="PhoneNumber" class="form-control" placeholder="Phone Number" />
-                <label asp-for="PhoneNumber">Phone Number</label>
+            <div>
+                <label asp-for="PhoneNumber"></label>
+                <input asp-for="PhoneNumber" class="form-control" placeholder="Phone number" />
                 <span asp-validation-for="PhoneNumber" class="text-danger"></span>
             </div>
         </div>
 
-        <!-- Company Information Section -->
+        <!-- Company Information -->
         <div class="section-title">
-            <i class="fas fa-building"></i>
-            Company Information
+            <i class="fas fa-building"></i> Company Information
         </div>
 
         <div class="info-box">
@@ -264,68 +234,64 @@
             All vendor accounts require admin approval before you can start receiving requests.
         </div>
 
-        <div class="form-floating">
-            <input asp-for="CompanyName" class="form-control" placeholder="Company Name" />
-            <label asp-for="CompanyName">Company Name</label>
+        <div>
+            <label asp-for="CompanyName"></label>
+            <input asp-for="CompanyName" class="form-control" placeholder="Company name" />
             <span asp-validation-for="CompanyName" class="text-danger"></span>
         </div>
 
         <div class="form-row">
-            <div class="form-floating">
-                <input asp-for="BusinessLicense" class="form-control" placeholder="Business License" />
-                <label asp-for="BusinessLicense">Business License Number</label>
+            <div>
+                <label asp-for="BusinessLicense"></label>
+                <input asp-for="BusinessLicense" class="form-control" placeholder="License number" />
                 <span asp-validation-for="BusinessLicense" class="text-danger"></span>
             </div>
-
-            <div class="form-floating">
+            <div>
+                <label asp-for="YearsOfExperience"></label>
                 <input asp-for="YearsOfExperience" class="form-control" type="number" min="0" placeholder="Years" />
-                <label asp-for="YearsOfExperience">Years of Experience</label>
                 <span asp-validation-for="YearsOfExperience" class="text-danger"></span>
             </div>
         </div>
 
-        <div class="form-floating">
-            <input asp-for="ServiceArea" class="form-control" placeholder="Service Area" />
-            <label asp-for="ServiceArea">Service Areas (e.g., Beirut, Mount Lebanon, Tripoli)</label>
+        <div>
+            <label asp-for="ServiceArea"></label>
+            <input asp-for="ServiceArea" class="form-control" placeholder="e.g. Beirut, Mount Lebanon, Tripoli" />
             <span asp-validation-for="ServiceArea" class="text-danger"></span>
         </div>
 
         <div class="form-row">
-            <div class="form-floating">
-                <input asp-for="Specialization" class="form-control" placeholder="Specialization" />
-                <label asp-for="Specialization">Specialization (Optional)</label>
+            <div>
+                <label asp-for="Specialization"></label>
+                <input asp-for="Specialization" class="form-control" placeholder="Specialization (Optional)" />
                 <span asp-validation-for="Specialization" class="text-danger"></span>
             </div>
-
-            <div class="form-floating">
-                <input asp-for="Website" class="form-control" type="url" placeholder="Website" />
-                <label asp-for="Website">Website (Optional)</label>
+            <div>
+                <label asp-for="Website"></label>
+                <input asp-for="Website" class="form-control" type="url" placeholder="Website (Optional)" />
                 <span asp-validation-for="Website" class="text-danger"></span>
             </div>
         </div>
 
-        <div class="form-floating">
-            <textarea asp-for="CompanyDescription" class="form-control" placeholder="Description"></textarea>
-            <label asp-for="CompanyDescription">Company Description (Optional)</label>
+        <div>
+            <label asp-for="CompanyDescription"></label>
+            <textarea asp-for="CompanyDescription" class="form-control" placeholder="Company description (Optional)"></textarea>
             <span asp-validation-for="CompanyDescription" class="text-danger"></span>
         </div>
 
         <!-- Security Section -->
         <div class="section-title">
-            <i class="fas fa-lock"></i>
-            Account Security
+            <i class="fas fa-lock"></i> Account Security
         </div>
 
         <div class="form-row">
-            <div class="form-floating">
-                <input asp-for="Password" class="form-control" type="password" placeholder="Password" />
-                <label asp-for="Password">Password</label>
+            <div>
+                <label asp-for="Password"></label>
+                <input asp-for="Password" class="form-control" type="password" placeholder="Enter password" />
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
-
-            <div class="form-floating">
-                <input asp-for="ConfirmPassword" class="form-control" type="password" placeholder="Confirm Password" />
-                <label asp-for="ConfirmPassword">Confirm Password</label>
+            <div>
+                <label asp-for="ConfirmPassword"></label>
+                <input asp-for="ConfirmPassword" class="form-control" type="password" placeholder="Confirm password" />
                 <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
             </div>
         </div>
@@ -348,7 +314,5 @@
 </div>
 
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
+    @await Html.PartialAsync("_ValidationScriptsPartial")
 }

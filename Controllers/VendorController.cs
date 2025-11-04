@@ -2,12 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SolarConnect.Data;
-using SolarConnect.Models.ViewModels;
 using SolarConnect.Models;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
-using SolarConnect.Models.ViewModels;
 
 namespace SolarConnect.Controllers
 {
@@ -21,144 +18,222 @@ namespace SolarConnect.Controllers
             _context = context;
         }
 
+        // === DASHBOARD ===
         public async Task<IActionResult> Dashboard()
         {
-            var userId = int.Parse(User.FindFirstValue("UserId"));
+            var userEmail = User.Identity.Name;
+
             var vendor = await _context.Vendors
                 .Include(v => v.User)
-                .FirstOrDefaultAsync(v => v.UserId == userId);
+                .FirstOrDefaultAsync(v => v.User.Email == userEmail);
 
             if (vendor == null)
-            {
-                return NotFound();
-            }
+                return Unauthorized();
+
+            // ✅ Updated Stats (Dashboard Counters)
+            ViewBag.AvailableRequests = await _context.Requests.CountAsync(r => r.Status == "Open");
+            ViewBag.MyQuotes = await _context.Quotes.CountAsync(q => q.VendorId == vendor.Id);
+            ViewBag.AcceptedProjects = await _context.Projects
+                .Include(p => p.Quote)
+                .CountAsync(p => p.Quote.VendorId == vendor.Id && p.Status == "Completed");
+            ViewBag.MyProjects = await _context.Projects
+                .Include(p => p.Quote)
+                .CountAsync(p => p.Quote.VendorId == vendor.Id); // ✅ new dashboard stat
 
             return View(vendor);
         }
 
-        // ADD THIS NEW METHOD
-        public async Task<IActionResult> BrowseRequests()
+        // === VIEW ALL CLIENT REQUESTS ===
+        public async Task<IActionResult> ClientRequests()
         {
-            var userId = int.Parse(User.FindFirstValue("UserId"));
-            var vendor = await _context.Vendors.FirstOrDefaultAsync(v => v.UserId == userId);
-
-            if (vendor == null)
-            {
-                return NotFound();
-            }
-
-            // Check if vendor is approved
-            if (!vendor.IsApproved)
-            {
-                TempData["Error"] = "Your account must be approved by admin before you can browse requests.";
-                return RedirectToAction("Dashboard");
-            }
-
-            // Get all open requests with client info
             var requests = await _context.Requests
                 .Include(r => r.Client)
-                .ThenInclude(c => c.User)
+                    .ThenInclude(c => c.User)
                 .Where(r => r.Status == "Open")
                 .OrderByDescending(r => r.CreatedAt)
                 .ToListAsync();
 
             return View(requests);
         }
-        // GET: Submit Quote
+
+        // === CREATE QUOTE (GET) ===
         [HttpGet]
-        public async Task<IActionResult> SubmitQuote(int id)
+        public async Task<IActionResult> CreateQuote(int requestId)
         {
-            var userId = int.Parse(User.FindFirstValue("UserId"));
-            var vendor = await _context.Vendors.FirstOrDefaultAsync(v => v.UserId == userId);
-
-            if (vendor == null || !vendor.IsApproved)
-            {
-                TempData["Error"] = "Your account must be approved to submit quotes.";
-                return RedirectToAction("Dashboard");
-            }
-
-            // Get the request details
             var request = await _context.Requests
                 .Include(r => r.Client)
-                .ThenInclude(c => c.User)
-                .FirstOrDefaultAsync(r => r.Id == id && r.Status == "Open");
+                    .ThenInclude(c => c.User)
+                .FirstOrDefaultAsync(r => r.Id == requestId);
 
             if (request == null)
+                return NotFound();
+
+            ViewBag.RequestId = requestId;
+            ViewBag.ClientName = $"{request.Client.User.FirstName} {request.Client.User.LastName}";
+
+            return View();
+        }
+
+        // === CREATE QUOTE (POST) ===
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateQuote(Quote model)
+        {
+            var userEmail = User.Identity.Name;
+            var vendor = await _context.Vendors
+                .Include(v => v.User)
+                .FirstOrDefaultAsync(v => v.User.Email == userEmail);
+
+            if (vendor == null)
+                return Unauthorized();
+
+            if (ModelState.IsValid)
             {
-                TempData["Error"] = "This request is no longer available.";
-                return RedirectToAction("BrowseRequests");
+                model.VendorId = vendor.Id;
+                model.SubmittedAt = System.DateTime.UtcNow;
+                model.Status = "Pending";
+
+                _context.Quotes.Add(model);
+                await _context.SaveChangesAsync();
+
+                TempData["Success"] = "✅ Your quote has been submitted successfully!";
+                return RedirectToAction("MyQuotes");
             }
 
-            // Check if vendor already submitted a quote for this request
-            var existingQuote = await _context.Quotes
-                .FirstOrDefaultAsync(q => q.RequestId == id && q.VendorId == vendor.Id);
+            var request = await _context.Requests
+                .Include(r => r.Client)
+                    .ThenInclude(c => c.User)
+                .FirstOrDefaultAsync(r => r.Id == model.RequestId);
 
-            if (existingQuote != null)
+            if (request != null)
             {
-                TempData["Error"] = "You have already submitted a quote for this request.";
-                return RedirectToAction("BrowseRequests");
+                ViewBag.RequestId = model.RequestId;
+                ViewBag.ClientName = $"{request.Client.User.FirstName} {request.Client.User.LastName}";
             }
-
-            // Pass request data to view
-            ViewBag.Request = request;
-            ViewBag.VendorId = vendor.Id;
-
-            var model = new SubmitQuoteViewModel
-            {
-                RequestId = id,
-                SystemSize = request.RecommendedSystemSize ?? 0
-            };
 
             return View(model);
         }
 
-        // POST: Submit Quote
+        // === MANAGE MY QUOTES ===
+        public async Task<IActionResult> MyQuotes()
+        {
+            var userEmail = User.Identity.Name;
+            var vendor = await _context.Vendors
+                .Include(v => v.User)
+                .FirstOrDefaultAsync(v => v.User.Email == userEmail);
+
+            if (vendor == null)
+                return Unauthorized();
+
+            var quotes = await _context.Quotes
+                .Include(q => q.Request)
+                    .ThenInclude(r => r.Client)
+                        .ThenInclude(c => c.User)
+                .Where(q => q.VendorId == vendor.Id)
+                .OrderByDescending(q => q.SubmittedAt)
+                .ToListAsync();
+
+            return View(quotes);
+        }
+
+        // === MANAGE PROJECTS ===
+        public async Task<IActionResult> MyProjects()
+        {
+            var userEmail = User.Identity.Name;
+            var vendor = await _context.Vendors
+                .Include(v => v.User)
+                .FirstOrDefaultAsync(v => v.User.Email == userEmail);
+
+            if (vendor == null)
+                return Unauthorized();
+
+            var projects = await _context.Projects
+                .Include(p => p.Quote)
+                    .ThenInclude(q => q.Request)
+                        .ThenInclude(r => r.Client)
+                            .ThenInclude(c => c.User)
+                .Where(p => p.Quote.VendorId == vendor.Id)
+                .OrderByDescending(p => p.StartDate)
+                .ToListAsync();
+
+            return View(projects);
+        }
+
+        // === UPDATE PROJECT (GET) ===
+        [HttpGet]
+        public async Task<IActionResult> UpdateProject(int id)
+        {
+            var project = await _context.Projects
+                .Include(p => p.Quote)
+                    .ThenInclude(q => q.Request)
+                .FirstOrDefaultAsync(p => p.Id == id);
+
+            if (project == null)
+                return NotFound();
+
+            return View(project);
+        }
+
+        // === UPDATE PROJECT (POST) ===
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> SubmitQuote(SubmitQuoteViewModel model)
+        public async Task<IActionResult> UpdateProject(Project model)
         {
-            if (!ModelState.IsValid)
-            {
-                var request = await _context.Requests
-                    .Include(r => r.Client)
-                    .ThenInclude(c => c.User)
-                    .FirstOrDefaultAsync(r => r.Id == model.RequestId);
-                ViewBag.Request = request;
-                return View(model);
-            }
+            var project = await _context.Projects.FindAsync(model.Id);
+            if (project == null)
+                return NotFound();
 
-            var userId = int.Parse(User.FindFirstValue("UserId"));
-            var vendor = await _context.Vendors.FirstOrDefaultAsync(v => v.UserId == userId);
+            project.Status = model.Status;
+            project.InstallationNotes = model.InstallationNotes;
+            project.MaterialsUsed = model.MaterialsUsed;
+            project.ProgressStage = model.ProgressStage;
 
-            if (vendor == null || !vendor.IsApproved)
-            {
-                TempData["Error"] = "Your account must be approved to submit quotes.";
-                return RedirectToAction("Dashboard");
-            }
+            if (model.Status == "Completed")
+                project.CompletionDate = System.DateTime.UtcNow;
 
-            // Create the quote
-            var quote = new Quote
-            {
-                RequestId = model.RequestId,
-                VendorId = vendor.Id,
-                SystemSize = model.SystemSize,
-                TotalPrice = model.TotalPrice,
-                InstallationCost = model.InstallationCost,
-                PanelBrand = model.PanelBrand,
-                InverterBrand = model.InverterBrand,
-                BatteryBrand = model.BatteryBrand ?? "",
-                SystemDescription = model.SystemDescription,
-                EstimatedInstallationDays = model.EstimatedInstallationDays,
-                WarrantyYears = model.WarrantyYears,
-                Status = "Pending",
-                SubmittedAt = DateTime.UtcNow
-            };
-
-            _context.Quotes.Add(quote);
             await _context.SaveChangesAsync();
 
-            TempData["Success"] = "Your quote has been submitted successfully! The client will review it soon.";
-            return RedirectToAction("BrowseRequests");
+            TempData["Success"] = "✅ Project updated successfully!";
+            return RedirectToAction("MyProjects");
+        }
+
+        // === PRODUCTS ===
+        public async Task<IActionResult> Products()
+        {
+            var userEmail = User.Identity.Name;
+            var vendor = await _context.Vendors
+                .Include(v => v.User)
+                .FirstOrDefaultAsync(v => v.User.Email == userEmail);
+
+            if (vendor == null)
+                return Unauthorized();
+
+            var products = await _context.Products
+                .Where(p => p.VendorId == vendor.Id)
+                .ToListAsync();
+
+            return View(products);
+        }
+
+        // === REVIEWS ===
+        public async Task<IActionResult> Reviews()
+        {
+            var userEmail = User.Identity.Name;
+            var vendor = await _context.Vendors
+                .Include(v => v.User)
+                .FirstOrDefaultAsync(v => v.User.Email == userEmail);
+
+            if (vendor == null)
+                return Unauthorized();
+
+            var reviews = await _context.Reviews
+                .Include(r => r.Client)
+                    .ThenInclude(c => c.User)
+                .Where(r => r.VendorId == vendor.Id)
+                .OrderByDescending(r => r.CreatedAt)
+                .ToListAsync();
+
+            return View(reviews);
         }
     }
 }

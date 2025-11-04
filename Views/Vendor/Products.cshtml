@@ -1,0 +1,39 @@
+﻿@model IEnumerable<SolarConnect.Models.Product>
+@{
+    ViewData["Title"] = "Products - SolarConnect";
+}
+
+<div class="dashboard-container">
+    <h1><i class="fas fa-box"></i> My Products</h1>
+
+    @if (!Model.Any())
+    {
+        <p>You haven’t added any products yet.</p>
+    }
+    else
+    {
+        <table class="table table-striped mt-4">
+            <thead style="color:#ff6b00;">
+                <tr>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Price ($)</th>
+                    <th>Stock</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var p in Model)
+                {
+                    <tr>
+                        <td>@p.Name</td>
+                        <td>@p.Category</td>
+                        <td>@p.Price</td>
+                        <td>@p.Stock</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+
+    <a asp-action="Dashboard" class="btn btn-secondary mt-3"><i class="fas fa-arrow-left"></i> Back</a>
+</div>

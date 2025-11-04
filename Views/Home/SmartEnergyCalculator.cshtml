@@ -1,0 +1,92 @@
+﻿@{
+    ViewData["Title"] = "Smart Energy Calculator - SolarConnect";
+}
+
+<style>
+    body {
+        background: #fff9e6;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .calc-container {
+        max-width: 600px;
+        margin: 4rem auto;
+        background: white;
+        padding: 3rem;
+        border-radius: 20px;
+        box-shadow: 0 8px 25px rgba(255, 140, 0, 0.15);
+    }
+
+    h2 {
+        color: #ff6b00;
+        text-align: center;
+        margin-bottom: 1.5rem;
+    }
+
+    label {
+        font-weight: 600;
+        color: #444;
+        margin-top: 1rem;
+        display: block;
+    }
+
+    input {
+        width: 100%;
+        padding: 0.8rem;
+        border-radius: 10px;
+        border: 2px solid #e0e0e0;
+        font-size: 1rem;
+    }
+
+    button {
+        margin-top: 2rem;
+        width: 100%;
+        padding: 1rem;
+        background: linear-gradient(135deg, #ff8c00, #ffa500);
+        border: none;
+        color: white;
+        border-radius: 10px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: transform 0.3s;
+    }
+
+        button:hover {
+            transform: scale(1.03);
+        }
+
+    .result-box {
+        margin-top: 2rem;
+        background: #fff4d6;
+        padding: 1.5rem;
+        border-radius: 10px;
+        text-align: center;
+        color: #333;
+    }
+</style>
+
+<div class="calc-container">
+    <h2><i class="fas fa-calculator"></i> Smart Energy Calculator</h2>
+
+    <form asp-action="SmartEnergyCalculator" method="post">
+        <label>Roof Area (m²)</label>
+        <input type="number" name="RoofArea" step="0.1" required />
+
+        <label>Monthly Consumption (kWh)</label>
+        <input type="number" name="MonthlyConsumption" step="0.1" required />
+
+        <label>Average Sun Hours (hours/day)</label>
+        <input type="number" name="SunHours" value="5" step="0.1" />
+
+        <button type="submit">Calculate Now</button>
+    </form>
+
+    @if (ViewBag.Result != null)
+    {
+        <div class="result-box">
+            <h3>Estimated System: <strong>@ViewBag.Result.kw kW</strong></h3>
+            <p>Approximate Cost: <strong>$@ViewBag.Result.cost</strong></p>
+            <p>Expected Monthly Savings: <strong>$@ViewBag.Result.savings</strong></p>
+        </div>
+    }
+</div>

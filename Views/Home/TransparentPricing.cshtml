@@ -1,0 +1,36 @@
+﻿@{
+    ViewData["Title"] = "Transparent Pricing - SolarConnect";
+}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+    body {
+        background: #fff9e6;
+        font-family: 'Poppins';
+    }
+
+    .chart-box {
+        max-width: 700px;
+        margin: 3rem auto;
+        background: white;
+        padding: 3rem;
+        border-radius: 20px;
+        box-shadow: 0 8px 25px rgba(255,140,0,0.15);
+    }
+</style>
+
+<div class="chart-box">
+    <h2 style="color:#ff6b00;text-align:center;"><i class="fas fa-shield-alt"></i> Market Pricing Overview</h2>
+    <canvas id="priceChart"></canvas>
+</div>
+
+<script>
+    const data = {
+        labels: ['3 kW','5 kW','10 kW','15 kW'],
+        datasets: [{
+            label: 'Average Price (USD)',
+            data: [2100,3500,7000,10500],
+            backgroundColor: ['#ff8c00','#ffa500','#ffb347','#ffd580']
+        }]
+    };
+    new Chart(document.getElementById('priceChart'), { type:'bar', data });
+</script>

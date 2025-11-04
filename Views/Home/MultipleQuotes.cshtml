@@ -1,0 +1,83 @@
+﻿@{
+    ViewData["Title"] = "Request Multiple Quotes - SolarConnect";
+}
+<style>
+    body {
+        background: #fff9e6;
+        font-family: 'Poppins';
+    }
+
+    .req-container {
+        max-width: 700px;
+        margin: 3rem auto;
+        background: white;
+        padding: 3rem;
+        border-radius: 20px;
+        box-shadow: 0 8px 25px rgba(255,140,0,0.15);
+    }
+
+    h2 {
+        color: #ff6b00;
+        text-align: center;
+    }
+
+    label {
+        display: block;
+        margin-top: 1rem;
+        font-weight: 600;
+        color: #333;
+    }
+
+    input, select {
+        width: 100%;
+        padding: 0.8rem;
+        border: 2px solid #e0e0e0;
+        border-radius: 10px;
+    }
+
+    button {
+        margin-top: 2rem;
+        width: 100%;
+        padding: 1rem;
+        background: linear-gradient(135deg,#ff8c00,#ffa500);
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+</style>
+
+<div class="req-container">
+    <h2><i class="fas fa-handshake"></i> Request Solar Quotes</h2>
+
+    <form asp-action="MultipleQuotes" method="post">
+        <label>System Type</label>
+        <select name="SystemType">
+            <option>On-Grid</option>
+            <option>Off-Grid</option>
+            <option>Hybrid</option>
+        </select>
+
+        <label>Roof Area (m²)</label>
+        <input type="number" name="RoofArea" required />
+
+        <label>Budget (USD)</label>
+        <input type="number" name="Budget" required />
+
+        <label>City</label>
+        <input type="text" name="City" required />
+
+        <label>Preferred Installation Date</label>
+        <input type="date" name="PreferredDate" />
+
+        <button type="submit">Submit Request</button>
+    </form>
+
+    @if (TempData["Success"] != null)
+    {
+        <div style="background:#d4edda;padding:1rem;border-radius:10px;margin-top:1.5rem;color:#155724;">
+            @TempData["Success"]
+        </div>
+    }
+</div>

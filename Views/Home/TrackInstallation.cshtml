@@ -1,0 +1,41 @@
+﻿@{
+    ViewData["Title"] = "Track Installation - SolarConnect";
+}
+<style>
+    body {
+        background: #fff9e6;
+        font-family: 'Poppins';
+    }
+
+    .track-box {
+        max-width: 700px;
+        margin: 3rem auto;
+        background: white;
+        padding: 3rem;
+        border-radius: 20px;
+        box-shadow: 0 8px 25px rgba(255,140,0,0.15);
+    }
+
+    .progress-bar {
+        height: 25px;
+        background: #eee;
+        border-radius: 15px;
+        overflow: hidden;
+        margin-top: 1rem;
+    }
+
+    .progress-fill {
+        height: 100%;
+        background: linear-gradient(135deg,#ff8c00,#ffa500);
+        width: @ViewBag.Progress %;
+        transition: width 0.6s;
+    }
+</style>
+
+<div class="track-box">
+    <h2><i class="fas fa-chart-line"></i> Track Installation</h2>
+    <p>Project Status: <strong>@ViewBag.Status</strong></p>
+    <div class="progress-bar">
+        <div class="progress-fill"></div>
+    </div>
+</div>

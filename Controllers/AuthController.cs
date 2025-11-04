@@ -19,9 +19,6 @@ namespace SolarConnect.Controllers
     {
         private readonly ApplicationDbContext _context;
 
-        // Admin Secret Code - Change this to something your team knows!
-        private const string ADMIN_SECRET_CODE = "SOLAR2025ADMIN";
-
         public AuthController(ApplicationDbContext context)
         {
             _context = context;
@@ -140,7 +137,6 @@ namespace SolarConnect.Controllers
             return View();
         }
 
-        // POST: RegisterClient
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> RegisterClient(ClientRegisterViewModel model)
@@ -150,16 +146,18 @@ namespace SolarConnect.Controllers
                 return View(model);
             }
 
+            // Check if email already exists
             if (await _context.Users.AnyAsync(u => u.Email == model.Email))
             {
                 ModelState.AddModelError("Email", "This email is already in use.");
                 return View(model);
             }
 
+            // ✅ Create the User account
             var user = new User
             {
                 Email = model.Email,
-                Password = HashPassword(model.Password),
+                Password = BCrypt.Net.BCrypt.HashPassword(model.Password),
                 FirstName = model.FirstName,
                 LastName = model.LastName,
                 PhoneNumber = model.PhoneNumber,
@@ -171,30 +169,37 @@ namespace SolarConnect.Controllers
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
-            // Create client record (no property details yet)
+            // ✅ Create the Client profile (minimal)
             var client = new Client
             {
                 UserId = user.Id,
+                Address = string.Empty,
+                PropertyType = string.Empty,
+                RoofArea = 0,
+                MonthlyConsumption = 0,
+                MonthlyElectricityBill = 0,
+                AdditionalNotes = string.Empty, // important fix
                 CreatedAt = DateTime.UtcNow
             };
 
             _context.Clients.Add(client);
             await _context.SaveChangesAsync();
 
-            // Auto login
+            // ✅ Auto login after registration
             var claims = new List<Claim>
-            {
-                new Claim(ClaimTypes.Name, user.Email),
-                new Claim(ClaimTypes.Role, "Client"),
-                new Claim("UserId", user.Id.ToString())
-            };
+    {
+        new Claim(ClaimTypes.Name, user.Email),
+        new Claim(ClaimTypes.Role, "Client"),
+        new Claim("UserId", user.Id.ToString())
+    };
 
             var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
             await HttpContext.SignInAsync(
                 CookieAuthenticationDefaults.AuthenticationScheme,
-                new ClaimsPrincipal(claimsIdentity));
+                new ClaimsPrincipal(claimsIdentity)
+            );
 
-            TempData["Success"] = "Welcome! Create your first solar request to get quotes from vendors.";
+            TempData["Success"] = "🎉 Your account has been created successfully!";
             return RedirectToAction("Dashboard", "Client");
         }
 
@@ -258,70 +263,6 @@ namespace SolarConnect.Controllers
             return RedirectToAction("Login");
         }
 
-        // GET: RegisterAdmin
-        [HttpGet]
-        public IActionResult RegisterAdmin()
-        {
-            return View();
-        }
-
-        // POST: RegisterAdmin
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> RegisterAdmin(AdminRegisterViewModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-
-            // Verify secret code
-            if (model.SecretCode != ADMIN_SECRET_CODE)
-            {
-                ModelState.AddModelError("SecretCode", "Invalid admin secret code. Contact your team leader.");
-                return View(model);
-            }
-
-            // Check if email already exists
-            if (await _context.Users.AnyAsync(u => u.Email == model.Email))
-            {
-                ModelState.AddModelError("Email", "This email is already in use.");
-                return View(model);
-            }
-
-            // Create admin user
-            var user = new User
-            {
-                Email = model.Email,
-                Password = HashPassword(model.Password),
-                FirstName = model.FirstName,
-                LastName = model.LastName,
-                PhoneNumber = model.PhoneNumber,
-                Role = "Admin",
-                IsActive = true,
-                CreatedAt = DateTime.UtcNow
-            };
-
-            _context.Users.Add(user);
-            await _context.SaveChangesAsync();
-
-            // Auto login
-            var claims = new List<Claim>
-            {
-                new Claim(ClaimTypes.Name, user.Email),
-                new Claim(ClaimTypes.Role, "Admin"),
-                new Claim("UserId", user.Id.ToString())
-            };
-
-            var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-            await HttpContext.SignInAsync(
-                CookieAuthenticationDefaults.AuthenticationScheme,
-                new ClaimsPrincipal(claimsIdentity));
-
-            TempData["Success"] = "Admin account created successfully! Welcome to SolarConnect.";
-            return RedirectToAction("Dashboard", "Admin");
-        }
-
         // POST: Logout
         [HttpPost]
         public async Task<IActionResult> Logout()
@@ -329,8 +270,6 @@ namespace SolarConnect.Controllers
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Login");
         }
-
-        // Helper methods for testing/setup
         [HttpGet]
         public async Task<IActionResult> CreateAdmin()
         {
@@ -357,7 +296,6 @@ namespace SolarConnect.Controllers
 
             return Content("Admin user created! Email: admin@solarconnect.com, Password: Admin123");
         }
-
         [HttpGet]
         public async Task<IActionResult> CheckAdmin()
         {
@@ -374,12 +312,11 @@ namespace SolarConnect.Controllers
 
             return Content($"✅ Admin found! Email: {admin.Email}, Role: {admin.Role}, Password matches: {passwordMatches}");
         }
-
         [HttpGet]
         public async Task<IActionResult> CreateTestAdmin()
         {
             // Delete old admin if exists
-            var oldAdmin = await _context.Users.FirstOrDefaultAsync(u => u.Email == "admin@solarconnect.com");
+            var oldAdmin = await _context.Users.FirstOrDefaultAsync(u => u.Email == "mahmoud@solarconnet.com");
             if (oldAdmin != null)
             {
                 _context.Users.Remove(oldAdmin);
@@ -389,7 +326,7 @@ namespace SolarConnect.Controllers
             // Create fresh admin
             var admin = new User
             {
-                Email = "admin@solarconnect.com",
+                Email = "mahmoud@solarconnect.com",
                 Password = HashPassword("Admin123"),
                 FirstName = "Admin",
                 LastName = "User",
@@ -402,84 +339,8 @@ namespace SolarConnect.Controllers
             _context.Users.Add(admin);
             await _context.SaveChangesAsync();
 
-            return Content("✅ Fresh admin created! Try logging in now with admin@solarconnect.com / Admin123");
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> CreateTeamAdmins()
-        {
-            var admins = new List<User>
-            {
-                new User
-                {
-                    Email = "admin1@solarconnect.com",
-                    Password = HashPassword("Admin123"),
-                    FirstName = "Admin",
-                    LastName = "One",
-                    PhoneNumber = "1234567890",
-                    Role = "Admin",
-                    IsActive = true,
-                    CreatedAt = DateTime.UtcNow
-                },
-                new User
-                {
-                    Email = "admin2@solarconnect.com",
-                    Password = HashPassword("Admin123"),
-                    FirstName = "Admin",
-                    LastName = "Two",
-                    PhoneNumber = "1234567891",
-                    Role = "Admin",
-                    IsActive = true,
-                    CreatedAt = DateTime.UtcNow
-                },
-                new User
-                {
-                    Email = "admin3@solarconnect.com",
-                    Password = HashPassword("Admin123"),
-                    FirstName = "Admin",
-                    LastName = "Three",
-                    PhoneNumber = "1234567892",
-                    Role = "Admin",
-                    IsActive = true,
-                    CreatedAt = DateTime.UtcNow
-                }
-            };
-
-            var result = new List<string>();
-
-            foreach (var admin in admins)
-            {
-                // Check if admin already exists
-                var existing = await _context.Users.FirstOrDefaultAsync(u => u.Email == admin.Email);
-
-                if (existing == null)
-                {
-                    _context.Users.Add(admin);
-                    result.Add($"✅ Created: {admin.Email}");
-                }
-                else
-                {
-                    result.Add($"⚠️ Already exists: {admin.Email}");
-                }
-            }
-
-            await _context.SaveChangesAsync();
-
-            var message = string.Join("<br/>", result);
-            return Content($@"
-        <h1>Team Admin Accounts</h1>
-        <div style='font-family: Arial; padding: 20px;'>
-            {message}
-            <hr/>
-            <h2>Login Credentials:</h2>
-            <ul>
-                <li><strong>Admin 1:</strong> admin1@solarconnect.com / Admin123</li>
-                <li><strong>Admin 2:</strong> admin2@solarconnect.com / Admin123</li>
-                <li><strong>Admin 3:</strong> admin3@solarconnect.com / Admin123</li>
-            </ul>
-            <p><a href='/Auth/Login'>Go to Login</a></p>
-        </div>
-    ", "text/html");
+            return Content("✅ Fresh admin created! Try logging in now with mahmoud@solarconnect.com / Admin123");
         }
     }
+
 }

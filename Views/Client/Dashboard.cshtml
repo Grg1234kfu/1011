@@ -2,6 +2,8 @@
     ViewData["Title"] = "Client Dashboard - SolarConnect";
 }
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
 <style>
     body {
         background: linear-gradient(135deg, #fff9e6 0%, #ffe8cc 100%);
@@ -54,16 +56,23 @@
         margin-top: 2rem;
     }
 
+    .card-link {
+        text-decoration: none;
+        color: inherit;
+    }
+
     .card {
         background: linear-gradient(135deg, #fff4d6, #ffe8cc);
         padding: 2rem;
         border-radius: 15px;
         text-align: center;
-        transition: transform 0.3s ease;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        cursor: pointer;
     }
 
         .card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 6px 18px rgba(255, 140, 0, 0.25);
         }
 
         .card i {
@@ -117,7 +126,7 @@
     </p>
 
     <div class="cards">
-        <a asp-action="CreateRequest" style="text-decoration: none; color: inherit;">
+        <a asp-action="NewRequest" class="card-link">
             <div class="card">
                 <i class="fas fa-plus-circle"></i>
                 <h3>New Solar Request</h3>
@@ -125,7 +134,7 @@
             </div>
         </a>
 
-        <a asp-action="MyRequests" style="text-decoration: none; color: inherit;">
+        <a asp-action="MyRequests" class="card-link">
             <div class="card">
                 <i class="fas fa-file-alt"></i>
                 <h3>My Requests</h3>
@@ -133,17 +142,21 @@
             </div>
         </a>
 
-        <div class="card">
-            <i class="fas fa-clipboard-list"></i>
-            <h3>Received Quotes</h3>
-            <p>Compare vendor offers</p>
-        </div>
+        <a asp-action="ReceivedQuotes" class="card-link">
+            <div class="card">
+                <i class="fas fa-clipboard-list"></i>
+                <h3>Received Quotes</h3>
+                <p>Compare vendor offers</p>
+            </div>
+        </a>
 
-        <div class="card">
-            <i class="fas fa-tasks"></i>
-            <h3>My Projects</h3>
-            <p>Track installation progress</p>
-        </div>
+        <a asp-action="MyProjects" class="card-link">
+            <div class="card">
+                <i class="fas fa-tasks"></i>
+                <h3>My Projects</h3>
+                <p>Track installation progress</p>
+            </div>
+        </a>
     </div>
 
     <form asp-controller="Auth" asp-action="Logout" method="post">
