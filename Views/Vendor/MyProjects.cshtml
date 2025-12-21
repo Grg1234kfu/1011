@@ -1,0 +1,339 @@
+﻿@model List<SolarConnect.Models.Quote>
+
+@{
+    ViewData["Title"] = "My Projects - SolarConnect";
+    var activeProjects = Model.Where(q => q.Status == "Accepted").ToList();
+    var completedProjects = Model.Where(q => q.Status == "Completed").ToList();
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+<style>
+    body {
+        background: linear-gradient(135deg, #fff9e6 0%, #ffe8cc 100%);
+        font-family: 'Poppins', sans-serif;
+        min-height: 100vh;
+        padding: 2rem;
+        margin: 0;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    h1 {
+        color: #ff6b00;
+        margin-bottom: 2rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+        h1 i {
+            font-size: 2.5rem;
+            color: #ff8c00;
+        }
+
+    .section-title {
+        color: #333;
+        margin: 2rem 0 1rem 0;
+        padding-bottom: 0.5rem;
+        border-bottom: 3px solid #ff8c00;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+        gap: 2rem;
+        margin-bottom: 3rem;
+    }
+
+    .project-card {
+        background: white;
+        border-radius: 15px;
+        padding: 2rem;
+        box-shadow: 0 5px 20px rgba(255, 140, 0, 0.15);
+        transition: all 0.3s ease;
+        border-left: 5px solid #28a745;
+    }
+
+        .project-card.completed {
+            border-left-color: #6c757d;
+            opacity: 0.85;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 140, 0, 0.25);
+        }
+
+    .project-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: start;
+        margin-bottom: 1.5rem;
+        padding-bottom: 1rem;
+        border-bottom: 2px solid #f0f0f0;
+    }
+
+    .project-title {
+        color: #ff6b00;
+        font-size: 1.3rem;
+        font-weight: 700;
+        margin: 0;
+    }
+
+    .status-badge {
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 600;
+    }
+
+        .status-badge.active {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+        }
+
+        .status-badge.completed {
+            background: #6c757d;
+            color: white;
+        }
+
+    .project-info {
+        margin-bottom: 1.5rem;
+    }
+
+    .info-row {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 0.8rem;
+        color: #666;
+    }
+
+        .info-row i {
+            color: #ff8c00;
+            width: 20px;
+        }
+
+    .progress-section {
+        background: linear-gradient(135deg, #fff4d6, #ffe8cc);
+        padding: 1.5rem;
+        border-radius: 12px;
+        margin: 1.5rem 0;
+    }
+
+        .progress-section h4 {
+            color: #ff6b00;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+    .progress-bar-container {
+        background: white;
+        height: 30px;
+        border-radius: 15px;
+        overflow: hidden;
+        margin-bottom: 0.5rem;
+    }
+
+    .progress-bar {
+        height: 100%;
+        background: linear-gradient(135deg, #28a745, #20c997);
+        transition: width 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: 600;
+    }
+
+    .btn-update {
+        background: linear-gradient(135deg, #28a745, #20c997);
+        color: white;
+        border: none;
+        padding: 0.8rem 1.5rem;
+        border-radius: 10px;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+        .btn-update:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+            color: white;
+            text-decoration: none;
+        }
+
+    .no-projects {
+        text-align: center;
+        padding: 3rem;
+        background: white;
+        border-radius: 15px;
+        color: #999;
+    }
+
+        .no-projects i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #ddd;
+        }
+</style>
+
+<div class="container">
+    <h1>
+        <i class="fas fa-tasks"></i>
+        My Projects
+    </h1>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success">@TempData["Success"]</div>
+    }
+
+    <!-- Active Projects -->
+    <h2 class="section-title">
+        <i class="fas fa-hammer"></i>
+        Active Projects (@activeProjects.Count)
+    </h2>
+
+    @if (activeProjects.Any())
+    {
+        <div class="projects-grid">
+            @foreach (var project in activeProjects)
+            {
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3 class="project-title">@project.Request.PropertyType Solar System</h3>
+                        <span class="status-badge active">
+                            <i class="fas fa-check-circle"></i> In Progress
+                        </span>
+                    </div>
+
+                    <div class="project-info">
+                        <div class="info-row">
+                            <i class="fas fa-user"></i>
+                            <strong>Client:</strong> @project.Request.Client.User.FirstName @project.Request.Client.User.LastName
+                        </div>
+                        <div class="info-row">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <strong>Location:</strong> @project.Request.PropertyAddress
+                        </div>
+                        <div class="info-row">
+                            <i class="fas fa-phone"></i>
+                            <strong>Phone:</strong> @project.Request.Client.User.PhoneNumber
+                        </div>
+                        <div class="info-row">
+                            <i class="fas fa-envelope"></i>
+                            <strong>Email:</strong> @project.Request.Client.User.Email
+                        </div>
+                        <div class="info-row">
+                            <i class="fas fa-bolt"></i>
+                            <strong>System Size:</strong> @project.SystemSize kW
+                        </div>
+                        <div class="info-row">
+                            <i class="fas fa-dollar-sign"></i>
+                            <strong>Project Value:</strong> $@project.TotalPrice.ToString("N0")
+                        </div>
+                    </div>
+
+                    <!-- Progress Section -->
+                    <div class="progress-section">
+                        <h4><i class="fas fa-chart-line"></i> Installation Progress</h4>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar" style="width: @project.ProgressPercentage%">
+                                @project.ProgressPercentage%
+                            </div>
+                        </div>
+                        <p style="color: #666; margin-top: 0.5rem;">
+                            <strong>Status:</strong> @project.ProjectStatus
+                        </p>
+                    </div>
+
+                    <div style="margin-top: 1.5rem;">
+                        <a asp-action="UpdateProgress" asp-route-id="@project.Id" class="btn-update">
+                            <i class="fas fa-edit"></i> Update Progress
+                        </a>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="no-projects">
+            <i class="fas fa-clipboard-list"></i>
+            <p>No active projects at the moment.</p>
+        </div>
+    }
+
+    <!-- Completed Projects -->
+    <h2 class="section-title">
+        <i class="fas fa-check-double"></i>
+        Completed Projects (@completedProjects.Count)
+    </h2>
+
+    @if (completedProjects.Any())
+    {
+        <div class="projects-grid">
+            @foreach (var project in completedProjects)
+            {
+                <div class="project-card completed">
+                    <div class="project-header">
+                        <h3 class="project-title">@project.Request.PropertyType Solar System</h3>
+                        <span class="status-badge completed">
+                            <i class="fas fa-check-circle"></i> Completed
+                        </span>
+                    </div>
+
+                    <div class="project-info">
+                        <div class="info-row">
+                            <i class="fas fa-user"></i>
+                            <strong>Client:</strong> @project.Request.Client.User.FirstName @project.Request.Client.User.LastName
+                        </div>
+                        <div class="info-row">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <strong>Location:</strong> @project.Request.PropertyAddress
+                        </div>
+                        <div class="info-row">
+                            <i class="fas fa-calendar-check"></i>
+                            <strong>Completed:</strong> @project.ProjectCompletionDate?.ToString("MMM dd, yyyy")
+                        </div>
+                        <div class="info-row">
+                            <i class="fas fa-bolt"></i>
+                            <strong>System Size:</strong> @project.SystemSize kW
+                        </div>
+                        <div class="info-row">
+                            <i class="fas fa-dollar-sign"></i>
+                            <strong>Project Value:</strong> $@project.TotalPrice.ToString("N0")
+                        </div>
+                    </div>
+
+                    <div class="progress-section">
+                        <div class="progress-bar-container">
+                            <div class="progress-bar" style="width: 100%">
+                                100% Complete ✅
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="no-projects">
+            <i class="fas fa-clipboard-check"></i>
+            <p>No completed projects yet.</p>
+        </div>
+    }
+</div>

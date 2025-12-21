@@ -1,0 +1,277 @@
+﻿@model SolarConnect.Models.Quote
+
+@{
+    ViewData["Title"] = "Update Project Progress - SolarConnect";
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+<style>
+    body {
+        background: linear-gradient(135deg, #fff9e6 0%, #ffe8cc 100%);
+        font-family: 'Poppins', sans-serif;
+        min-height: 100vh;
+        padding: 2rem;
+        margin: 0;
+    }
+
+    .container {
+        max-width: 900px;
+        margin: 0 auto;
+        background-color: white;
+        padding: 3rem;
+        border-radius: 20px;
+        box-shadow: 0 10px 40px rgba(255, 140, 0, 0.15);
+    }
+
+    h1 {
+        color: #ff6b00;
+        margin-bottom: 2rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    h1 i {
+        font-size: 2rem;
+        color: #ff8c00;
+    }
+
+    .btn-back {
+        background: white;
+        color: #ff6b00;
+        border: 2px solid #ff8c00;
+        padding: 0.8rem 1.5rem;
+        border-radius: 10px;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 2rem;
+        font-weight: 600;
+    }
+
+    .project-info {
+        background: #f8f9fa;
+        padding: 1.5rem;
+        border-radius: 12px;
+        margin-bottom: 2rem;
+        border-left: 4px solid #28a745;
+    }
+
+    .project-info h3 {
+        color: #28a745;
+        margin-bottom: 1rem;
+    }
+
+    .project-info p {
+        color: #666;
+        margin: 0.5rem 0;
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+        display: block;
+        color: #333;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+    }
+
+    .form-group select,
+    .form-group input,
+    .form-group textarea {
+        width: 100%;
+        padding: 0.9rem;
+        border: 2px solid #e0e0e0;
+        border-radius: 10px;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+    }
+
+    .form-group select:focus,
+    .form-group input:focus,
+    .form-group textarea:focus {
+        border-color: #ff8c00;
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(255, 140, 0, 0.1);
+    }
+
+    .form-group textarea {
+        min-height: 100px;
+        resize: vertical;
+    }
+
+    .progress-preview {
+        background: linear-gradient(135deg, #fff4d6, #ffe8cc);
+        padding: 1.5rem;
+        border-radius: 12px;
+        margin: 1.5rem 0;
+    }
+
+    .progress-preview h4 {
+        color: #ff6b00;
+        margin-bottom: 1rem;
+    }
+
+    .progress-bar-container {
+        background: white;
+        height: 30px;
+        border-radius: 15px;
+        overflow: hidden;
+        margin-bottom: 0.5rem;
+    }
+
+    .progress-bar {
+        height: 100%;
+        background: linear-gradient(135deg, #28a745, #20c997);
+        transition: width 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: 600;
+    }
+
+    .status-stages {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 0.5rem;
+        margin-top: 1rem;
+    }
+
+    .stage {
+        text-align: center;
+        padding: 0.8rem;
+        border-radius: 8px;
+        background: white;
+        font-size: 0.85rem;
+        color: #999;
+    }
+
+    .stage.active {
+        background: linear-gradient(135deg, #28a745, #20c997);
+        color: white;
+        font-weight: 600;
+    }
+
+    .btn-submit {
+        width: 100%;
+        padding: 1.2rem;
+        background: linear-gradient(135deg, #28a745, #20c997);
+        color: white;
+        border: none;
+        border-radius: 12px;
+        font-size: 1.1rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-top: 1.5rem;
+    }
+
+    .btn-submit:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(40, 167, 69, 0.3);
+    }
+</style>
+
+<div class="container">
+    <a asp-action="MyProjects" class="btn-back">
+        <i class="fas fa-arrow-left"></i> Back to My Projects
+    </a>
+
+    <h1>
+        <i class="fas fa-tasks"></i>
+        Update Project Progress
+    </h1>
+
+    <!-- Project Information -->
+    <div class="project-info"> 
+        <h3><i class="fas fa-solar-panel"></i> @Model.Request.PropertyType Solar Installation</h3>
+        <p><i class="fas fa-user"></i> Client: @Model.Request.Client.User.FirstName @Model.Request.Client.User.LastName</p>
+        <p><i class="fas fa-map-marker-alt"></i> Location: @Model.Request.PropertyAddress</p>
+        <p><i class="fas fa-dollar-sign"></i> Project Value: $@Model.TotalPrice.ToString("N0")</p>
+    </div>
+
+    <form asp-action="UpdateProgress" asp-route-id="@Model.Id" method="post">
+        <input type="hidden" name="id" value="@Model.Id" />
+
+        <!-- Project Status -->
+        <div class="form-group">
+            <label><i class="fas fa-clipboard-check"></i> Project Status</label>
+            <select name="projectStatus" id="projectStatus" required onchange="updateProgressPreview()">
+                <option value="Pending Start" @@(Model.ProjectStatus == "Pending Start" ? "selected" : "")>Pending Start</option>
+                <option value="Design" @@(Model.ProjectStatus == "Design" ? "selected" : "")>Design Phase</option>
+                <option value="Procurement" @@(Model.ProjectStatus == "Procurement" ? "selected" : "")>Procurement (Ordering Equipment)</option>
+                <option value="Installation" @@(Model.ProjectStatus == "Installation" ? "selected" : "")>Installation in Progress</option>
+                <option value="Inspection" @@(Model.ProjectStatus == "Inspection" ? "selected" : "")>Inspection & Testing</option>
+                <option value="Completed" @@(Model.ProjectStatus == "Completed" ? "selected" : "")>Completed ✅</option>
+            </select>
+        </div>
+
+        <!-- Progress Percentage -->
+        <div class="form-group">
+            <label><i class="fas fa-chart-line"></i> Progress Percentage (0-100%)</label>
+            <input type="number" name="progressPercentage" id="progressPercentage" min="0" max="100" value="@Model.ProgressPercentage" required oninput="updateProgressPreview()" />
+        </div>
+
+        <!-- Progress Preview -->
+        <div class="progress-preview">
+            <h4>Progress Preview</h4>
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="previewBar" style="width: @Model.ProgressPercentage%">
+                    <span id="previewPercentage">@Model.ProgressPercentage%</span>
+                </div>
+            </div>
+            <div class="status-stages">
+                <div class="stage" id="stage1">Pending</div>
+                <div class="stage" id="stage2">Design</div>
+                <div class="stage" id="stage3">Procurement</div>
+                <div class="stage" id="stage4">Installation</div>
+                <div class="stage" id="stage5">Inspection</div>
+                <div class="stage" id="stage6">Completed</div>
+            </div>
+        </div>
+
+        <!-- Vendor Notes -->
+        <div class="form-group">
+            <label><i class="fas fa-sticky-note"></i> Progress Notes (Optional)</label>
+            <textarea name="vendorNotes" placeholder="Add notes about current progress, any issues, or updates for the client...">@Model.VendorNotes</textarea>
+        </div>
+
+        <button type="submit" class="btn-submit">
+            <i class="fas fa-save"></i> Update Progress
+        </button>
+    </form>
+</div>
+
+<script>
+    function updateProgressPreview() {
+        const status = document.getElementById('projectStatus').value;
+        const percentage = document.getElementById('progressPercentage').value;
+        const bar = document.getElementById('previewBar');
+        const percentageText = document.getElementById('previewPercentage');
+
+        // Update bar width
+        bar.style.width = percentage + '%';
+        percentageText.textContent = percentage + '%';
+
+        // Update stage highlighting
+        const stages = ['Pending Start', 'Design', 'Procurement', 'Installation', 'Inspection', 'Completed'];
+        const currentIndex = stages.indexOf(status);
+
+        for (let i = 1; i <= 6; i++) {
+            const stage = document.getElementById('stage' + i);
+            if (i <= currentIndex + 1) {
+                stage.classList.add('active');
+            } else {
+                stage.classList.remove('active');
+            }
+        }
+    }
+
+    // Initialize on page load
+    updateProgressPreview();
+</script>

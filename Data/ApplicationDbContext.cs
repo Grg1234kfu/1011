@@ -15,6 +15,8 @@ namespace SolarConnect.Data
         public DbSet<Vendor> Vendors { get; set; }
         public DbSet<Request> Requests { get; set; }
         public DbSet<Quote> Quotes { get; set; }
+
+        public DbSet<Product> Products { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

@@ -3,88 +3,234 @@
   "WorkspaceRootPath": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|c:\\users\\user\\desktop\\1011 (2)\\1011\\solarconnect\\views\\auth\\registerclient.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|solutionrelative:views\\auth\\registerclient.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|c:\\users\\user\\desktop\\1011 (2)\\1011\\solarconnect\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|c:\\users\\user\\desktop\\1011 (2)\\1011\\solarconnect\\models\\viewmodels\\submitquoteviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|solutionrelative:models\\viewmodels\\submitquoteviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|c:\\users\\user\\desktop\\1011 (2)\\1011\\solarconnect\\services\\aiquoteadvisorservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|solutionrelative:services\\aiquoteadvisorservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|c:\\users\\user\\desktop\\1011 (2)\\1011\\solarconnect\\models\\client.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|solutionrelative:models\\client.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|c:\\users\\user\\desktop\\1011 (2)\\1011\\solarconnect\\services\\iaiquoteadvisorservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|solutionrelative:services\\iaiquoteadvisorservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|c:\\users\\user\\desktop\\1011 (2)\\1011\\solarconnect\\views\\client\\aiquoteanalysis.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|solutionrelative:views\\client\\aiquoteanalysis.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|c:\\users\\user\\desktop\\1011 (2)\\1011\\solarconnect\\views\\auth\\registervendor.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|solutionrelative:views\\auth\\registervendor.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|c:\\users\\user\\desktop\\1011 (2)\\1011\\solarconnect\\views\\client\\myrequests.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|solutionrelative:views\\client\\myrequests.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|c:\\users\\user\\desktop\\1011 (2)\\1011\\solarconnect\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|solutionrelative:controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|c:\\users\\user\\desktop\\1011 (2)\\1011\\solarconnect\\controllers\\clientcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|solutionrelative:controllers\\clientcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|c:\\users\\user\\desktop\\1011 (2)\\1011\\solarconnect\\models\\viewmodels\\adminregisterviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|solutionrelative:models\\viewmodels\\adminregisterviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|c:\\users\\user\\desktop\\1011 (2)\\1011\\solarconnect\\views\\auth\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|solutionrelative:views\\auth\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|c:\\users\\user\\desktop\\1011 (2)\\1011\\solarconnect\\views\\auth\\registeradmin.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|solutionrelative:views\\auth\\registeradmin.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|c:\\users\\user\\desktop\\1011 (2)\\1011\\solarconnect\\models\\quote.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|solutionrelative:models\\quote.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|c:\\users\\user\\desktop\\1011 (2)\\1011\\solarconnect\\controllers\\vendorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|solutionrelative:controllers\\vendorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|c:\\users\\user\\desktop\\1011 (2)\\1011\\solarconnect\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|solutionrelative:data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|c:\\users\\user\\desktop\\1011 (2)\\1011\\solarconnect\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|c:\\users\\user\\desktop\\1011 (2)\\1011\\solarconnect\\views\\vendor\\submitquote.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|solutionrelative:views\\vendor\\submitquote.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|c:\\users\\user\\desktop\\1011 (2)\\1011\\solarconnect\\views\\vendor\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|solutionrelative:views\\vendor\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|c:\\users\\user\\desktop\\1011 (2)\\1011\\solarconnect\\views\\client\\createrequest.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|solutionrelative:views\\client\\createrequest.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|c:\\users\\user\\desktop\\1011 (2)\\1011\\solarconnect\\views\\vendor\\browserequests.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|solutionrelative:views\\vendor\\browserequests.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|c:\\users\\user\\desktop\\1011 (2)\\1011\\solarconnect\\views\\auth\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|solutionrelative:views\\auth\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|c:\\users\\user\\desktop\\1011 (2)\\1011\\solarconnect\\models\\clientregisterviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|solutionrelative:models\\clientregisterviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|c:\\users\\user\\desktop\\1011 (2)\\1011\\solarconnect\\views\\auth\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|solutionrelative:views\\auth\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|c:\\users\\user\\desktop\\1011 (2)\\1011\\solarconnect\\views\\vendor\\addproduct.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|solutionrelative:views\\vendor\\addproduct.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|c:\\users\\user\\desktop\\1011 (2)\\1011\\solarconnect\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|solutionrelative:views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|c:\\users\\user\\desktop\\1011 (2)\\1011\\solarconnect\\services\\pdfservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|solutionrelative:services\\pdfservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|c:\\users\\user\\desktop\\1011 (2)\\1011\\solarconnect\\views\\auth\\registeradmin.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|solutionrelative:views\\auth\\registeradmin.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|c:\\users\\user\\desktop\\1011 (2)\\1011\\solarconnect\\controllers\\vendorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|solutionrelative:controllers\\vendorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|c:\\users\\user\\desktop\\1011 (2)\\1011\\solarconnect\\models\\viewmodels\\submitquoteviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|solutionrelative:models\\viewmodels\\submitquoteviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|c:\\users\\user\\desktop\\1011 (2)\\1011\\solarconnect\\models\\request.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|solutionrelative:models\\request.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|c:\\users\\user\\desktop\\1011 (2)\\1011\\solarconnect\\services\\emailservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|solutionrelative:services\\emailservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|c:\\users\\user\\desktop\\1011 (2)\\1011\\solarconnect\\services\\iemailservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|solutionrelative:services\\iemailservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|c:\\users\\user\\desktop\\1011 (2)\\1011\\solarconnect\\services\\ipdfservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|solutionrelative:services\\ipdfservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|c:\\users\\user\\desktop\\1011 (2)\\1011\\solarconnect\\services\\geminiaiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|solutionrelative:services\\geminiaiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\user\\AppData\\Local\\SourceServer\\eb64acef7e51c96f51e9bd6c4060814eaa97f55b1eb8681e68a7896c4213ff99\\Program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|c:\\users\\user\\desktop\\1011 (2)\\1011\\solarconnect\\views\\client\\myprojects.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|solutionrelative:views\\client\\myprojects.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|c:\\users\\user\\desktop\\1011 (2)\\1011\\solarconnect\\models\\emailsettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|solutionrelative:models\\emailsettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|c:\\users\\user\\desktop\\1011 (2)\\1011\\solarconnect\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|solutionrelative:models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|c:\\users\\user\\desktop\\1011 (2)\\1011\\solarconnect\\models\\viewmodels\\createproductviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|solutionrelative:models\\viewmodels\\createproductviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|c:\\users\\user\\desktop\\1011 (2)\\1011\\solarconnect\\views\\client\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|solutionrelative:views\\client\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|c:\\users\\user\\desktop\\1011 (2)\\1011\\solarconnect\\views\\client\\createrequest.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|solutionrelative:views\\client\\createrequest.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|c:\\users\\user\\desktop\\1011 (2)\\1011\\solarconnect\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|solutionrelative:controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|c:\\users\\user\\desktop\\1011 (2)\\1011\\solarconnect\\migrations\\20251015110813_makequotefieldsnullable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|solutionrelative:migrations\\20251015110813_makequotefieldsnullable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|c:\\users\\user\\desktop\\1011 (2)\\1011\\solarconnect\\views\\vendor\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|solutionrelative:views\\vendor\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|c:\\users\\user\\desktop\\1011 (2)\\1011\\solarconnect\\migrations\\20251015110206_addquotemodel2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|solutionrelative:migrations\\20251015110206_addquotemodel2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|c:\\users\\user\\desktop\\1011 (2)\\1011\\solarconnect\\views\\vendor\\editproduct.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|solutionrelative:views\\vendor\\editproduct.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|c:\\users\\user\\desktop\\1011 (2)\\1011\\solarconnect\\migrations\\20251013072026_makeclientstringsnullable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|solutionrelative:migrations\\20251013072026_makeclientstringsnullable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|c:\\users\\user\\desktop\\1011 (2)\\1011\\solarconnect\\views\\vendor\\products.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|solutionrelative:views\\vendor\\products.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|c:\\users\\user\\desktop\\1011 (2)\\1011\\solarconnect\\migrations\\20251013071258_makeclientfieldsnullable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|solutionrelative:migrations\\20251013071258_makeclientfieldsnullable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|c:\\users\\user\\desktop\\1011 (2)\\1011\\solarconnect\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|solutionrelative:data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|c:\\users\\user\\desktop\\1011 (2)\\1011\\solarconnect\\models\\loginviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|solutionrelative:models\\loginviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|c:\\users\\user\\desktop\\1011 (2)\\1011\\solarconnect\\views\\client\\analyzequotes.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|solutionrelative:views\\client\\analyzequotes.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|c:\\users\\user\\desktop\\1011 (2)\\1011\\solarconnect\\.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|solutionrelative:.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|c:\\users\\user\\desktop\\1011 (2)\\1011\\solarconnect\\test.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|solutionrelative:test.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|c:\\users\\user\\desktop\\1011 (2)\\1011\\solarconnect\\views\\vendor\\myprojects.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|solutionrelative:views\\vendor\\myprojects.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|c:\\users\\user\\desktop\\1011 (2)\\1011\\solarconnect\\views\\vendor\\updateprogress.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|solutionrelative:views\\vendor\\updateprogress.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|c:\\users\\user\\desktop\\1011 (2)\\1011\\solarconnect\\models\\quote.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|solutionrelative:models\\quote.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|c:\\users\\user\\desktop\\1011 (2)\\1011\\solarconnect\\views\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|solutionrelative:views\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|c:\\users\\user\\desktop\\1011 (2)\\1011\\solarconnect\\models\\vendor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|solutionrelative:models\\vendor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|c:\\users\\user\\desktop\\1011 (2)\\1011\\solarconnect\\models\\vendorregisterviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|solutionrelative:models\\vendorregisterviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|c:\\users\\user\\desktop\\1011 (2)\\1011\\solarconnect\\solarconnect.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|solutionrelative:solarconnect.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Migrations\\20251119063756_Ura.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Migrations\\20251119063756_Ura.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|c:\\users\\user\\desktop\\1011 (2)\\1011\\solarconnect\\views\\client\\requestdetails.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|solutionrelative:views\\client\\requestdetails.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|c:\\users\\user\\desktop\\1011 (2)\\1011\\solarconnect\\views\\vendor\\browserequests.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|solutionrelative:views\\vendor\\browserequests.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|c:\\users\\user\\desktop\\1011 (2)\\1011\\solarconnect\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|solutionrelative:models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|c:\\users\\user\\desktop\\1011 (2)\\1011\\solarconnect\\solarconnect.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
+      "RelativeMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|solutionrelative:solarconnect.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\user\\Desktop\\1011\\SolarConnect\\Controllers\\AuthController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|c:\\users\\user\\desktop\\1011 (2)\\1011\\solarconnect\\views\\auth\\registerclient.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|solutionrelative:views\\auth\\registerclient.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|c:\\users\\user\\desktop\\1011 (2)\\1011\\solarconnect\\models\\client.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|solutionrelative:models\\client.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|c:\\users\\user\\desktop\\1011 (2)\\1011\\solarconnect\\models\\viewmodels\\adminregisterviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|solutionrelative:models\\viewmodels\\adminregisterviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|c:\\users\\user\\desktop\\1011 (2)\\1011\\solarconnect\\models\\clientregisterviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|solutionrelative:models\\clientregisterviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|c:\\users\\user\\desktop\\1011 (2)\\1011\\solarconnect\\migrations\\20251119202630_initialcreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|solutionrelative:migrations\\20251119202630_initialcreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|c:\\users\\user\\desktop\\1011 (2)\\1011\\solarconnect\\migrations\\20251120185500_makeproductfieldsnullable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|solutionrelative:migrations\\20251120185500_makeproductfieldsnullable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|c:\\users\\user\\desktop\\1011 (2)\\1011\\solarconnect\\migrations\\20251120064941_mkepo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{754351B3-3685-42CE-B1E2-1632E8DBF64E}|SolarConnect.csproj|solutionrelative:migrations\\20251120064941_mkepo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -94,8 +240,12 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 5,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
@@ -105,25 +255,201 @@
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{0ad07096-bba9-4900-a651-0598d26f6d24}"
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ClientController.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Controllers\\ClientController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ClientController.cs",
+              "ToolTip": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Controllers\\ClientController.cs",
+              "RelativeToolTip": "Controllers\\ClientController.cs",
+              "ViewState": "AgIAAHQAAAAAAAAAAAAYwJoAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-19T20:55:04.846Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "MyRequests.cshtml",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Views\\Client\\MyRequests.cshtml",
+              "RelativeDocumentMoniker": "Views\\Client\\MyRequests.cshtml",
+              "ToolTip": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Views\\Client\\MyRequests.cshtml",
+              "RelativeToolTip": "Views\\Client\\MyRequests.cshtml",
+              "ViewState": "AgIAAMMAAAAAAAAAAAAswOAAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-15T18:00:30.01Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "RegisterClient.cshtml",
-              "DocumentMoniker": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Views\\Auth\\RegisterClient.cshtml",
-              "RelativeDocumentMoniker": "Views\\Auth\\RegisterClient.cshtml",
-              "ToolTip": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Views\\Auth\\RegisterClient.cshtml",
-              "RelativeToolTip": "Views\\Auth\\RegisterClient.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABABAAAfAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-13T07:08:09.114Z",
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-11-18T16:57:24.887Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "AIQuoteAdvisorService.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Services\\AIQuoteAdvisorService.cs",
+              "RelativeDocumentMoniker": "Services\\AIQuoteAdvisorService.cs",
+              "ToolTip": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Services\\AIQuoteAdvisorService.cs",
+              "RelativeToolTip": "Services\\AIQuoteAdvisorService.cs",
+              "ViewState": "AgIAADUAAAAAAAAAAAAiwFQAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-30T09:13:14.007Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "IAIQuoteAdvisorService.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Services\\IAIQuoteAdvisorService.cs",
+              "RelativeDocumentMoniker": "Services\\IAIQuoteAdvisorService.cs",
+              "ToolTip": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Services\\IAIQuoteAdvisorService.cs",
+              "RelativeToolTip": "Services\\IAIQuoteAdvisorService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-30T09:12:31.67Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAABMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-18T19:26:15.406Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "RegisterVendor.cshtml",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Views\\Auth\\RegisterVendor.cshtml",
+              "RelativeDocumentMoniker": "Views\\Auth\\RegisterVendor.cshtml",
+              "ToolTip": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Views\\Auth\\RegisterVendor.cshtml",
+              "RelativeToolTip": "Views\\Auth\\RegisterVendor.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADYAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-21T09:14:11.217Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "SubmitQuote.cshtml",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Views\\Vendor\\SubmitQuote.cshtml",
+              "RelativeDocumentMoniker": "Views\\Vendor\\SubmitQuote.cshtml",
+              "ToolTip": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Views\\Vendor\\SubmitQuote.cshtml",
+              "RelativeToolTip": "Views\\Vendor\\SubmitQuote.cshtml",
+              "ViewState": "AgIAAL8AAAAAAAAAAAAuwN0AAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-15T10:55:41.256Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "AIQuoteAnalysis.cshtml",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Views\\Client\\AIQuoteAnalysis.cshtml",
+              "RelativeDocumentMoniker": "Views\\Client\\AIQuoteAnalysis.cshtml",
+              "ToolTip": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Views\\Client\\AIQuoteAnalysis.cshtml",
+              "RelativeToolTip": "Views\\Client\\AIQuoteAnalysis.cshtml",
+              "ViewState": "AgIAAFYBAAAAAAAAAAAAAHIBAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-30T09:19:22.846Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Login.cshtml",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Views\\Auth\\Login.cshtml",
+              "RelativeDocumentMoniker": "Views\\Auth\\Login.cshtml",
+              "ToolTip": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Views\\Auth\\Login.cshtml",
+              "RelativeToolTip": "Views\\Auth\\Login.cshtml",
+              "ViewState": "AgIAAAUCAAAAAAAAAADwvz4CAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-21T21:02:05.482Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "AddProduct.cshtml",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Views\\Vendor\\AddProduct.cshtml",
+              "RelativeDocumentMoniker": "Views\\Vendor\\AddProduct.cshtml",
+              "ToolTip": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Views\\Vendor\\AddProduct.cshtml",
+              "RelativeToolTip": "Views\\Vendor\\AddProduct.cshtml",
+              "ViewState": "AgIAAJ8AAAAAAAAAAAAswLsAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-19T10:27:06.642Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "CreateRequest.cshtml",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Views\\Client\\CreateRequest.cshtml",
+              "RelativeDocumentMoniker": "Views\\Client\\CreateRequest.cshtml",
+              "ToolTip": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Views\\Client\\CreateRequest.cshtml",
+              "RelativeToolTip": "Views\\Client\\CreateRequest.cshtml",
+              "ViewState": "AgIAAIgCAAAAAAAAAAAuwJkCAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-13T06:46:03.314Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "PdfService.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Services\\PdfService.cs",
+              "RelativeDocumentMoniker": "Services\\PdfService.cs",
+              "ToolTip": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Services\\PdfService.cs",
+              "RelativeToolTip": "Services\\PdfService.cs",
+              "ViewState": "AgIAAEUAAAAAAAAAAAAswFcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-20T19:28:39.4Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAALkBAAAAAAAAAAAAAOwBAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-19T11:22:21.655Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Register.cshtml",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Views\\Auth\\Register.cshtml",
+              "RelativeDocumentMoniker": "Views\\Auth\\Register.cshtml",
+              "ToolTip": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Views\\Auth\\Register.cshtml",
+              "RelativeToolTip": "Views\\Auth\\Register.cshtml",
+              "ViewState": "AgIAADoAAAAAAAAAAADwv2EAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-15T12:13:36.017Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "RegisterAdmin.cshtml",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Views\\Auth\\RegisterAdmin.cshtml",
+              "RelativeDocumentMoniker": "Views\\Auth\\RegisterAdmin.cshtml",
+              "ToolTip": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Views\\Auth\\RegisterAdmin.cshtml",
+              "RelativeToolTip": "Views\\Auth\\RegisterAdmin.cshtml",
+              "ViewState": "AgIAAAEAAAAAAAAAAADwvzoAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-15T12:13:16.714Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
               "Title": "SubmitQuoteViewModel.cs",
               "DocumentMoniker": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Models\\ViewModels\\SubmitQuoteViewModel.cs",
               "RelativeDocumentMoniker": "Models\\ViewModels\\SubmitQuoteViewModel.cs",
@@ -135,163 +461,402 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "AdminRegisterViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Models\\ViewModels\\AdminRegisterViewModel.cs",
-              "RelativeDocumentMoniker": "Models\\ViewModels\\AdminRegisterViewModel.cs",
-              "ToolTip": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Models\\ViewModels\\AdminRegisterViewModel.cs",
-              "RelativeToolTip": "Models\\ViewModels\\AdminRegisterViewModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACgAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-15T12:10:55.388Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Register.cshtml",
-              "DocumentMoniker": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Views\\Auth\\Register.cshtml",
-              "RelativeDocumentMoniker": "Views\\Auth\\Register.cshtml",
-              "ToolTip": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Views\\Auth\\Register.cshtml",
-              "RelativeToolTip": "Views\\Auth\\Register.cshtml",
-              "ViewState": "AgIAABUAAAAAAAAAAAAwwDIAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-15T12:13:36.017Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "AuthController.cs",
-              "DocumentMoniker": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Controllers\\AuthController.cs",
-              "RelativeDocumentMoniker": "Controllers\\AuthController.cs",
-              "ToolTip": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Controllers\\AuthController.cs",
-              "RelativeToolTip": "Controllers\\AuthController.cs",
-              "ViewState": "AgIAAHQBAAAAAAAAAAAuwI8BAAAOAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-13T07:07:08.614Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "RegisterAdmin.cshtml",
-              "DocumentMoniker": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Views\\Auth\\RegisterAdmin.cshtml",
-              "RelativeDocumentMoniker": "Views\\Auth\\RegisterAdmin.cshtml",
-              "ToolTip": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Views\\Auth\\RegisterAdmin.cshtml",
-              "RelativeToolTip": "Views\\Auth\\RegisterAdmin.cshtml",
-              "ViewState": "AgIAAAMBAAAAAAAAAAAwwC4BAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-15T12:13:16.714Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "20251015110813_MakeQuoteFieldsNullable.cs",
-              "DocumentMoniker": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Migrations\\20251015110813_MakeQuoteFieldsNullable.cs",
-              "RelativeDocumentMoniker": "Migrations\\20251015110813_MakeQuoteFieldsNullable.cs",
-              "ToolTip": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Migrations\\20251015110813_MakeQuoteFieldsNullable.cs",
-              "RelativeToolTip": "Migrations\\20251015110813_MakeQuoteFieldsNullable.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAkAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-15T11:08:14.078Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "Quote.cs",
-              "DocumentMoniker": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Models\\Quote.cs",
-              "RelativeDocumentMoniker": "Models\\Quote.cs",
-              "ToolTip": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Models\\Quote.cs",
-              "RelativeToolTip": "Models\\Quote.cs",
-              "ViewState": "AgIAAB8AAAAAAAAAAAAwwD0AAAA/AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-15T10:58:22.021Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "MyRequests.cshtml",
-              "DocumentMoniker": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Views\\Client\\MyRequests.cshtml",
-              "RelativeDocumentMoniker": "Views\\Client\\MyRequests.cshtml",
-              "ToolTip": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Views\\Client\\MyRequests.cshtml",
-              "RelativeToolTip": "Views\\Client\\MyRequests.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgBAAARAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-15T18:00:30.01Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Client.cs",
-              "DocumentMoniker": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Models\\Client.cs",
-              "RelativeDocumentMoniker": "Models\\Client.cs",
-              "ToolTip": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Models\\Client.cs",
-              "RelativeToolTip": "Models\\Client.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAjAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-13T07:12:21.589Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 16,
               "Title": "VendorController.cs",
               "DocumentMoniker": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Controllers\\VendorController.cs",
               "RelativeDocumentMoniker": "Controllers\\VendorController.cs",
               "ToolTip": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Controllers\\VendorController.cs",
               "RelativeToolTip": "Controllers\\VendorController.cs",
-              "ViewState": "AgIAAIgAAAAAAAAAAAAewJ0AAAAMAAAAAAAAAA==",
+              "ViewState": "AgIAAP4BAAAAAAAAAAAswDkCAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-15T09:06:13.668Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 18,
-              "Title": "20251015110206_AddQuoteModel2.cs",
-              "DocumentMoniker": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Migrations\\20251015110206_AddQuoteModel2.cs",
-              "RelativeDocumentMoniker": "Migrations\\20251015110206_AddQuoteModel2.cs",
-              "ToolTip": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Migrations\\20251015110206_AddQuoteModel2.cs",
-              "RelativeToolTip": "Migrations\\20251015110206_AddQuoteModel2.cs",
+              "Title": "Request.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Models\\Request.cs",
+              "RelativeDocumentMoniker": "Models\\Request.cs",
+              "ToolTip": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Models\\Request.cs",
+              "RelativeToolTip": "Models\\Request.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAIwDMAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-19T15:57:18.849Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "EmailService.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Services\\EmailService.cs",
+              "RelativeDocumentMoniker": "Services\\EmailService.cs",
+              "ToolTip": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Services\\EmailService.cs",
+              "RelativeToolTip": "Services\\EmailService.cs",
+              "ViewState": "AgIAAEoAAAAAAAAAAAAswHMAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-20T19:34:17.316Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "IEmailService.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Services\\IEmailService.cs",
+              "RelativeDocumentMoniker": "Services\\IEmailService.cs",
+              "ToolTip": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Services\\IEmailService.cs",
+              "RelativeToolTip": "Services\\IEmailService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAACJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-20T19:35:41.702Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "IPdfService.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Services\\IPdfService.cs",
+              "RelativeDocumentMoniker": "Services\\IPdfService.cs",
+              "ToolTip": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Services\\IPdfService.cs",
+              "RelativeToolTip": "Services\\IPdfService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAABcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-20T19:27:53.592Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "GeminiAIService.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Services\\GeminiAIService.cs",
+              "RelativeDocumentMoniker": "Services\\GeminiAIService.cs",
+              "ToolTip": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Services\\GeminiAIService.cs",
+              "RelativeToolTip": "Services\\GeminiAIService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-18T19:26:30.418Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\user\\AppData\\Local\\SourceServer\\eb64acef7e51c96f51e9bd6c4060814eaa97f55b1eb8681e68a7896c4213ff99\\Program.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\AppData\\Local\\SourceServer\\eb64acef7e51c96f51e9bd6c4060814eaa97f55b1eb8681e68a7896c4213ff99\\Program.cs",
+              "ToolTip": "C:\\Users\\user\\AppData\\Local\\SourceServer\\eb64acef7e51c96f51e9bd6c4060814eaa97f55b1eb8681e68a7896c4213ff99\\Program.cs",
+              "RelativeToolTip": "..\\..\\..\\..\\AppData\\Local\\SourceServer\\eb64acef7e51c96f51e9bd6c4060814eaa97f55b1eb8681e68a7896c4213ff99\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-20T19:37:53.367Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "MyProjects.cshtml",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Views\\Client\\MyProjects.cshtml",
+              "RelativeDocumentMoniker": "Views\\Client\\MyProjects.cshtml",
+              "ToolTip": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Views\\Client\\MyProjects.cshtml",
+              "RelativeToolTip": "Views\\Client\\MyProjects.cshtml",
+              "ViewState": "AgIAAMYBAAAAAAAAAAAswAMCAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-20T08:12:15.593Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "EmailSettings.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Models\\EmailSettings.cs",
+              "RelativeDocumentMoniker": "Models\\EmailSettings.cs",
+              "ToolTip": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Models\\EmailSettings.cs",
+              "RelativeToolTip": "Models\\EmailSettings.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-20T19:26:51.672Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "Product.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Models\\Product.cs",
+              "RelativeDocumentMoniker": "Models\\Product.cs",
+              "ToolTip": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Models\\Product.cs",
+              "RelativeToolTip": "Models\\Product.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAA0wD4AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-19T06:36:23.299Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 56,
+              "Title": "20251120185500_MakeProductFieldsNullable.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Migrations\\20251120185500_MakeProductFieldsNullable.cs",
+              "RelativeDocumentMoniker": "Migrations\\20251120185500_MakeProductFieldsNullable.cs",
+              "ToolTip": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Migrations\\20251120185500_MakeProductFieldsNullable.cs",
+              "RelativeToolTip": "Migrations\\20251120185500_MakeProductFieldsNullable.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-15T11:02:06.704Z"
+              "WhenOpened": "2025-11-20T18:55:00.635Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "ApplicationDbContext.cs",
-              "DocumentMoniker": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Data\\ApplicationDbContext.cs",
-              "RelativeDocumentMoniker": "Data\\ApplicationDbContext.cs",
-              "ToolTip": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Data\\ApplicationDbContext.cs",
-              "RelativeToolTip": "Data\\ApplicationDbContext.cs",
-              "ViewState": "AgIAABwAAAAAAAAAAAAwwAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 27,
+              "Title": "CreateProductViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Models\\ViewModels\\CreateProductViewModel.cs",
+              "RelativeDocumentMoniker": "Models\\ViewModels\\CreateProductViewModel.cs",
+              "ToolTip": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Models\\ViewModels\\CreateProductViewModel.cs",
+              "RelativeToolTip": "Models\\ViewModels\\CreateProductViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAC0AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-15T10:58:34.523Z"
+              "WhenOpened": "2025-11-19T12:57:44.406Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "SubmitQuote.cshtml",
-              "DocumentMoniker": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Views\\Vendor\\SubmitQuote.cshtml",
-              "RelativeDocumentMoniker": "Views\\Vendor\\SubmitQuote.cshtml",
-              "ToolTip": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Views\\Vendor\\SubmitQuote.cshtml",
-              "RelativeToolTip": "Views\\Vendor\\SubmitQuote.cshtml",
-              "ViewState": "AgIAACABAAAAAAAAAAAwwE0BAAABAAAAAAAAAA==",
+              "DocumentIndex": 28,
+              "Title": "Dashboard.cshtml",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Views\\Client\\Dashboard.cshtml",
+              "RelativeDocumentMoniker": "Views\\Client\\Dashboard.cshtml",
+              "ToolTip": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Views\\Client\\Dashboard.cshtml",
+              "RelativeToolTip": "Views\\Client\\Dashboard.cshtml",
+              "ViewState": "AgIAAA4BAAAAAAAAAAAswEkBAAAGAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-15T10:55:41.256Z"
+              "WhenOpened": "2025-10-13T06:47:51.577Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 30,
               "Title": "Dashboard.cshtml",
               "DocumentMoniker": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Views\\Vendor\\Dashboard.cshtml",
               "RelativeDocumentMoniker": "Views\\Vendor\\Dashboard.cshtml",
               "ToolTip": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Views\\Vendor\\Dashboard.cshtml",
               "RelativeToolTip": "Views\\Vendor\\Dashboard.cshtml",
-              "ViewState": "AgIAAPUAAAAAAAAAAAAwwA0BAAAFAAAAAAAAAA==",
+              "ViewState": "AgIAACMAAAAAAAAAAAAAAEAAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-10-15T09:11:56.932Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 31,
+              "Title": "EditProduct.cshtml",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Views\\Vendor\\EditProduct.cshtml",
+              "RelativeDocumentMoniker": "Views\\Vendor\\EditProduct.cshtml",
+              "ToolTip": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Views\\Vendor\\EditProduct.cshtml",
+              "RelativeToolTip": "Views\\Vendor\\EditProduct.cshtml",
+              "ViewState": "AgIAANIAAAAAAAAAAAAswPgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-19T06:56:42.094Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "Products.cshtml",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Views\\Vendor\\Products.cshtml",
+              "RelativeDocumentMoniker": "Views\\Vendor\\Products.cshtml",
+              "ToolTip": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Views\\Vendor\\Products.cshtml",
+              "RelativeToolTip": "Views\\Vendor\\Products.cshtml",
+              "ViewState": "AgIAADMBAAAAAAAAAAAswG4BAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-19T12:59:57.45Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "Controllers\\AuthController.cs",
+              "ToolTip": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "Controllers\\AuthController.cs",
+              "ViewState": "AgIAAEcBAAAAAAAAAAAiwI8BAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-13T07:07:08.614Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "ApplicationDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Data\\ApplicationDbContext.cs",
+              "RelativeDocumentMoniker": "Data\\ApplicationDbContext.cs",
+              "ToolTip": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Data\\ApplicationDbContext.cs",
+              "RelativeToolTip": "Data\\ApplicationDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-15T10:58:34.523Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "LoginViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Models\\LoginViewModel.cs",
+              "RelativeDocumentMoniker": "Models\\LoginViewModel.cs",
+              "ToolTip": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Models\\LoginViewModel.cs",
+              "RelativeToolTip": "Models\\LoginViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-20T07:03:52.27Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 57,
+              "Title": "20251120064941_MKePo.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Migrations\\20251120064941_MKePo.cs",
+              "RelativeDocumentMoniker": "Migrations\\20251120064941_MKePo.cs",
+              "ToolTip": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Migrations\\20251120064941_MKePo.cs",
+              "RelativeToolTip": "Migrations\\20251120064941_MKePo.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-20T06:49:41.985Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 55,
+              "Title": "20251119202630_InitialCreate.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Migrations\\20251119202630_InitialCreate.cs",
+              "RelativeDocumentMoniker": "Migrations\\20251119202630_InitialCreate.cs",
+              "ToolTip": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Migrations\\20251119202630_InitialCreate.cs",
+              "RelativeToolTip": "Migrations\\20251119202630_InitialCreate.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-19T20:26:30.57Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "AnalyzeQuotes.cshtml",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Views\\Client\\AnalyzeQuotes.cshtml",
+              "RelativeDocumentMoniker": "Views\\Client\\AnalyzeQuotes.cshtml",
+              "ToolTip": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Views\\Client\\AnalyzeQuotes.cshtml",
+              "RelativeToolTip": "Views\\Client\\AnalyzeQuotes.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-19T15:41:49.004Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": ".gitignore",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\.gitignore",
+              "RelativeDocumentMoniker": ".gitignore",
+              "ToolTip": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\.gitignore",
+              "RelativeToolTip": ".gitignore",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-11-18T19:26:14.026Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "test.txt",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\test.txt",
+              "RelativeDocumentMoniker": "test.txt",
+              "ToolTip": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\test.txt",
+              "RelativeToolTip": "test.txt",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2025-11-18T19:26:16.166Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "MyProjects.cshtml",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Views\\Vendor\\MyProjects.cshtml",
+              "RelativeDocumentMoniker": "Views\\Vendor\\MyProjects.cshtml",
+              "ToolTip": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Views\\Vendor\\MyProjects.cshtml",
+              "RelativeToolTip": "Views\\Vendor\\MyProjects.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-19T10:30:12.219Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "UpdateProgress.cshtml",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Views\\Vendor\\UpdateProgress.cshtml",
+              "RelativeDocumentMoniker": "Views\\Vendor\\UpdateProgress.cshtml",
+              "ToolTip": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Views\\Vendor\\UpdateProgress.cshtml",
+              "RelativeToolTip": "Views\\Vendor\\UpdateProgress.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAL4AAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-19T10:30:13.753Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "Quote.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Models\\Quote.cs",
+              "RelativeDocumentMoniker": "Models\\Quote.cs",
+              "ToolTip": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Models\\Quote.cs",
+              "RelativeToolTip": "Models\\Quote.cs",
+              "ViewState": "AgIAACoAAAAAAAAAAAAmwEsAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-15T10:58:22.021Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "_ViewImports.cshtml",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Views\\_ViewImports.cshtml",
+              "RelativeDocumentMoniker": "Views\\_ViewImports.cshtml",
+              "ToolTip": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Views\\_ViewImports.cshtml",
+              "RelativeToolTip": "Views\\_ViewImports.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-19T11:20:15.209Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 42,
+              "Title": "Vendor.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Models\\Vendor.cs",
+              "RelativeDocumentMoniker": "Models\\Vendor.cs",
+              "ToolTip": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Models\\Vendor.cs",
+              "RelativeToolTip": "Models\\Vendor.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-19T11:20:13.418Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 43,
+              "Title": "VendorRegisterViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Models\\VendorRegisterViewModel.cs",
+              "RelativeDocumentMoniker": "Models\\VendorRegisterViewModel.cs",
+              "ToolTip": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Models\\VendorRegisterViewModel.cs",
+              "RelativeToolTip": "Models\\VendorRegisterViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-19T11:20:11.634Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 44,
+              "Title": "SolarConnect.csproj",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\SolarConnect.csproj",
+              "RelativeDocumentMoniker": "SolarConnect.csproj",
+              "ToolTip": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\SolarConnect.csproj",
+              "RelativeToolTip": "SolarConnect.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-11-18T19:26:50.901Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 46,
+              "Title": "RequestDetails.cshtml",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Views\\Client\\RequestDetails.cshtml",
+              "RelativeDocumentMoniker": "Views\\Client\\RequestDetails.cshtml",
+              "ToolTip": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Views\\Client\\RequestDetails.cshtml",
+              "RelativeToolTip": "Views\\Client\\RequestDetails.cshtml",
+              "ViewState": "AgIAAG8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-19T11:17:04.401Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 45,
+              "Title": "20251119063756_Ura.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Migrations\\20251119063756_Ura.cs",
+              "RelativeDocumentMoniker": "Migrations\\20251119063756_Ura.cs",
+              "ToolTip": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Migrations\\20251119063756_Ura.cs",
+              "RelativeToolTip": "Migrations\\20251119063756_Ura.cs",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-19T06:37:56.713Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 47,
               "Title": "BrowseRequests.cshtml",
               "DocumentMoniker": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Views\\Vendor\\BrowseRequests.cshtml",
               "RelativeDocumentMoniker": "Views\\Vendor\\BrowseRequests.cshtml",
@@ -303,31 +868,78 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
-              "Title": "20251013072026_MakeClientStringsNullable.cs",
-              "DocumentMoniker": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Migrations\\20251013072026_MakeClientStringsNullable.cs",
-              "RelativeDocumentMoniker": "Migrations\\20251013072026_MakeClientStringsNullable.cs",
-              "ToolTip": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Migrations\\20251013072026_MakeClientStringsNullable.cs",
-              "RelativeToolTip": "Migrations\\20251013072026_MakeClientStringsNullable.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-13T07:20:27.019Z"
+              "DocumentIndex": 51,
+              "Title": "RegisterClient.cshtml",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Views\\Auth\\RegisterClient.cshtml",
+              "RelativeDocumentMoniker": "Views\\Auth\\RegisterClient.cshtml",
+              "ToolTip": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Views\\Auth\\RegisterClient.cshtml",
+              "RelativeToolTip": "Views\\Auth\\RegisterClient.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABABAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-13T07:08:09.114Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
-              "Title": "20251013071258_MakeClientFieldsNullable.cs",
-              "DocumentMoniker": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Migrations\\20251013071258_MakeClientFieldsNullable.cs",
-              "RelativeDocumentMoniker": "Migrations\\20251013071258_MakeClientFieldsNullable.cs",
-              "ToolTip": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Migrations\\20251013071258_MakeClientFieldsNullable.cs",
-              "RelativeToolTip": "Migrations\\20251013071258_MakeClientFieldsNullable.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 50,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\1011\\SolarConnect\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\1011\\SolarConnect\\Controllers\\AuthController.cs",
+              "ToolTip": "C:\\Users\\user\\Desktop\\1011\\SolarConnect\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "..\\..\\..\\1011\\SolarConnect\\Controllers\\AuthController.cs",
+              "ViewState": "AgIAABsAAAAAAAAAAAAAABYAAABCAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-13T07:12:59.148Z"
+              "WhenOpened": "2025-11-18T17:35:17.617Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 48,
+              "Title": "User.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Models\\User.cs",
+              "RelativeDocumentMoniker": "Models\\User.cs",
+              "ToolTip": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Models\\User.cs",
+              "RelativeToolTip": "Models\\User.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-19T06:40:33.129Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 49,
+              "Title": "SolarConnect",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\SolarConnect.csproj",
+              "RelativeDocumentMoniker": "SolarConnect.csproj",
+              "ToolTip": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\SolarConnect.csproj",
+              "RelativeToolTip": "SolarConnect.csproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-11-18T19:26:55.763Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 53,
+              "Title": "AdminRegisterViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Models\\ViewModels\\AdminRegisterViewModel.cs",
+              "RelativeDocumentMoniker": "Models\\ViewModels\\AdminRegisterViewModel.cs",
+              "ToolTip": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Models\\ViewModels\\AdminRegisterViewModel.cs",
+              "RelativeToolTip": "Models\\ViewModels\\AdminRegisterViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-15T12:10:55.388Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 52,
+              "Title": "Client.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Models\\Client.cs",
+              "RelativeDocumentMoniker": "Models\\Client.cs",
+              "ToolTip": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Models\\Client.cs",
+              "RelativeToolTip": "Models\\Client.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-13T07:12:21.589Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 54,
               "Title": "ClientRegisterViewModel.cs",
               "DocumentMoniker": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Models\\ClientRegisterViewModel.cs",
               "RelativeDocumentMoniker": "Models\\ClientRegisterViewModel.cs",
@@ -336,30 +948,6 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACYAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-13T07:06:50.54Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "Dashboard.cshtml",
-              "DocumentMoniker": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Views\\Client\\Dashboard.cshtml",
-              "RelativeDocumentMoniker": "Views\\Client\\Dashboard.cshtml",
-              "ToolTip": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Views\\Client\\Dashboard.cshtml",
-              "RelativeToolTip": "Views\\Client\\Dashboard.cshtml",
-              "ViewState": "AgIAAGkAAAAAAAAAAAAuwJIAAAAKAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-13T06:47:51.577Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "CreateRequest.cshtml",
-              "DocumentMoniker": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Views\\Client\\CreateRequest.cshtml",
-              "RelativeDocumentMoniker": "Views\\Client\\CreateRequest.cshtml",
-              "ToolTip": "C:\\Users\\user\\Desktop\\1011 (2)\\1011\\SolarConnect\\Views\\Client\\CreateRequest.cshtml",
-              "RelativeToolTip": "Views\\Client\\CreateRequest.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-13T06:46:03.314Z"
             }
           ]
         }

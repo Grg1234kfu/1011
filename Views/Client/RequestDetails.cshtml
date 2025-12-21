@@ -1,0 +1,553 @@
+﻿@model SolarConnect.Models.Request
+
+@{
+    ViewData["Title"] = "Request Details - SolarConnect";
+    var quotes = ViewBag.Quotes as List<SolarConnect.Models.Quote>;
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+<style>
+    body {
+        background: linear-gradient(135deg, #fff9e6 0%, #ffe8cc 100%);
+        font-family: 'Poppins', sans-serif;
+        min-height: 100vh;
+        padding: 2rem;
+        margin: 0;
+    }
+
+    .container {
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+
+    .btn-back {
+        background: white;
+        color: #ff6b00;
+        border: 2px solid #ff8c00;
+        padding: 0.8rem 1.5rem;
+        border-radius: 10px;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 2rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+        .btn-back:hover {
+            background: #fff4d6;
+            text-decoration: none;
+        }
+
+    .request-summary {
+        background: white;
+        padding: 2rem;
+        border-radius: 20px;
+        box-shadow: 0 10px 40px rgba(255, 140, 0, 0.15);
+        margin-bottom: 2rem;
+    }
+
+        .request-summary h1 {
+            color: #ff6b00;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+            .request-summary h1 i {
+                font-size: 2rem;
+                color: #ff8c00;
+            }
+
+    .summary-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .summary-item {
+        background: #fafafa;
+        padding: 1rem;
+        border-radius: 10px;
+        border-left: 4px solid #ff8c00;
+    }
+
+        .summary-item strong {
+            color: #ff6b00;
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .summary-item span {
+            color: #333;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+    .badge {
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        display: inline-block;
+    }
+
+    .badge-open {
+        background: linear-gradient(135deg, #17a2b8, #20c997);
+        color: white;
+    }
+
+    .badge-accepted {
+        background: linear-gradient(135deg, #28a745, #20c997);
+        color: white;
+    }
+
+    .alert {
+        padding: 1rem;
+        border-radius: 8px;
+        margin-bottom: 1.5rem;
+    }
+
+    .alert-success {
+        background-color: #d4edda;
+        border-left: 4px solid #28a745;
+        color: #155724;
+    }
+
+    .alert-info {
+        background-color: #d1ecf1;
+        border-left: 4px solid #17a2b8;
+        color: #0c5460;
+    }
+
+    .alert-warning {
+        background-color: #fff3cd;
+        border-left: 4px solid #ffc107;
+        color: #856404;
+    }
+
+    .quotes-section {
+        margin-top: 2rem;
+    }
+
+        .quotes-section h2 {
+            color: #ff6b00;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+    .quote-card {
+        background: white;
+        border-radius: 15px;
+        padding: 2rem;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        border-left: 4px solid #ff8c00;
+        transition: transform 0.3s ease;
+    }
+
+        .quote-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 140, 0, 0.15);
+        }
+
+        .quote-card.accepted {
+            border-left-color: #28a745;
+            background: linear-gradient(135deg, #f0fff4, #ffffff);
+        }
+
+        .quote-card.rejected {
+            opacity: 0.6;
+            border-left-color: #dc3545;
+        }
+
+    .quote-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: start;
+        margin-bottom: 1.5rem;
+    }
+
+    .vendor-info h3 {
+        color: #ff6b00;
+        margin-bottom: 0.5rem;
+        font-size: 1.5rem;
+    }
+
+    .vendor-info p {
+        color: #666;
+        margin: 0.3rem 0;
+    }
+
+    .vendor-info i {
+        color: #ff8c00;
+        margin-right: 0.5rem;
+        width: 20px;
+    }
+
+    .price-highlight {
+        background: linear-gradient(135deg, #ff8c00, #ffa500);
+        color: white;
+        padding: 1.5rem;
+        border-radius: 12px;
+        text-align: center;
+    }
+
+        .price-highlight h2 {
+            font-size: 2.5rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .price-highlight p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+    .quote-details {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+        margin: 1.5rem 0;
+    }
+
+    .detail-box {
+        background: #fafafa;
+        padding: 1rem;
+        border-radius: 8px;
+    }
+
+        .detail-box strong {
+            color: #ff6b00;
+            display: block;
+            margin-bottom: 0.3rem;
+            font-size: 0.85rem;
+        }
+
+        .detail-box span {
+            color: #333;
+            font-weight: 600;
+        }
+
+    .system-description {
+        background: #fff4d6;
+        padding: 1rem;
+        border-radius: 8px;
+        margin: 1.5rem 0;
+    }
+
+        .system-description strong {
+            color: #ff6b00;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+    .quote-actions {
+        display: flex;
+        gap: 1rem;
+        margin-top: 1.5rem;
+    }
+
+    .btn {
+        padding: 0.8rem 1.5rem;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .btn-accept {
+        background: linear-gradient(135deg, #28a745, #20c997);
+        color: white;
+        flex: 1;
+    }
+
+        .btn-accept:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+        }
+
+    .btn-reject {
+        background: white;
+        color: #dc3545;
+        border: 2px solid #dc3545;
+    }
+
+        .btn-reject:hover {
+            background: #dc3545;
+            color: white;
+        }
+
+    .empty-state {
+        text-align: center;
+        padding: 4rem 2rem;
+        background: white;
+        border-radius: 15px;
+        color: #999;
+    }
+
+        .empty-state i {
+            font-size: 5rem;
+            color: #ddd;
+            margin-bottom: 1rem;
+        }
+
+    /* AI Analysis Button */
+    .ai-banner {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        padding: 2rem;
+        border-radius: 15px;
+        margin-bottom: 2rem;
+        text-align: center;
+        box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);
+    }
+
+        .ai-banner h3 {
+            margin: 0 0 0.5rem 0;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .ai-banner p {
+            margin: 0 0 1.5rem 0;
+            opacity: 0.9;
+        }
+
+    .btn-ai-analyze {
+        background: white;
+        color: #667eea;
+        padding: 1rem 2rem;
+        border-radius: 12px;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-weight: 700;
+        transition: all 0.3s ease;
+        border: none;
+        font-size: 1.1rem;
+    }
+
+        .btn-ai-analyze:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 255, 255, 0.3);
+            text-decoration: none;
+            color: #667eea;
+        }
+</style>
+
+<div class="container">
+    <a asp-action="MyRequests" class="btn-back">
+        <i class="fas fa-arrow-left"></i> Back to My Requests
+    </a>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success">
+            <i class="fas fa-check-circle"></i> @TempData["Success"]
+        </div>
+    }
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-warning">
+            <i class="fas fa-exclamation-circle"></i> @TempData["Error"]
+        </div>
+    }
+
+    <!-- Request Summary -->
+    <div class="request-summary">
+        <h1>
+            <i class="fas fa-file-alt"></i>
+            Request #@Model.Id
+            <span class="badge badge-@Model.Status.ToLower()">@Model.Status</span>
+        </h1>
+
+        <div class="summary-grid">
+            <div class="summary-item">
+                <strong><i class="fas fa-map-marker-alt"></i> LOCATION</strong>
+                <span>@Model.PropertyAddress</span>
+            </div>
+            <div class="summary-item">
+                <strong><i class="fas fa-home"></i> PROPERTY TYPE</strong>
+                <span>@Model.PropertyType</span>
+            </div>
+            <div class="summary-item">
+                <strong><i class="fas fa-ruler-combined"></i> ROOF AREA</strong>
+                <span>@Model.RoofArea m²</span>
+            </div>
+            <div class="summary-item">
+                <strong><i class="fas fa-bolt"></i> MONTHLY CONSUMPTION</strong>
+                <span>@Model.MonthlyConsumption kWh</span>
+            </div>
+            @if (Model.RecommendedSystemSize.HasValue)
+            {
+                <div class="summary-item">
+                    <strong><i class="fas fa-solar-panel"></i> RECOMMENDED SIZE</strong>
+                    <span>@Model.RecommendedSystemSize.Value.ToString("F2") kW</span>
+                </div>
+            }
+            <div class="summary-item">
+                <strong><i class="fas fa-calendar"></i> CREATED</strong>
+                <span>@Model.CreatedAt.ToString("MMM dd, yyyy")</span>
+            </div>
+        </div>
+
+        @if (!string.IsNullOrEmpty(Model.AdditionalNotes))
+        {
+            <div class="system-description">
+                <strong><i class="fas fa-sticky-note"></i> Your Notes:</strong>
+                <p>@Model.AdditionalNotes</p>
+            </div>
+        }
+    </div>
+
+    <!-- Quotes Section -->
+    <div class="quotes-section">
+        <h2>
+            <i class="fas fa-file-invoice-dollar"></i>
+            Received Quotes (@(quotes?.Count ?? 0))
+        </h2>
+
+        @if (quotes != null && quotes.Any())
+        {
+            <!-- AI Analysis Banner -->
+            @if (quotes.Count >= 2)
+            {
+                <div class="ai-banner">
+                    <h3>
+                        <i class="fas fa-robot"></i>
+                        Need Help Choosing?
+                    </h3>
+                    <p>Let AI analyze all @quotes.Count quotes and recommend the best option for you!</p>
+                    <a asp-action="AnalyzeQuotes" asp-route-requestId="@Model.Id" class="btn-ai-analyze">
+                        <i class="fas fa-magic"></i> Analyze with AI
+                    </a>
+                </div>
+            }
+
+            @if (Model.Status == "Open")
+            {
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle"></i> Review the quotes below and accept the one that best fits your needs!
+                </div>
+            }
+
+            @foreach (var quote in quotes)
+            {
+                <div class="quote-card @quote.Status.ToLower()">
+                    <div class="quote-header">
+                        <div class="vendor-info">
+                            <h3>@quote.Vendor.CompanyName</h3>
+                            <p><i class="fas fa-user"></i> @quote.Vendor.User.FirstName @quote.Vendor.User.LastName</p>
+                            <p><i class="fas fa-envelope"></i> @quote.Vendor.User.Email</p>
+                            <p><i class="fas fa-phone"></i> @quote.Vendor.User.PhoneNumber</p>
+                            <p><i class="fas fa-calendar"></i> Experience: @quote.Vendor.YearsOfExperience years</p>
+                            @if (quote.Vendor.Rating > 0)
+                            {
+                                <p><i class="fas fa-star"></i> Rating: @quote.Vendor.Rating / 5.0</p>
+                            }
+                        </div>
+
+                        <div class="price-highlight">
+                            <h2>$@quote.TotalPrice.ToString("N0")</h2>
+                            <p>Total Price</p>
+                        </div>
+                    </div>
+
+                    <div class="quote-details">
+                        <div class="detail-box">
+                            <strong><i class="fas fa-solar-panel"></i> SYSTEM SIZE</strong>
+                            <span>@quote.SystemSize kW</span>
+                        </div>
+                        <div class="detail-box">
+                            <strong><i class="fas fa-tools"></i> INSTALLATION</strong>
+                            <span>$@(quote.InstallationCost?.ToString("N0") ?? "Included")</span>
+                        </div>
+                        <div class="detail-box">
+                            <strong><i class="fas fa-calendar-check"></i> TIMELINE</strong>
+                            <span>@quote.EstimatedInstallationDays days</span>
+                        </div>
+                        <div class="detail-box">
+                            <strong><i class="fas fa-shield-alt"></i> WARRANTY</strong>
+                            <span>@quote.WarrantyYears years</span>
+                        </div>
+                    </div>
+
+                    <div class="quote-details">
+                        <div class="detail-box">
+                            <strong><i class="fas fa-solar-panel"></i> PANELS</strong>
+                            <span>@quote.PanelBrand</span>
+                        </div>
+                        <div class="detail-box">
+                            <strong><i class="fas fa-plug"></i> INVERTER</strong>
+                            <span>@quote.InverterBrand</span>
+                        </div>
+                        @if (!string.IsNullOrEmpty(quote.BatteryBrand))
+                        {
+                            <div class="detail-box">
+                                <strong><i class="fas fa-battery-full"></i> BATTERY</strong>
+                                <span>@quote.BatteryBrand</span>
+                            </div>
+                        }
+                    </div>
+
+                    @if (!string.IsNullOrEmpty(quote.SystemDescription))
+                    {
+                        <div class="system-description">
+                            <strong><i class="fas fa-info-circle"></i> System Description:</strong>
+                            <p>@quote.SystemDescription</p>
+                        </div>
+                    }
+
+                    @if (quote.Status == "Accepted")
+                    {
+                        <div class="alert alert-success">
+                            <i class="fas fa-check-circle"></i> <strong>You accepted this quote!</strong> The vendor will contact you soon.
+                        </div>
+                    }
+                    else if (quote.Status == "Rejected")
+                    {
+                        <div class="alert alert-warning">
+                            <i class="fas fa-times-circle"></i> Quote Rejected
+                        </div>
+                    }
+                    else if (Model.Status == "Open")
+                    {
+                        <div class="quote-actions">
+                            <form asp-action="AcceptQuote" method="post" style="flex: 1;">
+                                <input type="hidden" name="quoteId" value="@quote.Id" />
+                                <input type="hidden" name="requestId" value="@Model.Id" />
+                                <button type="submit" class="btn btn-accept" onclick="return confirm('Accept this quote? This will reject all other quotes.')">
+                                    <i class="fas fa-check"></i> Accept Quote
+                                </button>
+                            </form>
+                        </div>
+                    }
+                </div>
+            }
+        }
+        else
+        {
+            <div class="empty-state">
+                <i class="fas fa-hourglass-half"></i>
+                <h2>No Quotes Yet</h2>
+                <p>Vendors are reviewing your request. You'll receive quotes soon!</p>
+            </div>
+        }
+    </div>
+</div>

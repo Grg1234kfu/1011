@@ -1,0 +1,249 @@
+﻿@model SolarConnect.Models.ViewModels.CreateProductViewModel
+
+@{
+    ViewData["Title"] = "Edit Product - SolarConnect";
+    var productId = ViewBag.ProductId;
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+<style>
+    body {
+        background: linear-gradient(135deg, #fff9e6 0%, #ffe8cc 100%);
+        font-family: 'Poppins', sans-serif;
+        min-height: 100vh;
+        padding: 2rem;
+        margin: 0;
+    }
+
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        background: white;
+        padding: 3rem;
+        border-radius: 20px;
+        box-shadow: 0 10px 40px rgba(255, 140, 0, 0.15);
+    }
+
+    h1 {
+        color: #ff6b00;
+        margin-bottom: 2rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+        h1 i {
+            font-size: 2rem;
+            color: #ff8c00;
+        }
+
+    .btn-back {
+        background: white;
+        color: #ff6b00;
+        border: 2px solid #ff8c00;
+        padding: 0.8rem 1.5rem;
+        border-radius: 10px;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 2rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+        .btn-back:hover {
+            background: #ff8c00;
+            color: white;
+            text-decoration: none;
+        }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+        .form-group label {
+            display: block;
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+            .form-group label i {
+                color: #ff8c00;
+                margin-right: 0.5rem;
+            }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.9rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+            .form-group input:focus,
+            .form-group select:focus,
+            .form-group textarea:focus {
+                border-color: #ff8c00;
+                outline: none;
+                box-shadow: 0 0 0 3px rgba(255, 140, 0, 0.1);
+            }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+    .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+    }
+
+    .btn-submit {
+        width: 100%;
+        padding: 1.2rem;
+        background: linear-gradient(135deg, #1976d2, #1565c0);
+        color: white;
+        border: none;
+        border-radius: 12px;
+        font-size: 1.1rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-top: 1rem;
+    }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(25, 118, 210, 0.3);
+        }
+
+    .text-danger {
+        color: #dc3545;
+        font-size: 0.875rem;
+        margin-top: 0.25rem;
+    }
+</style>
+
+<div class="container">
+    <a asp-action="Products" class="btn-back">
+        <i class="fas fa-arrow-left"></i> Back to Products
+    </a>
+
+    <h1>
+        <i class="fas fa-edit"></i>
+        Edit Product
+    </h1>
+
+    <form asp-action="EditProduct" asp-route-id="@productId" method="post">
+        @Html.AntiForgeryToken()
+
+        <div class="form-group">
+            <label asp-for="ProductName">
+                <i class="fas fa-box"></i> Product Name
+            </label>
+            <input asp-for="ProductName" class="form-control" />
+            <span asp-validation-for="ProductName" class="text-danger"></span>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label asp-for="Category">
+                    <i class="fas fa-list"></i> Category
+                </label>
+                <select asp-for="Category" class="form-control">
+                    <option value="">Select Category</option>
+                    <option value="SolarPanel">Solar Panel</option>
+                    <option value="Inverter">Inverter</option>
+                    <option value="Battery">Battery</option>
+                    <option value="Accessory">Accessory</option>
+                </select>
+                <span asp-validation-for="Category" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Brand">
+                    <i class="fas fa-tag"></i> Brand
+                </label>
+                <input asp-for="Brand" class="form-control" />
+                <span asp-validation-for="Brand" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label asp-for="Model">
+                    <i class="fas fa-barcode"></i> Model
+                </label>
+                <input asp-for="Model" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="PowerOutput">
+                    <i class="fas fa-bolt"></i> Power Output
+                </label>
+                <input asp-for="PowerOutput" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label asp-for="Price">
+                    <i class="fas fa-dollar-sign"></i> Price (USD)
+                </label>
+                <input asp-for="Price" type="number" step="0.01" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="WarrantyYears">
+                    <i class="fas fa-shield-alt"></i> Warranty (Years)
+                </label>
+                <input asp-for="WarrantyYears" type="number" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="StockQuantity">
+                <i class="fas fa-warehouse"></i> Stock Quantity
+            </label>
+            <input asp-for="StockQuantity" type="number" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Description">
+                <i class="fas fa-align-left"></i> Description
+            </label>
+            <textarea asp-for="Description" class="form-control"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Specifications">
+                <i class="fas fa-clipboard-list"></i> Technical Specifications
+            </label>
+            <textarea asp-for="Specifications" class="form-control"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="ImageUrl">
+                <i class="fas fa-image"></i> Image URL
+            </label>
+            <input asp-for="ImageUrl" class="form-control" />
+        </div>
+
+        <button type="submit" class="btn-submit">
+            <i class="fas fa-save"></i> Update Product
+        </button>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

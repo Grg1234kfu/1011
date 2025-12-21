@@ -13,6 +13,7 @@
         font-family: 'Poppins', sans-serif;
         min-height: 100vh;
         padding: 2rem;
+        margin: 0;
     }
 
     .form-container {
@@ -56,10 +57,13 @@
         gap: 0.5rem;
         margin-bottom: 2rem;
         font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
     }
 
         .btn-back:hover {
             background: #fff4d6;
+            transform: translateY(-2px);
         }
 
     .request-info-box {
@@ -116,19 +120,19 @@
         .form-floating input,
         .form-floating textarea {
             width: 100%;
-            padding: 1rem 1rem 0.5rem;
+            padding: 1rem;
             border: 2px solid #e0e0e0;
             border-radius: 10px;
             outline: none;
-            background: #fafafa;
+            background-color: transparent;
             transition: all 0.3s ease;
             font-size: 1rem;
+            font-family: inherit;
         }
 
         .form-floating textarea {
             min-height: 120px;
             resize: vertical;
-            padding: 1rem;
         }
 
         .form-floating label {
@@ -137,27 +141,30 @@
             left: 1rem;
             pointer-events: none;
             transition: 0.2s ease all;
-            color: #777;
-            background-color: #fff;
-            padding: 0 5px;
-        }
-
-        .form-floating input:focus + label,
-        .form-floating input:not(:placeholder-shown) + label,
-        .form-floating textarea:focus + label,
-        .form-floating textarea:not(:placeholder-shown) + label {
-            top: -0.5rem;
-            left: 0.75rem;
-            font-size: 0.8rem;
-            color: #ff8c00;
+            color: #999;
+            background-color: transparent !important;
+            padding: 0;
+            font-size: 1rem;
         }
 
         .form-floating input:focus,
         .form-floating textarea:focus {
             border-color: #ff8c00;
-            background-color: #fff;
+            background-color: white;
             box-shadow: 0 0 0 3px rgba(255, 140, 0, 0.1);
         }
+
+            .form-floating input:focus + label,
+            .form-floating input:not(:placeholder-shown) + label,
+            .form-floating textarea:focus + label,
+            .form-floating textarea:not(:placeholder-shown) + label {
+                top: -0.8rem;
+                left: 0.5rem;
+                font-size: 0.75rem;
+                color: #ff8c00;
+                background-color: transparent !important;
+                padding: 0 !important;
+            }
 
     .text-danger {
         font-size: 0.85rem;
@@ -204,6 +211,19 @@
             color: #ff8c00;
             margin-top: 0.2rem;
         }
+
+    @@media (max-width: 768px) {
+        .form-row
+
+    {
+        grid-template-columns: 1fr;
+    }
+
+    .form-container {
+        padding: 1.5rem;
+    }
+
+    }
 </style>
 
 <div class="form-container">
@@ -247,19 +267,19 @@
 
             <div class="form-row">
                 <div class="form-floating">
-                    <input asp-for="SystemSize" class="form-control" type="number" step="0.01" placeholder="System Size" />
+                    <input asp-for="SystemSize" class="form-control" type="number" step="0.01" placeholder=" " required />
                     <label asp-for="SystemSize">System Size (kW)</label>
                     <span asp-validation-for="SystemSize" class="text-danger"></span>
                 </div>
 
                 <div class="form-floating">
-                    <input asp-for="TotalPrice" class="form-control" type="number" step="0.01" placeholder="Total Price" />
+                    <input asp-for="TotalPrice" class="form-control" type="number" step="0.01" placeholder=" " required />
                     <label asp-for="TotalPrice">Total Price (USD)</label>
                     <span asp-validation-for="TotalPrice" class="text-danger"></span>
                 </div>
 
                 <div class="form-floating">
-                    <input asp-for="InstallationCost" class="form-control" type="number" step="0.01" placeholder="Installation Cost" />
+                    <input asp-for="InstallationCost" class="form-control" type="number" step="0.01" placeholder=" " required />
                     <label asp-for="InstallationCost">Installation Cost (USD)</label>
                     <span asp-validation-for="InstallationCost" class="text-danger"></span>
                 </div>
@@ -277,26 +297,26 @@
 
             <div class="form-row">
                 <div class="form-floating">
-                    <input asp-for="PanelBrand" class="form-control" placeholder="Panel Brand" />
+                    <input asp-for="PanelBrand" class="form-control" placeholder=" " />
                     <label asp-for="PanelBrand">Solar Panel Brand</label>
                     <span asp-validation-for="PanelBrand" class="text-danger"></span>
                 </div>
 
                 <div class="form-floating">
-                    <input asp-for="InverterBrand" class="form-control" placeholder="Inverter Brand" />
+                    <input asp-for="InverterBrand" class="form-control" placeholder=" " />
                     <label asp-for="InverterBrand">Inverter Brand</label>
                     <span asp-validation-for="InverterBrand" class="text-danger"></span>
                 </div>
 
                 <div class="form-floating">
-                    <input asp-for="BatteryBrand" class="form-control" placeholder="Battery Brand (Optional)" />
+                    <input asp-for="BatteryBrand" class="form-control" placeholder=" " />
                     <label asp-for="BatteryBrand">Battery Brand (Optional)</label>
                     <span asp-validation-for="BatteryBrand" class="text-danger"></span>
                 </div>
             </div>
 
             <div class="form-floating">
-                <textarea asp-for="SystemDescription" class="form-control" placeholder="System Description"></textarea>
+                <textarea asp-for="SystemDescription" class="form-control" placeholder=" "></textarea>
                 <label asp-for="SystemDescription">Detailed System Description</label>
                 <span asp-validation-for="SystemDescription" class="text-danger"></span>
             </div>
@@ -308,13 +328,13 @@
 
             <div class="form-row">
                 <div class="form-floating">
-                    <input asp-for="EstimatedInstallationDays" class="form-control" type="number" placeholder="Installation Days" />
+                    <input asp-for="EstimatedInstallationDays" class="form-control" type="number" placeholder=" " />
                     <label asp-for="EstimatedInstallationDays">Installation Timeline (Days)</label>
                     <span asp-validation-for="EstimatedInstallationDays" class="text-danger"></span>
                 </div>
 
                 <div class="form-floating">
-                    <input asp-for="WarrantyYears" class="form-control" type="number" placeholder="Warranty Years" />
+                    <input asp-for="WarrantyYears" class="form-control" type="number" placeholder=" " />
                     <label asp-for="WarrantyYears">Warranty Period (Years)</label>
                     <span asp-validation-for="WarrantyYears" class="text-danger"></span>
                 </div>

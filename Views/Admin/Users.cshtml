@@ -1,0 +1,105 @@
+@model List<SolarConnect.Models.User>
+
+@{
+    ViewData["Title"] = "Manage Users";
+}
+
+<style>
+    .wrap { max-width: 1200px; margin: 0 auto; padding: 30px; }
+    .topbar { display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; }
+    .card { background:#fff; border-radius:12px; padding:18px; }
+    table { width:100%; border-collapse: collapse; }
+    th, td { padding:12px; border-bottom:1px solid #eee; text-align:left; }
+    th { background:#fff4d6; color:#ff6b00; }
+    .badge { padding:4px 10px; border-radius:999px; font-size:12px; font-weight:700; }
+    .ok { background:#eaffea; color:#1e7a1e; }
+    .no { background:#ffecec; color:#a11; }
+    .btn { padding:8px 12px; border-radius:10px; font-weight:700; border:1px solid #ff8c00; cursor:pointer; text-decoration:none; display:inline-block; }
+    .btn-primary { background:#ff8c00; color:#fff; }
+    .btn-light { background:#fff; color:#ff6b00; }
+    .btn-danger { background:#b00020; color:#fff; border-color:#b00020; }
+    .actions { display:flex; gap:8px; flex-wrap:wrap; }
+    .alert { padding:10px 12px; border-radius:10px; margin:12px 0; }
+    .alert-success { background:#eaffea; border:1px solid #a6e3a6; color:#1e7a1e; }
+    .alert-error { background:#ffecec; border:1px solid #ffb3b3; color:#a11; }
+</style>
+
+<div class="wrap">
+    <div class="topbar">
+        <h2>Manage Users</h2>
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <a asp-action="Dashboard" class="btn btn-light">← Dashboard</a>
+            <a asp-action="CreateUser" class="btn btn-primary">+ Create User</a>
+        </div>
+    </div>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success">@TempData["Success"]</div>
+    }
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-error">@TempData["Error"]</div>
+    }
+
+    <div class="card">
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Full Name</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Status</th>
+                    <th>Created</th>
+                    <th style="width:360px;">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            @if (Model == null || Model.Count == 0)
+            {
+                <tr><td colspan="7">No users found.</td></tr>
+            }
+            else
+            {
+                foreach (var u in Model)
+                {
+                    <tr>
+                        <td>@u.Id</td>
+                        <td>@u.FirstName @u.LastName</td>
+                        <td>@u.Email</td>
+                        <td>@u.Role</td>
+                        <td>
+                            @if (u.IsActive)
+                            {
+                                <span class="badge ok">Active</span>
+                            }
+                            else
+                            {
+                                <span class="badge no">Inactive</span>
+                            }
+                        </td>
+                        <td>@u.CreatedAt.ToString("yyyy-MM-dd")</td>
+                        <td>
+                            <div class="actions">
+                                <a asp-action="EditUser" asp-route-id="@u.Id" class="btn btn-light">Edit</a>
+
+                                <a asp-action="ChangePassword" asp-route-id="@u.Id" class="btn btn-light">Password</a>
+
+                                <form asp-action="ToggleActive" asp-route-id="@u.Id" method="post" style="display:inline;">
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit" class="btn btn-light">
+                                        @(u.IsActive ? "Deactivate" : "Activate")
+                                    </button>
+                                </form>
+
+                                <a asp-action="DeleteUser" asp-route-id="@u.Id" class="btn btn-danger">Delete</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+            </tbody>
+        </table>
+    </div>
+</div>

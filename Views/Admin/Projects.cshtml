@@ -1,0 +1,64 @@
+@model IEnumerable<SolarConnect.Models.Quote>
+
+@{
+    ViewData["Title"] = "Projects - Admin";
+}
+
+<style>
+    .wrap { max-width: 1400px; margin: 0 auto; padding: 30px; }
+    .back { display:inline-block; margin-bottom: 15px; color:#ff6b00; text-decoration:none; font-weight:600; }
+    table { width: 100%; border-collapse: collapse; background: white; border-radius: 12px; overflow:hidden; }
+    th, td { padding: 12px; border-bottom: 1px solid #eee; text-align:left; vertical-align: top; }
+    th { background: #fff4d6; color: #ff6b00; }
+    .small { color:#666; font-size: 12px; }
+</style>
+
+<div class="wrap">
+    <a asp-action="Dashboard" class="back">← Back to Dashboard</a>
+
+    <h2>Projects (Quotes Tracking)</h2>
+
+    @if (!Model.Any())
+    {
+        <p>No quotes/projects found.</p>
+    }
+    else
+    {
+        <table>
+            <thead>
+                <tr>
+                    <th>Client</th>
+                    <th>Vendor</th>
+                    <th>Request</th>
+                    <th>System Size</th>
+                    <th>Total Price</th>
+                    <th>Status</th>
+                    <th>Submitted</th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var q in Model)
+            {
+                <tr>
+                    <td>
+                        <strong>@q.Request?.Client?.User?.FirstName @q.Request?.Client?.User?.LastName</strong>
+                        <div class="small">@q.Request?.Client?.User?.Email</div>
+                    </td>
+                    <td>
+                        <strong>@q.Vendor?.CompanyName</strong>
+                        <div class="small">@q.Vendor?.User?.Email</div>
+                    </td>
+                    <td>
+                        <div><strong>@q.Request?.PropertyType</strong></div>
+                        <div class="small">@q.Request?.PropertyAddress</div>
+                    </td>
+                    <td>@q.SystemSize</td>
+                    <td>@q.TotalPrice.ToString("0.00")</td>
+                    <td>@q.Status</td>
+                    <td>@q.SubmittedAt.ToString("yyyy-MM-dd HH:mm")</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    }
+</div>

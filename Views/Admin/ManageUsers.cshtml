@@ -1,0 +1,34 @@
+@model List<SolarConnect.Models.User>
+@{
+    ViewData["Title"] = "Manage Users";
+}
+
+<h2>Manage Users</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Email</th>
+            <th>Full Name</th>
+            <th>Phone</th>
+            <th>Role</th>
+            <th>Active</th>
+            <th>Created</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var u in Model)
+    {
+        <tr>
+            <td>@u.Id</td>
+            <td>@u.Email</td>
+            <td>@u.FirstName @u.LastName</td>
+            <td>@u.PhoneNumber</td>
+            <td>@u.Role</td>
+            <td>@u.IsActive</td>
+            <td>@u.CreatedAt</td>
+        </tr>
+    }
+    </tbody>
+</table>

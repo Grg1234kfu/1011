@@ -23,13 +23,13 @@ namespace SolarConnect.Models
 
         // System Details
         [Column(TypeName = "decimal(18,2)")]
-        public decimal SystemSize { get; set; } // kW
+        public decimal SystemSize { get; set; }
 
         [Column(TypeName = "decimal(18,2)")]
-        public decimal TotalPrice { get; set; } // USD
+        public decimal TotalPrice { get; set; }
 
         [Column(TypeName = "decimal(18,2)")]
-        public decimal? InstallationCost { get; set; } // USD
+        public decimal? InstallationCost { get; set; }
 
         [StringLength(200)]
         public string PanelBrand { get; set; }
@@ -52,13 +52,27 @@ namespace SolarConnect.Models
         // Status
         [Required]
         [StringLength(50)]
-        public string Status { get; set; } = "Pending"; // Pending, Accepted, Rejected
+        public string Status { get; set; } = "Pending";
 
         public DateTime SubmittedAt { get; set; } = DateTime.UtcNow;
 
         public DateTime? RespondedAt { get; set; }
 
         [StringLength(1000)]
-        public string? ClientResponse { get; set; }  // Added ?
+        public string? ClientResponse { get; set; }
+
+        // ✅ ADD THESE PROGRESS TRACKING PROPERTIES:
+        [StringLength(50)]
+        public string ProjectStatus { get; set; } = "Pending Start";
+
+        [Range(0, 100)]
+        public int ProgressPercentage { get; set; } = 0;
+
+        public DateTime? ProjectStartDate { get; set; }
+
+        public DateTime? ProjectCompletionDate { get; set; }
+
+        [StringLength(1000)]
+        public string? VendorNotes { get; set; }
     }
 }

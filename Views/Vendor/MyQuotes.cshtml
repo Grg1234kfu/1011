@@ -1,0 +1,389 @@
+﻿@model IEnumerable<SolarConnect.Models.Quote>
+
+@{
+    ViewData["Title"] = "My Quotes - SolarConnect";
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+<style>
+    body {
+        background: linear-gradient(135deg, #fff9e6 0%, #ffe8cc 100%);
+        font-family: 'Poppins', sans-serif;
+        min-height: 100vh;
+        padding: 2rem;
+        margin: 0;
+    }
+
+    .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        background-color: white;
+        padding: 3rem;
+        border-radius: 20px;
+        box-shadow: 0 10px 40px rgba(255, 140, 0, 0.15);
+    }
+
+    h1 {
+        color: #ff6b00;
+        margin-bottom: 2rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+        h1 i {
+            font-size: 2.5rem;
+            color: #ff8c00;
+        }
+
+    .btn-back {
+        background: white;
+        color: #ff6b00;
+        border: 2px solid #ff8c00;
+        padding: 0.8rem 1.5rem;
+        border-radius: 10px;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 2rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+        .btn-back:hover {
+            background: #fff4d6;
+        }
+
+    .filter-buttons {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+    }
+
+    .filter-btn {
+        padding: 0.7rem 1.5rem;
+        border: 2px solid #ff8c00;
+        background: white;
+        color: #ff6b00;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: linear-gradient(135deg, #ff8c00, #ffa500);
+            color: white;
+        }
+
+    .stats-bar {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .stat-card {
+        background: linear-gradient(135deg, #fff4d6, #ffe8cc);
+        padding: 1.5rem;
+        border-radius: 12px;
+        text-align: center;
+    }
+
+        .stat-card h3 {
+            font-size: 2rem;
+            color: #ff6b00;
+            margin-bottom: 0.3rem;
+        }
+
+        .stat-card p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+    .quote-card {
+        background: #fafafa;
+        border-left: 4px solid #ff8c00;
+        border-radius: 12px;
+        padding: 2rem;
+        margin-bottom: 1.5rem;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+        .quote-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 140, 0, 0.2);
+        }
+
+        .quote-card.accepted {
+            border-left-color: #28a745;
+            background: linear-gradient(135deg, #f0fff4, #fafafa);
+        }
+
+        .quote-card.rejected {
+            border-left-color: #dc3545;
+            opacity: 0.7;
+        }
+
+    .quote-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: start;
+        margin-bottom: 1.5rem;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .quote-info h3 {
+        color: #ff6b00;
+        margin-bottom: 0.5rem;
+        font-size: 1.3rem;
+    }
+
+    .quote-info p {
+        color: #666;
+        margin: 0.3rem 0;
+        font-size: 0.9rem;
+    }
+
+    .quote-info i {
+        color: #ff8c00;
+        margin-right: 0.5rem;
+        width: 20px;
+    }
+
+    .status-badge {
+        padding: 0.5rem 1.2rem;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+
+    .status-pending {
+        background: #fff3cd;
+        color: #856404;
+    }
+
+    .status-accepted {
+        background: #d4edda;
+        color: #155724;
+    }
+
+    .status-rejected {
+        background: #f8d7da;
+        color: #721c24;
+    }
+
+    .quote-details {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+        margin-top: 1rem;
+    }
+
+    .detail-item {
+        background: white;
+        padding: 1rem;
+        border-radius: 8px;
+    }
+
+        .detail-item strong {
+            color: #ff6b00;
+            display: block;
+            margin-bottom: 0.3rem;
+            font-size: 0.85rem;
+        }
+
+        .detail-item span {
+            color: #333;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+    .price-highlight {
+        background: linear-gradient(135deg, #ff8c00, #ffa500);
+        color: white;
+        padding: 1rem 1.5rem;
+        border-radius: 10px;
+        text-align: center;
+    }
+
+        .price-highlight h2 {
+            font-size: 2rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .price-highlight p {
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+
+    .empty-state {
+        text-align: center;
+        padding: 4rem 2rem;
+        color: #999;
+    }
+
+        .empty-state i {
+            font-size: 5rem;
+            color: #ddd;
+            margin-bottom: 1rem;
+        }
+
+        .empty-state h2 {
+            color: #666;
+        }
+</style>
+
+<div class="container">
+    <a asp-action="Dashboard" class="btn-back">
+        <i class="fas fa-arrow-left"></i> Back to Dashboard
+    </a>
+
+    <h1>
+        <i class="fas fa-file-invoice-dollar"></i>
+        My Submitted Quotes
+    </h1>
+
+    @if (Model.Any())
+    {
+        <!-- Statistics Bar -->
+        <div class="stats-bar">
+            <div class="stat-card">
+                <h3>@Model.Count()</h3>
+                <p>Total Quotes</p>
+            </div>
+            <div class="stat-card">
+                <h3>@Model.Count(q => q.Status == "Pending")</h3>
+                <p>Pending</p>
+            </div>
+            <div class="stat-card">
+                <h3>@Model.Count(q => q.Status == "Accepted")</h3>
+                <p>Accepted</p>
+            </div>
+            <div class="stat-card">
+                <h3>@Model.Count(q => q.Status == "Rejected")</h3>
+                <p>Rejected</p>
+            </div>
+        </div>
+
+        <!-- Filter Buttons -->
+        <div class="filter-buttons">
+            <button class="filter-btn active" onclick="filterQuotes('all')">
+                <i class="fas fa-list"></i> All Quotes
+            </button>
+            <button class="filter-btn" onclick="filterQuotes('pending')">
+                <i class="fas fa-clock"></i> Pending
+            </button>
+            <button class="filter-btn" onclick="filterQuotes('accepted')">
+                <i class="fas fa-check-circle"></i> Accepted
+            </button>
+            <button class="filter-btn" onclick="filterQuotes('rejected')">
+                <i class="fas fa-times-circle"></i> Rejected
+            </button>
+        </div>
+
+        <!-- Quotes List -->
+        @foreach (var quote in Model)
+        {
+            <div class="quote-card @quote.Status.ToLower()" data-status="@quote.Status.ToLower()">
+                <div class="quote-header">
+                    <div class="quote-info">
+                        <h3>
+                            <i class="fas fa-home"></i>
+                            @quote.Request.PropertyType Solar Installation
+                        </h3>
+                        <p><i class="fas fa-user"></i> Client: @quote.Request.Client.User.FirstName @quote.Request.Client.User.LastName</p>
+                        <p><i class="fas fa-map-marker-alt"></i> Location: @quote.Request.PropertyAddress</p>
+                        <p><i class="far fa-calendar"></i> Submitted: @quote.SubmittedAt.ToString("MMM dd, yyyy")</p>
+                    </div>
+                    <div>
+                        <div class="price-highlight">
+                            <h2>$@quote.TotalPrice.ToString("N0")</h2>
+                            <p>Your Quote</p>
+                        </div>
+                        <span class="status-badge status-@quote.Status.ToLower()" style="display: block; margin-top: 1rem;">
+                            @quote.Status
+                        </span>
+                    </div>
+                </div>
+
+                <div class="quote-details">
+                    <div class="detail-item">
+                        <strong><i class="fas fa-solar-panel"></i> SYSTEM SIZE</strong>
+                        <span>@quote.SystemSize kW</span>
+                    </div>
+                    <div class="detail-item">
+                        <strong><i class="fas fa-tools"></i> INSTALLATION</strong>
+                        <span>$@(quote.InstallationCost?.ToString("N0") ?? "Included")</span>
+                    </div>
+                    <div class="detail-item">
+                        <strong><i class="fas fa-calendar-check"></i> TIMELINE</strong>
+                        <span>@quote.EstimatedInstallationDays days</span>
+                    </div>
+                    <div class="detail-item">
+                        <strong><i class="fas fa-shield-alt"></i> WARRANTY</strong>
+                        <span>@quote.WarrantyYears years</span>
+                    </div>
+                    <div class="detail-item">
+                        <strong><i class="fas fa-bolt"></i> CLIENT NEEDS</strong>
+                        <span>@quote.Request.MonthlyConsumption kWh/month</span>
+                    </div>
+                    <div class="detail-item">
+                        <strong><i class="fas fa-ruler-combined"></i> ROOF AREA</strong>
+                        <span>@quote.Request.RoofArea m²</span>
+                    </div>
+                </div>
+
+                @if (quote.Status == "Accepted")
+                {
+                    <div style="margin-top: 1rem; padding: 1rem; background: #d4edda; border-radius: 8px; color: #155724;">
+                        <i class="fas fa-check-circle"></i> <strong>Congratulations!</strong> Your quote was accepted. Contact the client to begin the project.
+                    </div>
+                }
+                else if (quote.Status == "Rejected")
+                {
+                    <div style="margin-top: 1rem; padding: 1rem; background: #f8d7da; border-radius: 8px; color: #721c24;">
+                        <i class="fas fa-times-circle"></i> This quote was not selected by the client.
+                    </div>
+                }
+            </div>
+        }
+    }
+    else
+    {
+        <div class="empty-state">
+            <i class="fas fa-file-invoice"></i>
+            <h2>No Quotes Yet</h2>
+            <p>You haven't submitted any quotes yet. Browse client requests to get started!</p>
+            <a asp-action="BrowseRequests" class="btn-back" style="margin-top: 1rem;">
+                <i class="fas fa-inbox"></i> Browse Requests
+            </a>
+        </div>
+    }
+</div>
+
+<script>
+    function filterQuotes(status) {
+        const cards = document.querySelectorAll('.quote-card');
+        const buttons = document.querySelectorAll('.filter-btn');
+
+        // Update active button
+        buttons.forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+
+        // Filter cards
+        cards.forEach(card => {
+            if (status === 'all' || card.dataset.status === status) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+</script>

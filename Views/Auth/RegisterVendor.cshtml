@@ -2,353 +2,702 @@
 
 @{
     ViewData["Title"] = "Vendor Registration - SolarConnect";
+    Layout = null;
 }
 
-<style>
-    body {
-        background: linear-gradient(135deg, #fff9e6 0%, #ffe8cc 100%);
-        font-family: 'Poppins', sans-serif;
-        min-height: 100vh;
-    }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    .form-container {
-        max-width: 700px;
-        margin: 3rem auto;
-        background-color: #fff;
-        padding: 3rem;
-        border-radius: 20px;
-        box-shadow: 0 10px 40px rgba(255, 140, 0, 0.15);
-        animation: fadeInSlide 0.8s ease-out;
-    }
+        html, body {
+            height: 100%;
+            overflow-x: hidden;
+        }
 
-    @@keyframes fadeInSlide {
-        from {
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Background */
+        .registration-page {
+            position: relative;
+            min-height: 100vh;
+            background: linear-gradient(rgba(0, 40, 80, 0.75), rgba(0, 20, 40, 0.85)), url('https://images.unsplash.com/photo-1509391366360-2e959784a276?w=1920') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1rem;
+        }
+
+        /* Decorative elements */
+        .sun-rays {
+            position: absolute;
+            top: -150px;
+            right: -150px;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: pulse 4s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @@keyframes pulse {
+            0%, 100%
+
+        {
+            transform: scale(1);
+            opacity: 0.6;
+        }
+
+        50% {
+            transform: scale(1.15);
+            opacity: 0.9;
+        }
+
+        }
+
+        /* Form Container */
+        .form-container {
+            max-width: 750px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 255, 255, 0.25);
+            padding: 3.5rem;
+            border-radius: 25px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            animation: slideInForm 0.8s ease-out;
+            position: relative;
+            z-index: 10;
+        }
+
+        @@keyframes slideInForm {
+            from
+
+        {
             opacity: 0;
-            transform: translateY(30px);
+            transform: translateY(50px);
         }
 
         to {
             opacity: 1;
             transform: translateY(0);
         }
-    }
 
-    .header-section {
-        text-align: center;
-        margin-bottom: 2.5rem;
-    }
-
-        .header-section i {
-            font-size: 3rem;
-            color: #ff6b00;
-            margin-bottom: 1rem;
         }
 
-    h2 {
-        color: #ff6b00;
-        margin-bottom: 0.5rem;
-        font-weight: bold;
-        font-size: 2rem;
-    }
-
-    .subtitle {
-        color: #666;
-        font-size: 0.95rem;
-    }
-
-    .section-title {
-        color: #ff8c00;
-        font-size: 1.1rem;
-        font-weight: 600;
-        margin: 2rem 0 1rem 0;
-        padding-bottom: 0.5rem;
-        border-bottom: 2px solid #ffe8cc;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-    }
-
-        .section-title i {
-            font-size: 1.2rem;
+        /* Header Section */
+        .header-section {
+            text-align: center;
+            margin-bottom: 3rem;
         }
 
-    .form-row {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 1rem;
-        margin-bottom: 1.5rem;
-    }
+        .logo-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
 
-    .form-floating {
-        position: relative;
-        margin-bottom: 1.5rem;
-    }
+        .logo-icon {
+            width: 65px;
+            height: 65px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            animation: logoFloat 3s ease-in-out infinite;
+        }
 
-        .form-floating input,
-        .form-floating select,
-        .form-floating textarea {
-            width: 100%;
-            padding: 1rem 1rem 0.5rem;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
-            outline: none;
-            background: #fafafa;
-            transition: all 0.3s ease;
+        @@keyframes logoFloat {
+            0%, 100%
+
+        {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(-8px);
+        }
+
+        }
+
+        .logo-icon i {
+            font-size: 2.2rem;
+            color: #FFD700;
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #fff;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        .logo-tagline {
+            font-size: 0.7rem;
+            color: #FFD700;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        h2 {
+            color: #fff;
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 0.8rem;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        .subtitle {
+            color: rgba(255, 255, 255, 0.9);
             font-size: 1rem;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
         }
 
-        .form-floating textarea {
-            min-height: 100px;
-            resize: vertical;
-            padding-top: 1.5rem;
+        /* Section Titles */
+        .section-title {
+            color: #FFD700;
+            font-size: 1.2rem;
+            font-weight: 800;
+            margin: 2.5rem 0 1.5rem 0;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid rgba(255, 215, 0, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
         }
 
-        .form-floating label {
-            position: absolute;
-            top: 1rem;
-            left: 1rem;
-            pointer-events: none;
-            transition: 0.2s ease all;
-            color: #777;
-            background-color: #fff;
-            padding: 0 5px;
-        }
-
-        .form-floating input:focus + label,
-        .form-floating input:not(:placeholder-shown) + label,
-        .form-floating select:focus + label,
-        .form-floating select:not([value=""]) + label,
-        .form-floating textarea:focus + label,
-        .form-floating textarea:not(:placeholder-shown) + label {
-            top: -0.5rem;
-            left: 0.75rem;
-            font-size: 0.8rem;
-            color: #ff8c00;
-        }
-
-        .form-floating input:focus,
-        .form-floating select:focus,
-        .form-floating textarea:focus {
-            border-color: #ff8c00;
-            background-color: #fff;
-            box-shadow: 0 0 0 3px rgba(255, 140, 0, 0.1);
-        }
-
-    .text-danger {
-        font-size: 0.85rem;
-        margin-top: 0.3rem;
-        display: block;
-        color: #dc3545;
-    }
-
-    .info-box {
-        background-color: #fff4d6;
-        border-left: 4px solid #ff8c00;
-        padding: 1rem;
-        border-radius: 8px;
-        margin-bottom: 1.5rem;
-        font-size: 0.9rem;
-        color: #666;
-    }
-
-        .info-box i {
-            color: #ff8c00;
-            margin-right: 0.5rem;
-        }
-
-    .btn-animated {
-        display: block;
-        width: 100%;
-        padding: 1rem;
-        background: linear-gradient(135deg, #ff6b00, #ff8c00);
-        color: white;
-        font-weight: 600;
-        border: none;
-        border-radius: 12px;
-        transition: all 0.3s ease;
-        font-size: 1.1rem;
-        cursor: pointer;
-    }
-
-        .btn-animated:hover {
-            background: linear-gradient(135deg, #ff5500, #ff6b00);
-            transform: scale(1.02);
-            box-shadow: 0 8px 20px rgba(255, 107, 0, 0.3);
-        }
-
-    .form-footer {
-        text-align: center;
-        margin-top: 2rem;
-        padding-top: 1.5rem;
-        border-top: 1px solid #e0e0e0;
-        font-size: 0.95rem;
-        color: #555;
-    }
-
-        .form-footer a {
-            color: #ff6b00;
-            font-weight: 600;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-            .form-footer a:hover {
-                color: #ff8c00;
-                text-decoration: underline;
+            .section-title i {
+                font-size: 1.5rem;
+                color: #FFA500;
             }
 
-    @@media (max-width: 768px) {
+        /* Form Row */
         .form-row {
-            grid-template-columns: 1fr;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 0;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+            /* Form Controls - FIXED */
+            .form-group label {
+                display: block;
+                margin-bottom: 0.6rem;
+                color: #fff;
+                font-weight: 600;
+                font-size: 0.95rem;
+                text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+            }
+
+            .form-group input,
+            .form-group select,
+            .form-group textarea {
+                width: 100%;
+                padding: 1rem 1.1rem;
+                border: 2px solid rgba(255, 255, 255, 0.3);
+                border-radius: 12px;
+                outline: none;
+                background: rgba(255, 255, 255, 0.95);
+                backdrop-filter: blur(10px);
+                transition: all 0.3s ease;
+                font-size: 0.95rem;
+                color: #333;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                /* IMPORTANT FIX */
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                appearance: none;
+            }
+
+            .form-group textarea {
+                min-height: 120px;
+                resize: vertical;
+                line-height: 1.5;
+            }
+
+                .form-group input:focus,
+                .form-group select:focus,
+                .form-group textarea:focus {
+                    border-color: #FFD700;
+                    background-color: #fff;
+                    box-shadow: 0 0 0 4px rgba(255, 215, 0, 0.3), 0 4px 15px rgba(0, 0, 0, 0.2);
+                    transform: translateY(-2px);
+                }
+
+                .form-group input::placeholder,
+                .form-group textarea::placeholder {
+                    color: #999;
+                }
+
+        /* CRITICAL FIX: Prevent input zoom on mobile */
+        @@media screen and (max-width: 768px) {
+            .form-group input, .form-group select, .form-group textarea
+
+        {
+            font-size: 16px; /* Prevents zoom on iOS */
+        }
+
+        }
+
+        /* Info Box */
+        .info-box {
+            background: rgba(23, 162, 184, 0.15);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(23, 162, 184, 0.4);
+            border-left: 4px solid #17a2b8;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+            .info-box i {
+                color: #5ddef4;
+                margin-right: 0.8rem;
+                font-size: 1.2rem;
+            }
+
+        /* Validation */
+        .text-danger {
+            font-size: 0.8rem;
+            margin-top: 0.4rem;
+            display: block;
+            color: #FFD700;
+            font-weight: 600;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+        }
+
+        .alert {
+            padding: 1.2rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .alert-danger {
+            background: rgba(220, 53, 69, 0.2);
+            border: 2px solid rgba(220, 53, 69, 0.5);
+            color: #FFD700;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+        }
+
+        /* Buttons */
+        .btn-register {
+            width: 100%;
+            padding: 1.3rem;
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            color: #1a1a1a;
+            font-weight: 800;
+            border: none;
+            border-radius: 15px;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin-top: 1rem;
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+
+            .btn-register::before {
+                content: '';
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 0;
+                height: 0;
+                background: rgba(255, 255, 255, 0.3);
+                border-radius: 50%;
+                transform: translate(-50%, -50%);
+                transition: width 0.6s, height 0.6s;
+            }
+
+            .btn-register:hover::before {
+                width: 300px;
+                height: 300px;
+            }
+
+            .btn-register:hover {
+                background: linear-gradient(135deg, #FFA500 0%, #FF8C00 100%);
+                transform: translateY(-3px);
+                box-shadow: 0 12px 40px rgba(255, 215, 0, 0.7);
+            }
+
+            .btn-register:active {
+                transform: translateY(-1px);
+            }
+
+            .btn-register i {
+                margin-right: 0.8rem;
+                font-size: 1.2rem;
+            }
+
+        /* Footer */
+        .form-footer {
+            text-align: center;
+            margin-top: 2.5rem;
+            padding-top: 2rem;
+            border-top: 2px solid rgba(255, 255, 255, 0.2);
+            font-size: 0.95rem;
+            color: #fff;
+        }
+
+            .form-footer p {
+                margin-bottom: 1rem;
+                text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+            }
+
+            .form-footer a {
+                color: #FFD700;
+                font-weight: 800;
+                text-decoration: none;
+                transition: all 0.3s;
+                position: relative;
+                text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+            }
+
+                .form-footer a::after {
+                    content: '';
+                    position: absolute;
+                    bottom: -5px;
+                    left: 0;
+                    width: 0;
+                    height: 2px;
+                    background: #FFD700;
+                    transition: width 0.3s;
+                }
+
+                .form-footer a:hover {
+                    color: #FFA500;
+                }
+
+                    .form-footer a:hover::after {
+                        width: 100%;
+                    }
+
+        /* Back Button */
+        .back-button {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #FFD700;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s;
+            z-index: 100;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+            .back-button:hover {
+                color: #FFA500;
+                transform: translateX(-5px);
+            }
+
+        /* Responsive */
+        @@media (max-width: 1024px) {
+            .form-container
+
+        {
+            padding: 2.5rem;
+        }
+
+        }
+
+        @@media (max-width: 768px) {
+            .registration-page
+
+        {
+            padding: 1.5rem 1rem;
+        }
+
+        .back-button {
+            top: 1rem;
+            left: 1rem;
+            font-size: 0.9rem;
         }
 
         .form-container {
-            margin: 2rem 1rem;
-            padding: 2rem;
+            padding: 2rem 1.5rem;
         }
-    }
-</style>
 
-<div class="form-container">
-    <div class="header-section">
-        <i class="fas fa-solar-panel"></i>
-        <h2>Register as Solar Vendor</h2>
-        <p class="subtitle">Join Lebanon's leading solar marketplace and connect with customers</p>
+        h2 {
+            font-size: 1.8rem;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+        }
+
+        .logo-icon {
+            width: 55px;
+            height: 55px;
+        }
+
+            .logo-icon i {
+                font-size: 1.8rem;
+            }
+
+        .form-row {
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        .section-title {
+            font-size: 1rem;
+            margin: 1.8rem 0 1rem 0;
+        }
+
+        .btn-register {
+            padding: 1.1rem;
+            font-size: 1rem;
+        }
+
+        }
+
+        @@media (max-width: 480px) {
+            .registration-page
+
+        {
+            padding: 1rem 0.5rem;
+        }
+
+        .back-button {
+            top: 0.8rem;
+            left: 0.8rem;
+        }
+
+        .form-container {
+            padding: 1.5rem 1.2rem;
+            margin: 0.5rem;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+        }
+
+        .subtitle {
+            font-size: 0.9rem;
+        }
+
+        .logo-section {
+            margin-bottom: 1rem;
+            gap: 0.8rem;
+        }
+
+        .form-group label {
+            font-size: 0.9rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 0.9rem 1rem;
+        }
+
+        .info-box {
+            padding: 1.2rem;
+            font-size: 0.9rem;
+        }
+
+        .btn-register i {
+            margin-right: 0.4rem;
+        }
+
+        }
+    </style>
+</head>
+<body>
+    <div class="registration-page">
+        <div class="sun-rays"></div>
+
+        <a href="/" class="back-button">
+            <i class="fas fa-arrow-left"></i> Back to Home
+        </a>
+
+        <div class="form-container">
+            <div class="header-section">
+                <div class="logo-section">
+                    <div class="logo-icon">
+                        <i class="fas fa-solar-panel"></i>
+                    </div>
+                    <div>
+                        <div class="logo-text">SolarConnect</div>
+                        <div class="logo-tagline">Clean Energy</div>
+                    </div>
+                </div>
+
+                <h2>Register as Solar Vendor</h2>
+                <p class="subtitle">Join Lebanon's leading solar marketplace and connect with thousands of customers</p>
+            </div>
+
+            <form asp-action="RegisterVendor" asp-controller="Auth" method="post">
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+                <!-- Personal Information Section -->
+                <div class="section-title">
+                    <i class="fas fa-user-tie"></i>
+                    Personal Information
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label asp-for="FirstName">First Name</label>
+                        <input asp-for="FirstName" type="text" placeholder="John" />
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="LastName">Last Name</label>
+                        <input asp-for="LastName" type="text" placeholder="Doe" />
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label asp-for="Email">Email Address</label>
+                        <input asp-for="Email" type="email" placeholder="vendor@solarcompany.com" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="PhoneNumber">Phone Number</label>
+                        <input asp-for="PhoneNumber" type="tel" placeholder="+961 XX XXX XXX" />
+                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <!-- Company Information Section -->
+                <div class="section-title">
+                    <i class="fas fa-building"></i>
+                    Company Information
+                </div>
+
+                <div class="info-box">
+                    <i class="fas fa-info-circle"></i>
+                    <strong>All vendor accounts require admin approval before you can start receiving client requests.</strong>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="CompanyName">Company Name</label>
+                    <input asp-for="CompanyName" type="text" placeholder="Your Solar Company Ltd." />
+                    <span asp-validation-for="CompanyName" class="text-danger"></span>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label asp-for="BusinessLicense">Business License Number</label>
+                        <input asp-for="BusinessLicense" type="text" placeholder="LB-XXXXX-XXXXX" />
+                        <span asp-validation-for="BusinessLicense" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="YearsOfExperience">Years of Experience</label>
+                        <input asp-for="YearsOfExperience" type="number" min="0" placeholder="5" />
+                        <span asp-validation-for="YearsOfExperience" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="ServiceArea">Service Areas</label>
+                    <input asp-for="ServiceArea" type="text" placeholder="e.g., Beirut, Mount Lebanon, Tripoli" />
+                    <span asp-validation-for="ServiceArea" class="text-danger"></span>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label asp-for="Specialization">Specialization (Optional)</label>
+                        <input asp-for="Specialization" type="text" placeholder="e.g., Residential, Commercial, Industrial" />
+                        <span asp-validation-for="Specialization" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Website">Website (Optional)</label>
+                        <input asp-for="Website" type="url" placeholder="https://yourcompany.com" />
+                        <span asp-validation-for="Website" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="CompanyDescription">Company Description (Optional)</label>
+                    <textarea asp-for="CompanyDescription" placeholder="Tell us about your company, experience, and what makes you unique..."></textarea>
+                    <span asp-validation-for="CompanyDescription" class="text-danger"></span>
+                </div>
+
+                <!-- Security Section -->
+                <div class="section-title">
+                    <i class="fas fa-lock"></i>
+                    Account Security
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label asp-for="Password">Password</label>
+                        <input asp-for="Password" type="password" placeholder="••••••••" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="ConfirmPassword">Confirm Password</label>
+                        <input asp-for="ConfirmPassword" type="password" placeholder="••••••••" />
+                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-register">
+                    <i class="fas fa-briefcase"></i> Register as Vendor
+                </button>
+            </form>
+
+            <div class="form-footer">
+                <p>
+                    Already have an account? <a asp-controller="Auth" asp-action="Login">Login here</a>
+                </p>
+                <p>
+                    Looking for solar solutions? <a asp-controller="Auth" asp-action="RegisterClient">Register as Client</a>
+                </p>
+            </div>
+        </div>
     </div>
 
-    <form asp-action="RegisterVendor" asp-controller="Auth" method="post" autocomplete="off">
-        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
-
-        <!-- Personal Information Section -->
-        <div class="section-title">
-            <i class="fas fa-user"></i>
-            Personal Information
-        </div>
-
-        <div class="form-row">
-            <div class="form-floating">
-                <input asp-for="FirstName" class="form-control" placeholder="First Name" />
-                <label asp-for="FirstName">First Name</label>
-                <span asp-validation-for="FirstName" class="text-danger"></span>
-            </div>
-
-            <div class="form-floating">
-                <input asp-for="LastName" class="form-control" placeholder="Last Name" />
-                <label asp-for="LastName">Last Name</label>
-                <span asp-validation-for="LastName" class="text-danger"></span>
-            </div>
-        </div>
-
-        <div class="form-row">
-            <div class="form-floating">
-                <input asp-for="Email" class="form-control" type="email" placeholder="Email" />
-                <label asp-for="Email">Email Address</label>
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-
-            <div class="form-floating">
-                <input asp-for="PhoneNumber" class="form-control" placeholder="Phone Number" />
-                <label asp-for="PhoneNumber">Phone Number</label>
-                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
-            </div>
-        </div>
-
-        <!-- Company Information Section -->
-        <div class="section-title">
-            <i class="fas fa-building"></i>
-            Company Information
-        </div>
-
-        <div class="info-box">
-            <i class="fas fa-info-circle"></i>
-            All vendor accounts require admin approval before you can start receiving requests.
-        </div>
-
-        <div class="form-floating">
-            <input asp-for="CompanyName" class="form-control" placeholder="Company Name" />
-            <label asp-for="CompanyName">Company Name</label>
-            <span asp-validation-for="CompanyName" class="text-danger"></span>
-        </div>
-
-        <div class="form-row">
-            <div class="form-floating">
-                <input asp-for="BusinessLicense" class="form-control" placeholder="Business License" />
-                <label asp-for="BusinessLicense">Business License Number</label>
-                <span asp-validation-for="BusinessLicense" class="text-danger"></span>
-            </div>
-
-            <div class="form-floating">
-                <input asp-for="YearsOfExperience" class="form-control" type="number" min="0" placeholder="Years" />
-                <label asp-for="YearsOfExperience">Years of Experience</label>
-                <span asp-validation-for="YearsOfExperience" class="text-danger"></span>
-            </div>
-        </div>
-
-        <div class="form-floating">
-            <input asp-for="ServiceArea" class="form-control" placeholder="Service Area" />
-            <label asp-for="ServiceArea">Service Areas (e.g., Beirut, Mount Lebanon, Tripoli)</label>
-            <span asp-validation-for="ServiceArea" class="text-danger"></span>
-        </div>
-
-        <div class="form-row">
-            <div class="form-floating">
-                <input asp-for="Specialization" class="form-control" placeholder="Specialization" />
-                <label asp-for="Specialization">Specialization (Optional)</label>
-                <span asp-validation-for="Specialization" class="text-danger"></span>
-            </div>
-
-            <div class="form-floating">
-                <input asp-for="Website" class="form-control" type="url" placeholder="Website" />
-                <label asp-for="Website">Website (Optional)</label>
-                <span asp-validation-for="Website" class="text-danger"></span>
-            </div>
-        </div>
-
-        <div class="form-floating">
-            <textarea asp-for="CompanyDescription" class="form-control" placeholder="Description"></textarea>
-            <label asp-for="CompanyDescription">Company Description (Optional)</label>
-            <span asp-validation-for="CompanyDescription" class="text-danger"></span>
-        </div>
-
-        <!-- Security Section -->
-        <div class="section-title">
-            <i class="fas fa-lock"></i>
-            Account Security
-        </div>
-
-        <div class="form-row">
-            <div class="form-floating">
-                <input asp-for="Password" class="form-control" type="password" placeholder="Password" />
-                <label asp-for="Password">Password</label>
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
-
-            <div class="form-floating">
-                <input asp-for="ConfirmPassword" class="form-control" type="password" placeholder="Confirm Password" />
-                <label asp-for="ConfirmPassword">Confirm Password</label>
-                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-            </div>
-        </div>
-
-        <button type="submit" class="btn-animated mt-3">
-            <i class="fas fa-briefcase"></i> Register as Vendor
-        </button>
-    </form>
-
-    <div class="form-footer">
-        <p>
-            Already have an account?
-            <a asp-controller="Auth" asp-action="Login">Login here</a>
-        </p>
-        <p class="mt-2">
-            Looking for solar solutions?
-            <a asp-controller="Auth" asp-action="RegisterClient">Register as Client</a>
-        </p>
-    </div>
-</div>
-
-@section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
-}
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+</body>
+</html>

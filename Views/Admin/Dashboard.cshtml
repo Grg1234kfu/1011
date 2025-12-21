@@ -1,156 +1,39 @@
 ﻿@{
     ViewData["Title"] = "Admin Dashboard - SolarConnect";
+
+    int totalClients = ViewBag.TotalClients ?? 0;
+    int totalVendors = ViewBag.TotalVendors ?? 0;
+    int pendingApprovals = ViewBag.PendingApprovals ?? 0;
+    int activeRequests = ViewBag.ActiveRequests ?? 0;
 }
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
 <style>
-    body {
-        background: linear-gradient(135deg, #fff9e6 0%, #ffe8cc 100%);
-        font-family: 'Poppins', sans-serif;
-        min-height: 100vh;
-        padding: 2rem;
-        margin: 0;
-    }
-
-    .dashboard-container {
-        max-width: 1400px;
-        margin: 0 auto;
-        background-color: white;
-        padding: 3rem;
-        border-radius: 20px;
-        box-shadow: 0 10px 40px rgba(255, 140, 0, 0.15);
-    }
-
-    h1 {
-        color: #ff6b00;
-        margin-bottom: 1rem;
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-    }
-
-        h1 i {
-            font-size: 2.5rem;
-            color: #ff8c00;
-        }
-
-    .welcome {
-        color: #666;
-        margin-bottom: 2rem;
-        font-size: 1.1rem;
-    }
-
-    .stats {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 1.5rem;
-        margin-bottom: 3rem;
-    }
-
-    .stat-card {
-        background: linear-gradient(135deg, #ff8c00, #ffa500);
-        color: white;
-        padding: 2rem;
-        border-radius: 15px;
-        text-align: center;
-    }
-
-        .stat-card i {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            opacity: 0.9;
-        }
-
-        .stat-card h2 {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-card p {
-            font-size: 1rem;
-            opacity: 0.9;
-        }
-
-    .cards {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 2rem;
-        margin-top: 2rem;
-    }
-
-    .card-link {
-        text-decoration: none;
-        color: inherit;
-    }
-
-    .card {
-        background: linear-gradient(135deg, #fff4d6, #ffe8cc);
-        padding: 2rem;
-        border-radius: 15px;
-        text-align: center;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        cursor: pointer;
-        height: 100%;
-    }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(255, 140, 0, 0.2);
-        }
-
-        .card i {
-            font-size: 3rem;
-            color: #ff8c00;
-            margin-bottom: 1rem;
-        }
-
-        .card h3 {
-            color: #ff6b00;
-            margin-bottom: 0.5rem;
-        }
-
-        .card p {
-            color: #666;
-            font-size: 0.9rem;
-        }
-
-    .actions {
-        margin-top: 2rem;
-        display: flex;
-        gap: 1rem;
-    }
-
-    .btn {
-        padding: 0.8rem 1.5rem;
-        border-radius: 10px;
-        cursor: pointer;
-        font-weight: 600;
-        text-decoration: none;
-        display: inline-block;
-        transition: all 0.3s ease;
-    }
-
-    .btn-primary {
-        background: linear-gradient(135deg, #ff6b00, #ff8c00);
-        color: white;
-        border: none;
-    }
-
-        .btn-primary:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 12px rgba(255, 140, 0, 0.3);
-        }
-
-    .btn-secondary {
-        background: white;
-        color: #ff6b00;
-        border: 2px solid #ff8c00;
-    }
-
-        .btn-secondary:hover {
-            background: #fff4d6;
-        }
+    body { background: linear-gradient(135deg, #fff9e6 0%, #ffe8cc 100%); font-family: 'Poppins', sans-serif; min-height: 100vh; padding: 2rem; margin: 0; }
+    .dashboard-container { max-width: 1400px; margin: 0 auto; background-color: white; padding: 3rem; border-radius: 20px; box-shadow: 0 10px 40px rgba(255, 140, 0, 0.15); }
+    h1 { color: #ff6b00; margin-bottom: 1rem; display: flex; align-items: center; gap: 1rem; }
+    h1 i { font-size: 2.5rem; color: #ff8c00; }
+    .welcome { color: #666; margin-bottom: 2rem; font-size: 1.1rem; }
+    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+    .stat-card { background: linear-gradient(135deg, #ff8c00, #ffa500); color: white; padding: 2rem; border-radius: 15px; text-align: center; }
+    .stat-card i { font-size: 3rem; margin-bottom: 1rem; opacity: 0.9; }
+    .stat-card h2 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-top: 2rem; }
+    .card-link { text-decoration: none; color: inherit; display: block; }
+    .card { background: linear-gradient(135deg, #fff4d6, #ffe8cc); padding: 2rem; border-radius: 15px; text-align: center; transition: transform 0.3s ease, box-shadow 0.3s ease; cursor: pointer; height: 100%; }
+    .card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(255, 140, 0, 0.2); }
+    .card i { font-size: 3rem; color: #ff8c00; margin-bottom: 1rem; }
+    .card h3 { color: #ff6b00; margin-bottom: 0.5rem; }
+    .card p { color: #666; font-size: 0.9rem; }
+    .actions { margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn { padding: 0.8rem 1.5rem; border-radius: 10px; cursor: pointer; font-weight: 600; text-decoration: none; display: inline-block; transition: all 0.3s ease; }
+    .btn-primary { background: linear-gradient(135deg, #ff6b00, #ff8c00); color: white; border: none; }
+    .btn-primary:hover { transform: scale(1.05); box-shadow: 0 4px 12px rgba(255, 140, 0, 0.3); }
+    .btn-secondary { background: white; color: #ff6b00; border: 2px solid #ff8c00; }
+    .btn-secondary:hover { background: #fff4d6; }
+    .alert-success { background: #eaffea; border: 1px solid #a6e3a6; padding: 12px; border-radius: 10px; margin-bottom: 15px; color: #2d7a2d; }
+    .alert-error { background: #ffeaea; border: 1px solid #f2b3b3; padding: 12px; border-radius: 10px; margin-bottom: 15px; color: #8a1f1f; }
 </style>
 
 <div class="dashboard-container">
@@ -159,83 +42,54 @@
         Admin Dashboard
     </h1>
 
+    @if (TempData["Success"] != null) { <div class="alert-success">@TempData["Success"]</div> }
+    @if (TempData["Error"] != null) { <div class="alert-error">@TempData["Error"]</div> }
+
     <p class="welcome">
-        Welcome back, <strong>@User.Identity.Name</strong>! Manage your solar platform. 👨‍💼
+        Welcome back, <strong>@User.Identity?.Name</strong>! Manage your solar platform. 👨‍💼
     </p>
 
     <div class="stats">
-        <div class="stat-card">
-            <i class="fas fa-users"></i>
-            <h2>0</h2>
-            <p>Total Clients</p>
-        </div>
-        <div class="stat-card">
-            <i class="fas fa-briefcase"></i>
-            <h2>0</h2>
-            <p>Total Vendors</p>
-        </div>
-        <div class="stat-card">
-            <i class="fas fa-clock"></i>
-            <h2>0</h2>
-            <p>Pending Approvals</p>
-        </div>
-        <div class="stat-card">
-            <i class="fas fa-file-alt"></i>
-            <h2>0</h2>
-            <p>Active Requests</p>
-        </div>
+        <div class="stat-card"><i class="fas fa-users"></i><h2>@totalClients</h2><p>Total Clients</p></div>
+        <div class="stat-card"><i class="fas fa-briefcase"></i><h2>@totalVendors</h2><p>Total Vendors</p></div>
+        <div class="stat-card"><i class="fas fa-clock"></i><h2>@pendingApprovals</h2><p>Pending Approvals</p></div>
+        <div class="stat-card"><i class="fas fa-file-alt"></i><h2>@activeRequests</h2><p>Active Requests</p></div>
     </div>
 
     <h2 style="color: #ff6b00; margin-bottom: 1.5rem;">Quick Actions</h2>
 
     <div class="cards">
-        <div class="card">
-            <i class="fas fa-users-cog"></i>
-            <h3>Manage Users</h3>
-            <p>View and manage all users</p>
-        </div>
-
-        <a asp-action="PendingVendors" class="card-link">
-            <div class="card">
-                <i class="fas fa-user-check"></i>
-                <h3>Approve Vendors</h3>
-                <p>Review and approve vendor accounts</p>
-            </div>
+        <a asp-action="Users" class="card-link">
+            <div class="card"><i class="fas fa-users-cog"></i><h3>Manage Users</h3><p>View and manage all users</p></div>
         </a>
 
-        <div class="card">
-            <i class="fas fa-box"></i>
-            <h3>Products</h3>
-            <p>Manage solar products catalog</p>
-        </div>
+        <a asp-action="PendingVendors" class="card-link">
+            <div class="card"><i class="fas fa-user-check"></i><h3>Approve Vendors</h3><p>Review and approve vendor accounts</p></div>
+        </a>
 
-        <div class="card">
-            <i class="fas fa-file-invoice"></i>
-            <h3>All Requests</h3>
-            <p>View all client requests</p>
-        </div>
+        <a asp-action="Requests" class="card-link">
+            <div class="card"><i class="fas fa-file-invoice"></i><h3>All Requests</h3><p>View all client requests</p></div>
+        </a>
 
-        <div class="card">
-            <i class="fas fa-tasks"></i>
-            <h3>Projects</h3>
-            <p>Monitor installation projects</p>
-        </div>
+        <a asp-action="Projects" class="card-link">
+            <div class="card"><i class="fas fa-tasks"></i><h3>Projects</h3><p>Track quotes and installations</p></div>
+        </a>
 
-        <div class="card">
-            <i class="fas fa-chart-bar"></i>
-            <h3>Reports & Analytics</h3>
-            <p>Pricing trends and statistics</p>
-        </div>
+        <a asp-action="Reports" class="card-link">
+            <div class="card"><i class="fas fa-chart-bar"></i><h3>Reports</h3><p>System statistics overview</p></div>
+        </a>
+
+        <a asp-action="Actions" class="card-link">
+            <div class="card"><i class="fas fa-list"></i><h3>System Actions</h3><p>Requests + Quotes (filter/search)</p></div>
+        </a>
     </div>
 
     <div class="actions">
-        <a href="/" class="btn btn-secondary">
-            <i class="fas fa-home"></i> Home
-        </a>
-        <form asp-controller="Auth" asp-action="Logout" method="post" style="display: inline;">
-            <button type="submit" class="btn btn-primary">
-                <i class="fas fa-sign-out-alt"></i> Logout
-            </button>
+        <a href="/" class="btn btn-secondary"><i class="fas fa-home"></i> Home</a>
+
+        <form asp-controller="Auth" asp-action="Logout" method="post" style="display:inline;">
+            @Html.AntiForgeryToken()
+            <button type="submit" class="btn btn-primary"><i class="fas fa-sign-out-alt"></i> Logout</button>
         </form>
     </div>
 </div>

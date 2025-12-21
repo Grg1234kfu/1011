@@ -12,37 +12,71 @@
         font-family: 'Poppins', sans-serif;
         min-height: 100vh;
         padding: 2rem;
+        margin: 0;
     }
 
     .dashboard-container {
-        max-width: 1200px;
+        max-width: 1400px;
         margin: 0 auto;
-        background-color: white;
-        padding: 3rem;
-        border-radius: 20px;
-        box-shadow: 0 10px 40px rgba(255, 140, 0, 0.15);
     }
 
-    h1 {
-        color: #ff6b00;
-        margin-bottom: 1rem;
+    .welcome-section {
+        background: white;
+        padding: 2.5rem;
+        border-radius: 20px;
+        margin-bottom: 2rem;
+        box-shadow: 0 10px 40px rgba(255, 140, 0, 0.15);
+        border-left: 6px solid #1976d2;
+    }
+
+        .welcome-section h1 {
+            color: #1976d2;
+            margin: 0 0 0.5rem 0;
+            font-size: 2.2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+            .welcome-section h1 i {
+                font-size: 2.5rem;
+                color: #1565c0;
+            }
+
+        .welcome-section p {
+            color: #666;
+            margin: 0;
+            font-size: 1.1rem;
+        }
+
+    .approval-alert {
+        background: linear-gradient(135deg, #fff3cd, #ffe8a1);
+        border-left: 6px solid #ffc107;
+        color: #856404;
+        padding: 1.5rem;
+        border-radius: 15px;
+        margin-bottom: 2rem;
         display: flex;
         align-items: center;
         gap: 1rem;
+        animation: pulse 2s infinite;
     }
 
-        h1 i {
-            font-size: 2.5rem;
-            color: #ff8c00;
-        }
+    @@keyframes pulse {
+        0%, 100%
 
-    .alert-warning {
-        background-color: #fff3cd;
-        border-left: 4px solid #ffc107;
-        color: #856404;
-        padding: 1rem;
-        border-radius: 8px;
-        margin-bottom: 2rem;
+    {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.9;
+    }
+
+    }
+
+    .approval-alert i {
+        font-size: 2rem;
     }
 
     .alert-success {
@@ -52,36 +86,106 @@
         padding: 1rem;
         border-radius: 8px;
         margin-bottom: 2rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
     }
 
-    .welcome {
-        color: #666;
-        margin-bottom: 2rem;
-        font-size: 1.1rem;
+    .stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 3rem;
     }
 
-    .company-info {
-        background: linear-gradient(135deg, #fff4d6, #ffe8cc);
-        padding: 1.5rem;
-        border-radius: 12px;
-        margin-bottom: 2rem;
+    .stat-box {
+        background: linear-gradient(135deg, #1976d2, #1565c0);
+        color: white;
+        padding: 2rem;
+        border-radius: 15px;
+        text-align: center;
+        box-shadow: 0 4px 15px rgba(25, 118, 210, 0.3);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
     }
 
-        .company-info h3 {
-            color: #ff6b00;
+        .stat-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            transition: all 0.5s ease;
+        }
+
+        .stat-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(25, 118, 210, 0.4);
+        }
+
+            .stat-box:hover::before {
+                top: -60%;
+                right: -60%;
+            }
+
+        .stat-box i {
+            font-size: 3rem;
             margin-bottom: 1rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
         }
 
-        .company-info p {
-            color: #666;
-            margin: 0.5rem 0;
+        .stat-box h2 {
+            font-size: 3.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
         }
 
-        .company-info i {
-            color: #ff8c00;
-            margin-right: 0.5rem;
-            width: 20px;
+        .stat-box p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
         }
+
+        .stat-box.orange {
+            background: linear-gradient(135deg, #ff8c00, #ffa500);
+            box-shadow: 0 4px 15px rgba(255, 140, 0, 0.3);
+        }
+
+            .stat-box.orange:hover {
+                box-shadow: 0 8px 25px rgba(255, 140, 0, 0.4);
+            }
+
+        .stat-box.green {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+        }
+
+            .stat-box.green:hover {
+                box-shadow: 0 8px 25px rgba(40, 167, 69, 0.4);
+            }
+
+        .stat-box.purple {
+            background: linear-gradient(135deg, #6f42c1, #5a32a3);
+            box-shadow: 0 4px 15px rgba(111, 66, 193, 0.3);
+        }
+
+            .stat-box.purple:hover {
+                box-shadow: 0 8px 25px rgba(111, 66, 193, 0.4);
+            }
+
+    h2 {
+        color: #1976d2;
+        margin-bottom: 1.5rem;
+        font-size: 1.8rem;
+    }
 
     .cards {
         display: grid;
@@ -90,44 +194,63 @@
         margin-top: 2rem;
     }
 
-    /* Make cards clickable */
     .card-link {
         text-decoration: none;
         color: inherit;
     }
 
     .card {
-        background: linear-gradient(135deg, #fff4d6, #ffe8cc);
+        background: white;
         padding: 2rem;
         border-radius: 15px;
         text-align: center;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        transition: all 0.3s ease;
         cursor: pointer;
+        border: 2px solid #e0e0e0;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
     }
 
         .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(255, 140, 0, 0.2);
+            transform: translateY(-8px);
+            box-shadow: 0 8px 20px rgba(25, 118, 210, 0.3);
+            border-color: #1976d2;
         }
 
         .card i {
-            font-size: 3rem;
-            color: #ff8c00;
+            font-size: 3.5rem;
+            color: #1976d2;
             margin-bottom: 1rem;
         }
 
         .card h3 {
-            color: #ff6b00;
+            color: #1565c0;
             margin-bottom: 0.5rem;
+            font-size: 1.4rem;
         }
 
         .card p {
             color: #666;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
         }
 
+        .card.locked {
+            opacity: 0.6;
+            cursor: not-allowed;
+            background: #f8f9fa;
+        }
+
+            .card.locked:hover {
+                transform: none;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+                border-color: #e0e0e0;
+            }
+
+            .card.locked i {
+                color: #999;
+            }
+
     .btn-logout {
-        background: linear-gradient(135deg, #ff6b00, #ff8c00);
+        background: linear-gradient(135deg, #dc3545, #c82333);
         color: white;
         border: none;
         padding: 0.8rem 1.5rem;
@@ -135,145 +258,131 @@
         cursor: pointer;
         font-weight: 600;
         margin-top: 2rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: all 0.3s ease;
     }
 
         .btn-logout:hover {
             transform: scale(1.05);
-            box-shadow: 0 4px 12px rgba(255, 140, 0, 0.3);
+            box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
         }
 
-    .stats {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 1.5rem;
-        margin-bottom: 2rem;
+    @@media (max-width: 768px) {
+        .stats
+
+    {
+        grid-template-columns: 1fr;
     }
 
-    .stat-box {
-        background: linear-gradient(135deg, #ff8c00, #ffa500);
-        color: white;
-        padding: 1.5rem;
-        border-radius: 12px;
-        text-align: center;
+    .cards {
+        grid-template-columns: 1fr;
     }
 
-        .stat-box i {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-box h2 {
-            font-size: 2rem;
-            margin-bottom: 0.3rem;
-        }
-
-        .stat-box p {
-            font-size: 0.9rem;
-            opacity: 0.9;
-        }
+    }
 </style>
 
 <div class="dashboard-container">
-    <h1>
-        <i class="fas fa-briefcase"></i>
-        Vendor Dashboard
-    </h1>
+    <div class="welcome-section">
+        <h1>
+            <i class="fas fa-building"></i>
+            Vendor Dashboard
+        </h1>
+        <p>
+            Welcome <strong>@Model.CompanyName</strong>! Manage your solar business here. ⚡
+        </p>
+    </div>
 
     @if (!Model.IsApproved)
     {
-        <div class="alert-warning">
-            <i class="fas fa-clock"></i> <strong>Account Pending:</strong> Your vendor account is awaiting admin approval. You'll be able to access all features once approved.
+        <div class="approval-alert">
+            <i class="fas fa-clock"></i>
+            <div>
+                <strong>Account Pending Approval</strong>
+                <p style="margin: 0.5rem 0 0 0;">Your vendor account is awaiting admin approval. You'll be notified once approved!</p>
+            </div>
         </div>
     }
-    else
+
+    @if (TempData["Success"] != null)
     {
         <div class="alert-success">
-            <i class="fas fa-check-circle"></i> <strong>Account Approved!</strong> You can now access all vendor features.
+            <i class="fas fa-check-circle"></i> @TempData["Success"]
         </div>
     }
 
-    <p class="welcome">
-        Welcome, <strong>@Model.User.FirstName @Model.User.LastName</strong>!
-    </p>
-
-    <div class="company-info">
-        <h3><i class="fas fa-building"></i> @Model.CompanyName</h3>
-        <p><i class="fas fa-map-marker-alt"></i> Service Area: @Model.ServiceArea</p>
-        <p><i class="fas fa-calendar"></i> Experience: @Model.YearsOfExperience years</p>
-        @if (Model.Rating > 0)
-        {
-            <p><i class="fas fa-star"></i> Rating: @Model.Rating / 5.0</p>
-        }
+    <!-- Statistics -->
+    <div class="stats">
+        <div class="stat-box orange">
+            <i class="fas fa-clipboard-list"></i>
+            <h2>@ViewBag.AvailableRequests</h2>
+            <p>Available Requests</p>
+        </div>
+        <div class="stat-box">
+            <i class="fas fa-file-invoice-dollar"></i>
+            <h2>@ViewBag.MyQuotes</h2>
+            <p>Submitted Quotes</p>
+        </div>
+        <div class="stat-box green">
+            <i class="fas fa-check-circle"></i>
+            <h2>@ViewBag.AcceptedProjects</h2>
+            <p>Active Projects</p>
+        </div>
+        <div class="stat-box purple">
+            <i class="fas fa-boxes"></i>
+            <h2>@(ViewBag.TotalProducts ?? 0)</h2>
+            <p>Products Listed</p>
+        </div>
     </div>
 
-    @if (Model.IsApproved)
-    {
-        <div class="stats">
-            <div class="stat-box">
-                <i class="fas fa-inbox"></i>
-                <h2>0</h2>
-                <p>Available Requests</p>
-            </div>
-            <div class="stat-box">
-                <i class="fas fa-file-invoice-dollar"></i>
-                <h2>0</h2>
-                <p>My Quotes</p>
-            </div>
-            <div class="stat-box">
-                <i class="fas fa-check-circle"></i>
-                <h2>0</h2>
-                <p>Accepted Projects</p>
-            </div>
-        </div>
+    <h2><i class="fas fa-bolt"></i> Quick Actions</h2>
 
-        <h2 style="color: #ff6b00; margin-bottom: 1.5rem;">Quick Actions</h2>
-
-        <div class="cards">
-            <!-- Client Requests - CLICKABLE -->
+    <!-- Action Cards -->
+    <div class="cards">
+        @if (Model.IsApproved)
+        {
             <a asp-action="BrowseRequests" class="card-link">
                 <div class="card">
-                    <i class="fas fa-inbox"></i>
-                    <h3>Client Requests</h3>
-                    <p>Browse solar installation requests</p>
+                    <i class="fas fa-search"></i>
+                    <h3>Browse Requests</h3>
+                    <p>View available solar installation requests</p>
                 </div>
             </a>
 
-            <!-- My Quotes - CLICKABLE -->
             <a asp-action="MyQuotes" class="card-link">
                 <div class="card">
                     <i class="fas fa-file-invoice-dollar"></i>
                     <h3>My Quotes</h3>
-                    <p>Manage submitted quotes</p>
+                    <p>Track submitted quotes and responses</p>
                 </div>
             </a>
 
-            <!-- Products - CLICKABLE -->
+            <a asp-action="MyProjects" class="card-link">
+                <div class="card">
+                    <i class="fas fa-tasks"></i>
+                    <h3>My Projects</h3>
+                    <p>Manage accepted projects and updates</p>
+                </div>
+            </a>
+
             <a asp-action="Products" class="card-link">
                 <div class="card">
-                    <i class="fas fa-box"></i>
-                    <h3>Products</h3>
-                    <p>Manage solar products catalog</p>
+                    <i class="fas fa-boxes"></i>
+                    <h3>My Products</h3>
+                    <p>Manage your equipment catalog</p>
                 </div>
             </a>
-
-            <!-- Reviews - CLICKABLE -->
-            <a asp-action="Reviews" class="card-link">
-                <div class="card">
-                    <i class="fas fa-star"></i>
-                    <h3>Reviews</h3>
-                    <p>View customer feedback</p>
-                </div>
-            </a>
-        </div>
-    }
-    else
-    {
-        <div style="text-align: center; padding: 3rem; color: #999;">
-            <i class="fas fa-hourglass-half" style="font-size: 4rem; color: #ffc107; margin-bottom: 1rem;"></i>
-            <h3 style="color: #666;">Waiting for Approval</h3>
-            <p>Your account will be reviewed by an administrator soon. You'll receive access to all features once approved.</p>
-        </div>
-    }
+        }
+        else
+        {
+            <div class="card locked">
+                <i class="fas fa-lock"></i>
+                <h3>Features Locked</h3>
+                <p>Available after admin approval</p>
+            </div>
+        }
+    </div>
 
     <form asp-controller="Auth" asp-action="Logout" method="post">
         <button type="submit" class="btn-logout">

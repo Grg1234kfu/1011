@@ -1,0 +1,24 @@
+@model IEnumerable<SolarConnect.Models.Product>
+@{
+    ViewData["Title"] = "Products";
+}
+<h2>Products</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th><th>Category</th><th>Brand</th><th>VendorId</th><th>Created</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var p in Model)
+    {
+        <tr>
+            <td>@p.ProductName</td>
+            <td>@p.Category</td>
+            <td>@p.Brand</td>
+            <td>@p.VendorId</td>
+            <td>@p.CreatedAt</td>
+        </tr>
+    }
+    </tbody>
+</table>
