@@ -1,0 +1,67 @@
+@model IEnumerable<SolarConnect.Models.Request>
+
+@{
+    ViewData["Title"] = "Requests - Admin";
+}
+
+<style>
+    .wrap { max-width: 1300px; margin: 0 auto; padding: 30px; }
+    .back { display:inline-block; margin-bottom: 15px; color:#ff6b00; text-decoration:none; font-weight:600; }
+    table { width: 100%; border-collapse: collapse; background: white; border-radius: 12px; overflow:hidden; }
+    th, td { padding: 12px; border-bottom: 1px solid #eee; text-align:left; vertical-align: top; }
+    th { background: #fff4d6; color: #ff6b00; }
+    .badge { padding: 4px 10px; border-radius: 999px; font-size: 12px; display:inline-block; }
+    .badge-open { background:#eaf1ff; color:#1d4ed8; }
+    .badge-closed { background:#e8fff0; color:#0f7b3a; }
+    .small { color:#666; font-size: 12px; }
+</style>
+
+<div class="wrap">
+    <a asp-action="Dashboard" class="back">← Back to Dashboard</a>
+
+    <h2>All Requests</h2>
+
+    @if (!Model.Any())
+    {
+        <p>No requests found.</p>
+    }
+    else
+    {
+        <table>
+            <thead>
+                <tr>
+                    <th>Client</th>
+                    <th>Address</th>
+                    <th>Property</th>
+                    <th>Roof Area</th>
+                    <th>Consumption</th>
+                    <th>Status</th>
+                    <th>Created</th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var r in Model)
+            {
+                var isClosed = (r.Status ?? "").Equals("Closed", StringComparison.OrdinalIgnoreCase);
+                <tr>
+                    <td>
+                        <strong>@r.Client?.User?.FirstName @r.Client?.User?.LastName</strong>
+                        <div class="small">@r.Client?.User?.Email</div>
+                        <div class="small">@r.Client?.User?.PhoneNumber</div>
+                    </td>
+                    <td>@r.PropertyAddress</td>
+                    <td>@r.PropertyType</td>
+                    <td>@r.RoofArea</td>
+                    <td>@r.MonthlyConsumption</td>
+                    <td>
+                        <span class="badge @(isClosed ? "badge-closed" : "badge-open")">
+                            @(r.Status ?? "Unknown")
+                        </span>
+                    </td>
+                    <td>@r.CreatedAt.ToString("yyyy-MM-dd HH:mm")</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    }
+</div>

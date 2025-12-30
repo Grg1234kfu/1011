@@ -1,0 +1,177 @@
+﻿<!-- ============================================ -->
+<!-- Views/Client/ReviewExtension.cshtml -->
+<!-- ============================================ -->
+@model Quote
+
+@{
+    ViewData["Title"] = "Review Extension Request";
+    var newDeadline = Model.ProjectDeadline.Value.AddDays(Model.TotalExtensionDaysGranted + Model.ExtensionDaysRequested);
+    var penaltyPerDay = Model.TotalPrice * (Model.PenaltyRate / 100m);
+}
+
+<div style="max-width: 900px; margin: 40px auto; padding: 30px; background: white; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+
+    <div style="text-align: center; margin-bottom: 30px;">
+        <i class="fas fa-balance-scale" style="font-size: 3rem; color: #3498db;"></i>
+        <h1 style="margin: 20px 0 10px 0; color: #2c3e50;">Extension Request Review</h1>
+        <p style="color: #7f8c8d;">From: @Model.Vendor.CompanyName</p>
+    </div>
+
+    <!-- Project Info -->
+    <div style="background: linear-gradient(135deg, #e3f2fd, #bbdefb); padding: 20px; border-radius: 8px; border-left: 4px solid #2196f3; margin-bottom: 25px;">
+        <h3 style="margin-top: 0; color: #1976d2;"><i class="fas fa-project-diagram"></i> Project Information</h3>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+            <div>
+                <strong>Property:</strong><br>
+                @Model.Request.PropertyAddress
+            </div>
+            <div>
+                <strong>Total Contract:</strong><br>
+                $@Model.TotalPrice.ToString("N2")
+            </div>
+            <div>
+                <strong>Current Progress:</strong><br>
+                @Model.ProgressPercentage%
+            </div>
+            <div>
+                <strong>Original Deadline:</strong><br>
+                @Model.ProjectDeadline?.ToString("MMM dd, yyyy")
+            </div>
+        </div>
+    </div>
+
+    <!-- Extension Request Details -->
+    <div style="background: #fff3cd; padding: 25px; border-radius: 8px; border-left: 4px solid #f39c12; margin-bottom: 25px;">
+        <h3 style="margin-top: 0; color: #f39c12;"><i class="fas fa-calendar-plus"></i> Extension Request</h3>
+        <div style="margin-bottom: 20px;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
+                <div>
+                    <strong>Additional Days:</strong><br>
+                    <span style="font-size: 1.5rem; color: #f39c12;">@Model.ExtensionDaysRequested</span> days
+                </div>
+                <div>
+                    <strong>New Deadline:</strong><br>
+                    <span style="font-size: 1.2rem; color: #2c3e50;">@newDeadline.ToString("MMM dd, yyyy")</span>
+                </div>
+            </div>
+            <div>
+                <strong style="display: block; margin-bottom: 10px;">Reason for Extension:</strong>
+                <div style="background: white; padding: 15px; border: 1px solid #ddd; border-radius: 5px; line-height: 1.6;">
+                    @Model.ExtensionReason
+                </div>
+            </div>
+            <p style="margin: 15px 0 0 0; color: #856404; font-size: 0.95em;">
+                <i class="fas fa-clock"></i> Requested on: @Model.ExtensionRequestedDate?.ToString("MMM dd, yyyy hh:mm tt")
+            </p>
+        </div>
+    </div>
+
+    <!-- Current Penalty Status -->
+    @if (Model.IsOverdue)
+    {
+        <div style="background: #fee; padding: 25px; border-radius: 8px; border-left: 4px solid #e74c3c; margin-bottom: 25px;">
+            <h3 style="margin-top: 0; color: #e74c3c;"><i class="fas fa-dollar-sign"></i> Current Penalty Status</h3>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                <div>
+                    <strong>Days Overdue:</strong><br>
+                    <span style="font-size: 1.3rem; color: #e74c3c;">@Model.DaysOverdue</span> days
+                </div>
+                <div>
+                    <strong>Daily Penalty:</strong><br>
+                    $@penaltyPerDay.ToString("N2")
+                </div>
+            </div>
+            <div style="margin-top: 15px; padding-top: 15px; border-top: 2px solid #e74c3c;">
+                <strong>Total Accumulated Penalty:</strong><br>
+                <span style="font-size: 1.8rem; color: #e74c3c; font-weight: bold;">$@Model.AccumulatedPenalty.ToString("N2")</span>
+            </div>
+            <p style="margin: 15px 0 0 0; color: #721c24; font-size: 0.95em;">
+                This amount will be deducted from the final payment unless waived.
+            </p>
+        </div>
+    }
+
+    <!-- Decision Form -->
+    <form asp-action="ProcessExtension" method="post" id="extensionForm">
+        <input type="hidden" name="quoteId" value="@Model.Id" />
+
+        <div style="background: #f8f9fa; padding: 25px; border-radius: 8px; margin-bottom: 25px;">
+            <h3 style="margin-top: 0; color: #2c3e50;"><i class="fas fa-gavel"></i> Your Decision</h3>
+
+            <!-- Approve Section -->
+            <div style="background: #e8f5e9; padding: 20px; border-radius: 8px; border-left: 4px solid #27ae60; margin-bottom: 20px;">
+                <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                    <input type="radio" name="approve" value="true" id="approveYes" style="width: 20px; height: 20px; margin-right: 10px;">
+                    <label for="approveYes" style="font-weight: 600; font-size: 1.1rem; color: #27ae60; cursor: pointer; margin: 0;">
+                        <i class="fas fa-check-circle"></i> Approve Extension
+                    </label>
+                </div>
+                <p style="margin: 0 0 15px 30px; color: #27ae60;">
+                    Grant @Model.ExtensionDaysRequested additional days. New deadline: @newDeadline.ToString("MMM dd, yyyy")
+                </p>
+
+                @if (Model.IsOverdue && Model.AccumulatedPenalty > 0)
+                {
+                    <div style="margin: 15px 0 0 30px; padding: 15px; background: white; border: 1px solid #27ae60; border-radius: 5px;">
+                        <input type="checkbox" name="waivePenalties" value="true" id="waivePenalties" style="width: 18px; height: 18px; margin-right: 10px;">
+                        <label for="waivePenalties" style="cursor: pointer; font-weight: 600;">
+                            Waive accumulated penalty of $@Model.AccumulatedPenalty.ToString("N2")
+                        </label>
+                        <p style="margin: 5px 0 0 28px; font-size: 0.9em; color: #27ae60;">
+                            Forgive the $@Model.AccumulatedPenalty penalty as a gesture of goodwill
+                        </p>
+                    </div>
+                }
+            </div>
+
+            <!-- Deny Section -->
+            <div style="background: #fee; padding: 20px; border-radius: 8px; border-left: 4px solid #e74c3c;">
+                <div style="display: flex; align-items: center; margin-bottom: 10px;">
+                    <input type="radio" name="approve" value="false" id="approveNo" style="width: 20px; height: 20px; margin-right: 10px;">
+                    <label for="approveNo" style="font-weight: 600; font-size: 1.1rem; color: #e74c3c; cursor: pointer; margin: 0;">
+                        <i class="fas fa-times-circle"></i> Deny Extension
+                    </label>
+                </div>
+                <p style="margin: 0 0 0 30px; color: #e74c3c;">
+                    Keep original deadline. Penalties continue at $@penaltyPerDay.ToString("N2") per day.
+                </p>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div style="display: flex; gap: 15px; justify-content: center; margin-top: 30px;">
+            <a href="@Url.Action("MyProjects")"
+               style="padding: 15px 30px; background: #95a5a6; color: white; text-decoration: none; border-radius: 5px; font-weight: 600;">
+                <i class="fas fa-arrow-left"></i> Back to Projects
+            </a>
+            <button type="submit" id="submitBtn" disabled
+                    style="padding: 15px 40px; background: #95a5a6; color: white; border: none; border-radius: 5px; font-weight: 600; cursor: not-allowed; font-size: 1rem;">
+                <i class="fas fa-paper-plane"></i> Submit Decision
+            </button>
+        </div>
+    </form>
+</div>
+
+<script>
+    // Enable submit button when radio selected
+    document.querySelectorAll('input[name="approve"]').forEach(radio => {
+        radio.addEventListener('change', function() {
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.disabled = false;
+            submitBtn.style.background = 'linear-gradient(135deg, #3498db, #2980b9)';
+            submitBtn.style.cursor = 'pointer';
+        });
+    });
+
+    // Confirmation before submit
+    document.getElementById('extensionForm').addEventListener('submit', function(e) {
+        const approve = document.querySelector('input[name="approve"]:checked')?.value === 'true';
+        const message = approve
+            ? 'Are you sure you want to APPROVE this extension?'
+            : 'Are you sure you want to DENY this extension? Penalties will continue to accumulate.';
+
+        if (!confirm(message)) {
+            e.preventDefault();
+        }
+    });
+</script>

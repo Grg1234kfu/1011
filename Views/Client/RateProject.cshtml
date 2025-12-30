@@ -1,0 +1,433 @@
+﻿@* ============================================ *@
+@* FILE: Views/Client/RateProject.cshtml *@
+@* ACTION: CREATE THIS NEW FILE *@
+@* ============================================ *@
+
+@model SolarConnect.Models.Quote
+
+@{
+    ViewData["Title"] = "Rate Project - SolarConnect";
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+<style>
+    body {
+        background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+        font-family: 'Poppins', sans-serif;
+        min-height: 100vh;
+        padding: 2rem;
+    }
+
+    .rating-container {
+        max-width: 700px;
+        margin: 2rem auto;
+        background: white;
+        border-radius: 20px;
+        padding: 3rem;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .header-section {
+        text-align: center;
+        margin-bottom: 2.5rem;
+        padding-bottom: 2rem;
+        border-bottom: 3px solid #4CAF50;
+    }
+
+        .header-section h1 {
+            color: #27ae60;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .header-section p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+    .project-info {
+        background: linear-gradient(135deg, #e8f5e9, #f1f8f4);
+        padding: 2rem;
+        border-radius: 15px;
+        margin-bottom: 2.5rem;
+        border-left: 5px solid #4CAF50;
+    }
+
+    .info-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.8rem 0;
+        border-bottom: 1px solid #e0e0e0;
+    }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .info-row .label {
+            color: #666;
+            font-weight: 600;
+        }
+
+        .info-row .value {
+            color: #333;
+            font-weight: 500;
+        }
+
+    .rating-section {
+        text-align: center;
+        margin: 3rem 0;
+    }
+
+        .rating-section h3 {
+            color: #333;
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+    .star-rating {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .star {
+        font-size: 4rem;
+        color: #ddd;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+        .star:hover,
+        .star.active {
+            color: #ffc107;
+            transform: scale(1.2);
+        }
+
+            .star:hover ~ .star {
+                color: #ddd;
+                transform: scale(1);
+            }
+
+    .rating-label {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #333;
+        min-height: 40px;
+        margin-bottom: 1.5rem;
+    }
+
+    .review-section {
+        margin: 2rem 0;
+    }
+
+        .review-section label {
+            display: block;
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+    .review-textarea {
+        width: 100%;
+        min-height: 120px;
+        padding: 1rem;
+        border: 2px solid #e0e0e0;
+        border-radius: 10px;
+        font-size: 1rem;
+        font-family: 'Poppins', sans-serif;
+        resize: vertical;
+        transition: all 0.3s ease;
+    }
+
+        .review-textarea:focus {
+            outline: none;
+            border-color: #4CAF50;
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+        }
+
+    .char-count {
+        text-align: right;
+        color: #999;
+        font-size: 0.9rem;
+        margin-top: 0.5rem;
+    }
+
+    .submit-button {
+        background: linear-gradient(135deg, #4CAF50, #45a049);
+        color: white;
+        border: none;
+        padding: 1.2rem 3rem;
+        border-radius: 50px;
+        font-size: 1.2rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-top: 2rem;
+        display: block;
+        width: 100%;
+        max-width: 300px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+        .submit-button:hover:not(:disabled) {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(76, 175, 80, 0.3);
+        }
+
+        .submit-button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+    .alert {
+        padding: 1rem 1.5rem;
+        border-radius: 10px;
+        margin-bottom: 1.5rem;
+        font-weight: 500;
+    }
+
+    .alert-success {
+        background: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+    }
+
+    .alert-error {
+        background: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+    }
+
+    .loading {
+        display: none;
+        text-align: center;
+        padding: 2rem;
+    }
+
+        .loading i {
+            font-size: 3rem;
+            color: #4CAF50;
+            animation: spin 1s linear infinite;
+        }
+
+    @@keyframes spin {
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+</style>
+
+<div class="rating-container">
+    <div class="header-section">
+        <h1>
+            <i class="fas fa-star"></i>
+            Rate Your Project
+        </h1>
+        <p>Share your experience with @ViewBag.CompanyName</p>
+    </div>
+
+    <div id="alertContainer"></div>
+
+    <div class="project-info">
+        <div class="info-row">
+            <span class="label"><i class="fas fa-building"></i> Vendor:</span>
+            <span class="value">@ViewBag.CompanyName</span>
+        </div>
+        <div class="info-row">
+            <span class="label"><i class="fas fa-user"></i> Contact:</span>
+            <span class="value">@ViewBag.VendorName</span>
+        </div>
+        <div class="info-row">
+            <span class="label"><i class="fas fa-map-marker-alt"></i> Property:</span>
+            <span class="value">@ViewBag.ProjectAddress</span>
+        </div>
+        <div class="info-row">
+            <span class="label"><i class="fas fa-bolt"></i> System Size:</span>
+            <span class="value">@ViewBag.SystemSize kW</span>
+        </div>
+        <div class="info-row">
+            <span class="label"><i class="fas fa-dollar-sign"></i> Total Cost:</span>
+            <span class="value">$@ViewBag.TotalPrice?.ToString("N2")</span>
+        </div>
+        <div class="info-row">
+            <span class="label"><i class="fas fa-calendar-check"></i> Completed:</span>
+            <span class="value">@ViewBag.CompletionDate</span>
+        </div>
+    </div>
+
+    <form id="ratingForm">
+        <div class="rating-section">
+            <h3>How would you rate this project?</h3>
+
+            <div class="star-rating" id="starRating">
+                <i class="fas fa-star star" data-rating="1"></i>
+                <i class="fas fa-star star" data-rating="2"></i>
+                <i class="fas fa-star star" data-rating="3"></i>
+                <i class="fas fa-star star" data-rating="4"></i>
+                <i class="fas fa-star star" data-rating="5"></i>
+            </div>
+
+            <div class="rating-label" id="ratingLabel">Click a star to rate</div>
+            <input type="hidden" id="selectedRating" value="0">
+        </div>
+
+        <div class="review-section">
+            <label for="reviewText">
+                <i class="fas fa-comment-dots"></i> Tell us more (optional)
+            </label>
+            <textarea id="reviewText"
+                      class="review-textarea"
+                      placeholder="Share details about your experience with this vendor..."
+                      maxlength="1000"></textarea>
+            <div class="char-count">
+                <span id="charCount">0</span> / 1000 characters
+            </div>
+        </div>
+
+        <button type="submit" class="submit-button" id="submitBtn" disabled>
+            <i class="fas fa-paper-plane"></i> Submit Rating
+        </button>
+    </form>
+
+    <div class="loading" id="loadingDiv">
+        <i class="fas fa-spinner"></i>
+        <p>Submitting your rating...</p>
+    </div>
+</div>
+
+<script>
+    const stars = document.querySelectorAll('.star');
+    const ratingLabel = document.getElementById('ratingLabel');
+    const selectedRatingInput = document.getElementById('selectedRating');
+    const submitBtn = document.getElementById('submitBtn');
+    const reviewText = document.getElementById('reviewText');
+    const charCount = document.getElementById('charCount');
+    const ratingForm = document.getElementById('ratingForm');
+    const loadingDiv = document.getElementById('loadingDiv');
+    const alertContainer = document.getElementById('alertContainer');
+
+    const ratingLabels = {
+        1: '⭐ Poor - Very Disappointed',
+        2: '⭐⭐ Fair - Below Expectations',
+        3: '⭐⭐⭐ Good - Met Expectations',
+        4: '⭐⭐⭐⭐ Very Good - Exceeded Expectations',
+        5: '⭐⭐⭐⭐⭐ Excellent - Outstanding Service!'
+    };
+
+    let currentRating = 0;
+
+    // Star hover and click handlers
+    stars.forEach(star => {
+        star.addEventListener('click', function() {
+            currentRating = parseInt(this.dataset.rating);
+            selectedRatingInput.value = currentRating;
+            updateStars(currentRating);
+            ratingLabel.textContent = ratingLabels[currentRating];
+            submitBtn.disabled = false;
+        });
+
+        star.addEventListener('mouseenter', function() {
+            const hoverRating = parseInt(this.dataset.rating);
+            updateStars(hoverRating);
+            ratingLabel.textContent = ratingLabels[hoverRating];
+        });
+    });
+
+    document.getElementById('starRating').addEventListener('mouseleave', function() {
+        if (currentRating > 0) {
+            updateStars(currentRating);
+            ratingLabel.textContent = ratingLabels[currentRating];
+        } else {
+            updateStars(0);
+            ratingLabel.textContent = 'Click a star to rate';
+        }
+    });
+
+    function updateStars(rating) {
+        stars.forEach((star, index) => {
+            if (index < rating) {
+                star.classList.add('active');
+            } else {
+                star.classList.remove('active');
+            }
+        });
+    }
+
+    // Character counter
+    reviewText.addEventListener('input', function() {
+        charCount.textContent = this.value.length;
+    });
+
+    // Form submission
+    ratingForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        const rating = parseInt(selectedRatingInput.value);
+        if (rating < 1 || rating > 5) {
+            showAlert('Please select a star rating', 'error');
+            return;
+        }
+
+        // Disable form
+        submitBtn.disabled = true;
+        ratingForm.style.display = 'none';
+        loadingDiv.style.display = 'block';
+
+        try {
+            const response = await fetch('@Url.Action("SubmitRating", "Client")', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
+                },
+                body: new URLSearchParams({
+                    quoteId: @ViewBag.QuoteId,
+                    rating: rating,
+                    review: reviewText.value.trim()
+                })
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                showAlert(result.message, 'success');
+                setTimeout(() => {
+                    window.location.href = '@Url.Action("MyProjects", "Client")';
+                }, 2000);
+            } else {
+                showAlert(result.message || 'Failed to submit rating', 'error');
+                loadingDiv.style.display = 'none';
+                ratingForm.style.display = 'block';
+                submitBtn.disabled = false;
+            }
+        } catch (error) {
+            showAlert('Error submitting rating. Please try again.', 'error');
+            loadingDiv.style.display = 'none';
+            ratingForm.style.display = 'block';
+            submitBtn.disabled = false;
+        }
+    });
+
+    function showAlert(message, type) {
+        const alertClass = type === 'success' ? 'alert-success' : 'alert-error';
+        const icon = type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle';
+
+        alertContainer.innerHTML = `
+            <div class="alert ${alertClass}">
+                <i class="fas ${icon}"></i> ${message}
+            </div>
+        `;
+    }
+</script>
+
+@* Anti-forgery token *@
+<input type="hidden" name="__RequestVerificationToken" value="@Html.AntiForgeryToken()" />

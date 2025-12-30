@@ -1,0 +1,954 @@
+﻿@model List<SolarConnect.Models.Quote>
+
+@{
+    ViewData["Title"] = "My Projects - SolarConnect";
+    var activeProjects = Model.Where(q => q.Status == "Accepted" && q.ProgressPercentage < 100).ToList();
+    var completedProjects = Model.Where(q => q.Status == "Accepted" && q.ProgressPercentage >= 100).ToList();
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+<style>
+    body {
+        background: linear-gradient(135deg, #fff9e6 0%, #ffe8cc 100%);
+        font-family: 'Poppins', sans-serif;
+        min-height: 100vh;
+        padding: 2rem;
+        margin: 0;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    h1 {
+        color: #ff6b00;
+        margin-bottom: 2rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+        h1 i {
+            font-size: 2.5rem;
+            color: #ff8c00;
+        }
+
+    .section-title {
+        color: #333;
+        margin: 2rem 0 1rem 0;
+        padding-bottom: 0.5rem;
+        border-bottom: 3px solid #ff8c00;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+        gap: 2rem;
+        margin-bottom: 3rem;
+    }
+
+    .project-card {
+        background: white;
+        border-radius: 15px;
+        padding: 2rem;
+        box-shadow: 0 5px 20px rgba(255, 140, 0, 0.15);
+        transition: all 0.3s ease;
+        border-left: 5px solid #28a745;
+    }
+
+        .project-card.completed {
+            border-left-color: #6c757d;
+            opacity: 0.85;
+        }
+
+        .project-card.overdue {
+            border-left-color: #e74c3c;
+            border-left-width: 8px;
+            animation: pulse-border 2s infinite;
+        }
+
+    @@keyframes pulse-border {
+        0%, 100%
+
+    {
+        border-left-color: #e74c3c;
+    }
+
+    50% {
+        border-left-color: #c0392b;
+    }
+
+    }
+
+    .project-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(255, 140, 0, 0.25);
+    }
+
+    .project-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: start;
+        margin-bottom: 1.5rem;
+        padding-bottom: 1rem;
+        border-bottom: 2px solid #f0f0f0;
+    }
+
+    .project-title {
+        color: #ff6b00;
+        font-size: 1.3rem;
+        font-weight: 700;
+        margin: 0;
+    }
+
+    .status-badges {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: flex-end;
+    }
+
+    .status-badge {
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        white-space: nowrap;
+    }
+
+        .status-badge.active {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+        }
+
+        .status-badge.completed {
+            background: #6c757d;
+            color: white;
+        }
+
+        .status-badge.overdue {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            animation: pulse 2s infinite;
+        }
+
+    @@keyframes pulse {
+        0%, 100%
+
+    {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.85;
+    }
+
+    }
+
+    .status-badge.warning {
+        background: linear-gradient(135deg, #f39c12, #e67e22);
+        color: white;
+    }
+
+    .status-badge.on-time {
+        background: linear-gradient(135deg, #3498db, #2980b9);
+        color: white;
+    }
+
+    .project-info {
+        margin-bottom: 1.5rem;
+    }
+
+    .info-row {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 0.8rem;
+        color: #666;
+    }
+
+        .info-row i {
+            color: #ff8c00;
+            width: 20px;
+        }
+
+    .progress-section {
+        background: linear-gradient(135deg, #fff4d6, #ffe8cc);
+        padding: 1.5rem;
+        border-radius: 12px;
+        margin: 1.5rem 0;
+    }
+
+        .progress-section h4 {
+            color: #ff6b00;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+    .progress-bar-container {
+        background: white;
+        height: 30px;
+        border-radius: 15px;
+        overflow: hidden;
+        margin-bottom: 0.5rem;
+    }
+
+    .progress-bar {
+        height: 100%;
+        background: linear-gradient(135deg, #28a745, #20c997);
+        transition: width 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: 600;
+    }
+
+    .deadline-info-box {
+        background: #f8f9fa;
+        padding: 1.2rem;
+        border-radius: 10px;
+        margin: 1.5rem 0;
+        border-left: 3px solid #95a5a6;
+    }
+
+        .deadline-info-box.overdue {
+            background: linear-gradient(135deg, #fee, #fdd);
+            border-left-color: #e74c3c;
+            border-left-width: 4px;
+        }
+
+    .deadline-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        font-size: 0.95rem;
+    }
+
+        .deadline-grid > div {
+            color: #666;
+        }
+
+        .deadline-grid strong {
+            display: block;
+            color: #333;
+            margin-bottom: 0.3rem;
+        }
+
+        .deadline-grid .highlight {
+            font-size: 1.1rem;
+            color: #3498db;
+            font-weight: 600;
+        }
+
+    .penalty-warning-box {
+        background: linear-gradient(135deg, #fee, #fdd);
+        padding: 1.5rem;
+        border-radius: 10px;
+        border: 3px solid #e74c3c;
+        margin: 1.5rem 0;
+        animation: shake 0.5s;
+    }
+
+    @@keyframes shake {
+        0%, 100%
+
+    {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-3px);
+    }
+
+    75% {
+        transform: translateX(3px);
+    }
+
+    }
+
+    .penalty-warning-box h4 {
+        margin: 0 0 1rem 0;
+        color: #e74c3c;
+        font-size: 1.1rem;
+    }
+
+        .penalty-warning-box h4 i {
+            margin-right: 0.5rem;
+        }
+
+    .penalty-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        margin-bottom: 1rem;
+    }
+
+        .penalty-grid > div strong {
+            display: block;
+            color: #721c24;
+            margin-bottom: 0.3rem;
+            font-size: 0.9rem;
+        }
+
+        .penalty-grid .amount {
+            font-size: 1.5rem;
+            color: #e74c3c;
+            font-weight: 700;
+        }
+
+    .penalty-impact {
+        padding-top: 1rem;
+        border-top: 2px solid #e74c3c;
+        font-size: 0.95rem;
+        margin-top: 1rem;
+        background: rgba(255,255,255,0.5);
+        padding: 1rem;
+        border-radius: 5px;
+    }
+
+        .penalty-impact strong {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #721c24;
+        }
+
+        .penalty-impact .calculation {
+            font-size: 1.1rem;
+            color: #333;
+        }
+
+        .penalty-impact .final-amount {
+            color: #e74c3c;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+    .extension-request-box {
+        background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+        padding: 1.2rem;
+        border-radius: 10px;
+        border-left: 4px solid #f39c12;
+        margin: 1.5rem 0;
+    }
+
+        .extension-request-box p {
+            margin: 0 0 0.5rem 0;
+            color: #856404;
+            font-weight: 600;
+        }
+
+            .extension-request-box p i {
+                margin-right: 0.5rem;
+            }
+
+        .extension-request-box .meta {
+            font-size: 0.85rem;
+            color: #856404;
+            margin-top: 0.5rem;
+            font-weight: normal;
+        }
+
+    .payment-status-box {
+        background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+        padding: 1.2rem;
+        border-radius: 10px;
+        margin: 1.5rem 0;
+        border-left: 3px solid #27ae60;
+    }
+
+        .payment-status-box strong {
+            display: block;
+            margin-bottom: 0.8rem;
+            color: #27ae60;
+            font-size: 1rem;
+        }
+
+            .payment-status-box strong i {
+                margin-right: 0.5rem;
+            }
+
+    .payment-badges {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+    }
+
+        .payment-badges .badge {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: white;
+            font-weight: 600;
+        }
+
+            .payment-badges .badge.paid {
+                background: #27ae60;
+            }
+
+            .payment-badges .badge.pending {
+                background: #95a5a6;
+            }
+
+    .payment-blocked-message {
+        background: linear-gradient(135deg, #fff3cd, #ffe8b3);
+        border: 3px solid #ffc107;
+        padding: 1.5rem;
+        border-radius: 12px;
+        margin-top: 1.5rem;
+        text-align: center;
+    }
+
+        .payment-blocked-message .icon {
+            font-size: 2.5rem;
+            color: #ff6b00;
+            margin-bottom: 0.8rem;
+            display: block;
+        }
+
+        .payment-blocked-message .message {
+            color: #856404;
+            font-weight: 600;
+            font-size: 1.05rem;
+            line-height: 1.6;
+            margin-bottom: 0.8rem;
+        }
+
+        .payment-blocked-message .amount {
+            color: #ff6b00;
+            font-weight: 700;
+            font-size: 1.3rem;
+            margin: 0.8rem 0;
+        }
+
+        .payment-blocked-message small {
+            color: #856404;
+            font-size: 0.9rem;
+            display: block;
+            margin-top: 0.5rem;
+        }
+
+    .action-buttons {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        margin-top: 1.5rem;
+    }
+
+    .btn-update {
+        background: linear-gradient(135deg, #7c3aed, #a78bfa);
+        color: white;
+        border: none;
+        padding: 0.9rem 1.8rem;
+        border-radius: 10px;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        flex: 1;
+        justify-content: center;
+        min-width: 180px;
+        font-size: 1rem;
+    }
+
+        .btn-update:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(124, 58, 237, 0.4);
+            color: white;
+            text-decoration: none;
+        }
+
+    .btn-extension {
+        background: linear-gradient(135deg, #f39c12, #e67e22);
+        color: white;
+        border: none;
+        padding: 0.9rem 1.8rem;
+        border-radius: 10px;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        flex: 1;
+        justify-content: center;
+        min-width: 180px;
+        font-size: 1rem;
+    }
+
+        .btn-extension:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(243, 156, 18, 0.4);
+            color: white;
+            text-decoration: none;
+        }
+
+    .no-projects {
+        text-align: center;
+        padding: 4rem;
+        background: white;
+        border-radius: 15px;
+        color: #999;
+    }
+
+        .no-projects i {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: #ddd;
+        }
+
+    .alert {
+        padding: 1rem 1.5rem;
+        border-radius: 10px;
+        margin-bottom: 1.5rem;
+        font-weight: 500;
+    }
+
+    .alert-success {
+        background: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+    }
+
+    .alert-danger {
+        background: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+    }
+</style>
+
+<div class="container">
+    <h1>
+        <i class="fas fa-tasks"></i>
+        My Projects
+    </h1>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success">
+            <i class="fas fa-check-circle"></i> @TempData["Success"]
+        </div>
+    }
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger">
+            <i class="fas fa-exclamation-circle"></i> @TempData["Error"]
+        </div>
+    }
+
+    <h2 class="section-title">
+        <i class="fas fa-hammer"></i>
+        Active Projects (@activeProjects.Count)
+    </h2>
+
+    @if (activeProjects.Any())
+    {
+        <div class="projects-grid">
+            @foreach (var project in activeProjects)
+            {
+                var penaltyPerDay = project.TotalPrice * (project.PenaltyRate / 100m);
+                var isOverdue = project.IsOverdue;
+                var daysRemaining = project.ProjectDeadline.HasValue
+                ? (project.EffectiveDeadline.Date - DateTime.UtcNow.Date).Days
+                : 0;
+
+                <div class="project-card @(isOverdue ? "overdue" : "")">
+                    <div class="project-header">
+                        <h3 class="project-title">@project.Request.PropertyType Solar System</h3>
+                        <div class="status-badges">
+                            <span class="status-badge active">
+                                <i class="fas fa-check-circle"></i> In Progress
+                            </span>
+                            @if (isOverdue)
+                            {
+                                <span class="status-badge overdue">
+                                    ⚠️ OVERDUE @project.DaysOverdue DAYS
+                                </span>
+                            }
+                            else if (daysRemaining <= 3 && daysRemaining > 0)
+                            {
+                                <span class="status-badge warning">
+                                    ⏰ @daysRemaining DAYS LEFT
+                                </span>
+                            }
+                            else if (project.ProjectDeadline.HasValue)
+                            {
+                                <span class="status-badge on-time">
+                                    📅 Due @project.EffectiveDeadline.ToString("MMM dd")
+                                </span>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="project-info">
+                        <div class="info-row">
+                            <i class="fas fa-user"></i>
+                            <strong>Client:</strong> @project.Request.Client.User.FirstName @project.Request.Client.User.LastName
+                        </div>
+                        <div class="info-row">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <strong>Location:</strong> @project.Request.PropertyAddress
+                        </div>
+                        <div class="info-row">
+                            <i class="fas fa-phone"></i>
+                            <strong>Phone:</strong> @project.Request.Client.User.PhoneNumber
+                        </div>
+                        <div class="info-row">
+                            <i class="fas fa-envelope"></i>
+                            <strong>Email:</strong> @project.Request.Client.User.Email
+                        </div>
+                        <div class="info-row">
+                            <i class="fas fa-bolt"></i>
+                            <strong>System Size:</strong> @project.SystemSize kW
+                        </div>
+                        <div class="info-row">
+                            <i class="fas fa-dollar-sign"></i>
+                            <strong>Project Value:</strong> $@project.TotalPrice.ToString("N0")
+                        </div>
+                        <div class="info-row">
+                            <i class="fas fa-money-check-alt"></i>
+                            <strong>Amount Received:</strong> $@project.TotalPaidAmount.ToString("N0")
+                        </div>
+                    </div>
+
+                    <div class="progress-section">
+                        <h4><i class="fas fa-chart-line"></i> Installation Progress</h4>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar" style="width: @project.ProgressPercentage%">
+                                @project.ProgressPercentage%
+                            </div>
+                        </div>
+                        <p style="color: #666; margin-top: 0.5rem;">
+                            <strong>Status:</strong> @(project.ProjectStatus ?? "Pending")
+                        </p>
+                    </div>
+
+                    @if (project.ProjectDeadline.HasValue)
+                    {
+                        <div class="deadline-info-box @(isOverdue ? "overdue" : "")">
+                            <div class="deadline-grid">
+                                <div>
+                                    <strong>Original Deadline:</strong>
+                                    @project.ProjectDeadline?.ToString("MMM dd, yyyy")
+                                </div>
+                                @if (project.TotalExtensionDaysGranted > 0)
+                                {
+                                    <div>
+                                        <strong>Extensions Granted:</strong>
+                                        @project.TotalExtensionDaysGranted days
+                                    </div>
+                                    <div style="grid-column: 1 / -1;">
+                                        <strong>Current Deadline:</strong>
+                                        <span class="highlight">@project.EffectiveDeadline.ToString("MMM dd, yyyy")</span>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    }
+
+                    @if (isOverdue)
+                    {
+                        <div class="penalty-warning-box">
+                            <h4>
+                                <i class="fas fa-exclamation-triangle"></i> Active Penalty
+                            </h4>
+                            <div class="penalty-grid">
+                                <div>
+                                    <strong>Daily Penalty:</strong>
+                                    <span class="amount">$@penaltyPerDay.ToString("N2")</span>
+                                </div>
+                                <div>
+                                    <strong>Total Penalty:</strong>
+                                    <span class="amount">$@project.AccumulatedPenalty.ToString("N2")</span>
+                                </div>
+                            </div>
+                            <div class="penalty-impact">
+                                <strong>Your Final Payment Impact:</strong>
+                                <div class="calculation">
+                                    $@project.InspectionPayment.ToString("N2") - $@project.AccumulatedPenalty.ToString("N2") =
+                                    <span class="final-amount">$@project.FinalPaymentAfterPenalty.ToString("N2")</span>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                    @if (project.ExtensionRequested)
+                    {
+                        <div class="extension-request-box">
+                            <p>
+                                <i class="fas fa-clock"></i> <strong>Extension request pending</strong> - Waiting for client approval
+                            </p>
+                            <p class="meta">
+                                Requested: @project.ExtensionDaysRequested days | Submitted: @project.ExtensionRequestedDate?.ToString("MMM dd, hh:mm tt")
+                            </p>
+                        </div>
+                    }
+
+                    <div class="payment-status-box">
+                        <strong>
+                            <i class="fas fa-dollar-sign"></i> Payment Status
+                        </strong>
+                        <div class="payment-badges">
+                            <span class="badge @(project.DepositPaid ? "paid" : "pending")">
+                                @(project.DepositPaid ? "✓" : "⏳") Deposit
+                            </span>
+                            <span class="badge @(project.DesignPaid ? "paid" : "pending")">
+                                @(project.DesignPaid ? "✓" : "⏳") Design
+                            </span>
+                            <span class="badge @(project.ProcurementPaid ? "paid" : "pending")">
+                                @(project.ProcurementPaid ? "✓" : "⏳") Procurement
+                            </span>
+                            <span class="badge @(project.InstallationPaid ? "paid" : "pending")">
+                                @(project.InstallationPaid ? "✓" : "⏳") Installation
+                            </span>
+                            <span class="badge @(project.InspectionPaid ? "paid" : "pending")">
+                                @(project.InspectionPaid ? "✓" : "⏳") Final
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- ============================================ -->
+                    <!-- REPLACE THE ACTION BUTTONS SECTION IN YOUR -->
+                    <!-- Views/Vendor/MyProjects.cshtml -->
+                    <!-- ============================================ -->
+                    @{
+                        bool canUpdate = true;
+                        string blockReason = "";
+                        string blockAmount = "";
+
+                        if (!project.DepositPaid)
+                        {
+                            canUpdate = false;
+                            blockReason = "Waiting for client to pay deposit";
+                            blockAmount = "$" + project.DepositAmount.ToString("N2");
+                        }
+                        else if (project.ProgressPercentage >= 20 && !project.DesignPaid)
+                        {
+                            canUpdate = false;
+                            blockReason = "Design phase complete! Waiting for Design payment";
+                            blockAmount = "$" + project.DesignPayment.ToString("N2");
+                        }
+                        else if (project.ProgressPercentage >= 40 && !project.ProcurementPaid)
+                        {
+                            canUpdate = false;
+                            blockReason = "Procurement phase complete! Waiting for Procurement payment";
+                            blockAmount = "$" + project.ProcurementPayment.ToString("N2");
+                        }
+                        else if (project.ProgressPercentage >= 80 && !project.InstallationPaid)
+                        {
+                            canUpdate = false;
+                            blockReason = "Installation phase complete! Waiting for Installation payment";
+                            blockAmount = "$" + project.InstallationPayment.ToString("N2");
+                        }
+                        else if (project.ProgressPercentage >= 99 && !project.InspectionPaid)
+                        {
+                            canUpdate = false;
+                            blockReason = "Project almost complete! Waiting for final Inspection payment";
+                            blockAmount = "$" + project.FinalPaymentAfterPenalty.ToString("N2");
+                        }
+                    }
+
+                    @if (canUpdate)
+                    {
+                        <div style="background: yellow; padding: 10px; margin: 10px 0;">
+                            🐛 DEBUG: Project ID = @project.Id
+                        </div>
+                        <div class="action-buttons">
+                            <!-- UPDATE PROGRESS BUTTON - ALWAYS SHOW -->
+                            <a asp-action="UpdateProgress" asp-route-id="@project.Id" class="btn-update">
+                                <i class="fas fa-edit"></i> Update Progress
+                            </a>
+                            <!-- TEMPORARY TEST BUTTON -->
+
+                            <a href="/Vendor/SetDeadlineYesterday?id=@project.Id"
+                               style="background: red; color: white; padding: 10px; border-radius: 5px; text-decoration: none;">
+                                🧪 TEST: Set Deadline Yesterday
+                            </a>
+                            
+                            <!-- REQUEST EXTENSION BUTTON - SHOW ONLY IF OVERDUE AND NOT ALREADY REQUESTED -->
+                            @if (isOverdue && !project.ExtensionRequested)
+                            {
+                                <a asp-controller="Vendor"
+                                   asp-action="RequestExtension"
+                                   asp-route-id="@project.Id"
+                                   class="btn-extension">
+                                    <i class="fas fa-calendar-plus"></i> Request Extension
+                                </a>
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                        <!-- PAYMENT BLOCKED MESSAGE -->
+                        <div class="payment-blocked-message">
+                            <i class="fas fa-lock icon"></i>
+                            <div class="message">
+                                @blockReason
+                            </div>
+                            <div class="amount">
+                                @blockAmount
+                            </div>
+                            <small>
+                                You cannot proceed until payment is received
+                            </small>
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="no-projects">
+            <i class="fas fa-clipboard-list"></i>
+            <p>No active projects at the moment.</p>
+        </div>
+    }
+
+    <h2 class="section-title">
+        <i class="fas fa-check-double"></i>
+        Completed Projects (@completedProjects.Count)
+    </h2>
+
+    @if (completedProjects.Any())
+    {
+        <div class="projects-grid">
+            @foreach (var project in completedProjects)
+            {
+                <div class="project-card completed">
+                    <div class="project-header">
+                        <h3 class="project-title">@project.Request.PropertyType Solar System</h3>
+                        <span class="status-badge completed">
+                            <i class="fas fa-check-circle"></i> Completed
+                        </span>
+                    </div>
+
+                    <div class="project-info">
+                        <div class="info-row">
+                            <i class="fas fa-user"></i>
+                            <strong>Client:</strong> @project.Request.Client.User.FirstName @project.Request.Client.User.LastName
+                        </div>
+                        <div class="info-row">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <strong>Location:</strong> @project.Request.PropertyAddress
+                        </div>
+                        <div class="info-row">
+                            <i class="fas fa-calendar-check"></i>
+                            <strong>Completed:</strong> @(project.ProjectCompletionDate?.ToString("MMM dd, yyyy") ?? "N/A")
+                        </div>
+                        <div class="info-row">
+                            <i class="fas fa-bolt"></i>
+                            <strong>System Size:</strong> @project.SystemSize kW
+                        </div>
+                        <div class="info-row">
+                            <i class="fas fa-dollar-sign"></i>
+                            <strong>Project Value:</strong> $@project.TotalPrice.ToString("N0")
+                        </div>
+                        @if (project.CompletedOnTime)
+                        {
+                            <div class="info-row" style="color: #27ae60;">
+                                <i class="fas fa-check-circle"></i>
+                                <strong>Completed on time! ✅</strong>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="info-row" style="color: #e74c3c;">
+                                <i class="fas fa-exclamation-circle"></i>
+                                <strong>Completed late (penalty applied)</strong>
+                            </div>
+                        }
+                    </div>
+                    @if (project.ClientRating != null)
+                    {
+                        <div class="client-rating-box" style="
+                    margin-top: 1.2rem;
+                    padding: 1rem;
+                    background: #fff8e1;
+                    border-left: 4px solid #ffb400;
+                    border-radius: 10px;
+                ">
+                            <strong style="color:#ff9800;">
+                                <i class="fas fa-star"></i> Client Rating
+                            </strong>
+
+                            <div style="font-size: 1.4rem; margin: 0.4rem 0;">
+                                @for (int i = 1; i <= 5; i++)
+                                {
+                                    if (i <= project.ClientRating)
+                                    {
+                                        <i class="fas fa-star" style="color:#ffb400;"></i>
+                                    }
+                                    else
+                                    {
+                                        <i class="far fa-star" style="color:#ccc;"></i>
+                                    }
+                                }
+                                <span style="font-size:0.9rem; color:#666;">
+                                    (@project.ClientRating / 5)
+                                </span>
+                            </div>
+
+                            @if (!string.IsNullOrWhiteSpace(project.ClientReview))
+                            {
+                                <p style="margin:0.4rem 0 0 0; color:#444;">
+                                    <i class="fas fa-comment"></i>
+                                    “@project.ClientReview”
+                                </p>
+                            }
+
+                            <small style="color:#777;">
+                                Rated on @project.RatedAt?.ToString("MMM dd, yyyy")
+                            </small>
+                        </div>
+                    }
+                    else
+                    {
+                        <div style="
+                    margin-top: 1.2rem;
+                    padding: 1rem;
+                    background: #f4f4f4;
+                    border-left: 4px solid #ccc;
+                    border-radius: 10px;
+                    color:#777;
+                ">
+                            <i class="fas fa-star-half-alt"></i>
+                            Client has not rated this project yet.
+                        </div>
+                    }
+
+
+                    <div class="progress-section">
+                        <div class="progress-bar-container">
+                            <div class="progress-bar" style="width: 100%">
+                                100% Complete ✅
+                            </div>
+                        </div>
+                        @if (project.ProjectStartDate.HasValue && project.ProjectCompletionDate.HasValue)
+                        {
+                            var duration = (project.ProjectCompletionDate.Value - project.ProjectStartDate.Value).Days;
+                            <p style="color: #666; margin-top: 0.8rem;">
+                                <i class="fas fa-hourglass-end"></i> Duration: @duration days
+                            </p>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="no-projects">
+            <i class="fas fa-clipboard-check"></i>
+            <p>No completed projects yet.</p>
+        </div>
+    }
+</div>

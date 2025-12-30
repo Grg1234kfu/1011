@@ -1,0 +1,351 @@
+﻿@model SolarConnect.Models.Quote
+
+@{
+    ViewData["Title"] = "Make Payment";
+    var amount = ViewBag.Amount;
+    var milestone = ViewBag.Milestone;
+    var milestoneDescription = ViewBag.MilestoneDescription;
+    var stripePublishableKey = ViewBag.StripePublishableKey;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewData["Title"]</title>
+    <script src="https://js.stripe.com/v3/"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .payment-container {
+            max-width: 600px;
+            margin: 50px auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .payment-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+            .payment-header h1 {
+                font-size: 28px;
+                margin-bottom: 10px;
+            }
+
+            .payment-header p {
+                opacity: 0.9;
+                font-size: 16px;
+            }
+
+        .payment-body {
+            padding: 40px;
+        }
+
+        .project-info {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+            .project-info h3 {
+                color: #667eea;
+                margin-bottom: 15px;
+                font-size: 18px;
+            }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+            .info-row:last-child {
+                border-bottom: none;
+            }
+
+        .info-label {
+            color: #666;
+            font-weight: 500;
+        }
+
+        .info-value {
+            color: #333;
+            font-weight: 600;
+        }
+
+        .amount-display {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+
+            .amount-display h2 {
+                font-size: 48px;
+                margin-bottom: 10px;
+            }
+
+            .amount-display p {
+                font-size: 18px;
+                opacity: 0.9;
+            }
+
+        #card-element {
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            transition: border-color 0.3s;
+        }
+
+            #card-element:focus {
+                border-color: #667eea;
+            }
+
+        #card-errors {
+            color: #e74c3c;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        .pay-button {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+            .pay-button:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+            }
+
+            .pay-button:disabled {
+                background: #ccc;
+                cursor: not-allowed;
+                transform: none;
+            }
+
+        .spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto;
+        }
+
+        @@keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+            .back-link:hover {
+                text-decoration: underline;
+            }
+
+        .security-note {
+            text-align: center;
+            color: #666;
+            font-size: 13px;
+            margin-top: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+            .security-note i {
+                color: #27ae60;
+                margin-right: 5px;
+            }
+    </style>
+</head>
+<body>
+    <div class="payment-container">
+        <div class="payment-header">
+            <h1>💳 Secure Payment</h1>
+            <p>Complete your milestone payment</p>
+        </div>
+
+        <div class="payment-body">
+            <div class="project-info">
+                <h3>📋 Project Details</h3>
+                <div class="info-row">
+                    <span class="info-label">Vendor:</span>
+                    <span class="info-value">@ViewBag.VendorName</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Location:</span>
+                    <span class="info-value">@ViewBag.ProjectAddress</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Milestone:</span>
+                    <span class="info-value">@milestoneDescription</span>
+                </div>
+            </div>
+
+            <div class="amount-display">
+                <h2>$@amount.ToString("N2")</h2>
+                <p>Amount Due</p>
+            </div>
+
+            <form id="payment-form">
+                <div id="card-element"></div>
+                <div id="card-errors" role="alert"></div>
+
+                <button type="submit" id="submit-button" class="pay-button">
+                    <span id="button-text">Pay Now - $@amount.ToString("N2")</span>
+                    <div class="spinner" id="spinner"></div>
+                </button>
+            </form>
+
+            <div class="security-note">
+                <i class="fas fa-lock"></i>
+                Payments are securely processed by Stripe. Your card details are never stored on our servers.
+            </div>
+
+            <a href="@Url.Action("MyProjects", "Client")" class="back-link">← Back to My Projects</a>
+        </div>
+    </div>
+    <script>
+        const stripe = Stripe('pk_test_51SgWyZ4wiZcb6fJLkbpQ6bJJdokOgpwQKmXbCnHtWV53E3O1ziN6NW0JF6F0Wv8sW2QEkZw8PwDRdsPgwxo4dzuF00gvvjUn2F');
+        const elements = stripe.elements();
+        const cardElement = elements.create('card', {
+            style: {
+                base: {
+                    fontSize: '16px',
+                    color: '#32325d',
+                    fontFamily: '"Segoe UI", sans-serif',
+                    '::placeholder': {
+                        color: '#aab7c4',
+                    },
+                },
+            },
+        });
+        cardElement.mount('#card-element');
+
+        cardElement.on('change', function(event) {
+            const displayError = document.getElementById('card-errors');
+            if (event.error) {
+                displayError.textContent = event.error.message;
+            } else {
+                displayError.textContent = '';
+            }
+        });
+
+        const form = document.getElementById('payment-form');
+        form.addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            setLoading(true);
+
+            try {
+                // Create payment intent
+                const response = await fetch('/Payment/CreatePaymentIntent', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        quoteId: @Model.Id,  // ✅ FIXED - Use Id instead of QuoteId
+                        milestone: '@milestone'
+                    }),
+                });
+
+                const { clientSecret } = await response.json();
+
+                // Confirm payment
+                const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
+                    payment_method: {
+                        card: cardElement,
+                    },
+                });
+
+                if (error) {
+                    document.getElementById('card-errors').textContent = error.message;
+                    setLoading(false);
+                } else if (paymentIntent.status === 'succeeded') {
+                    // Payment successful, confirm with server
+                    const confirmResponse = await fetch('/Payment/ConfirmPayment', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            quoteId: @Model.Id,  // ✅ FIXED - Use Id instead of QuoteId
+                            milestone: '@milestone',
+                            paymentIntentId: paymentIntent.id
+                        }),
+                    });
+
+                    if (confirmResponse.ok) {
+                        alert('✅ Payment successful! Vendor can now proceed with the next phase.');
+                        window.location.href = '/Client/MyProjects';
+                    } else {
+                        alert('❌ Payment verification failed. Please contact support.');
+                        setLoading(false);
+                    }
+                }
+            } catch (err) {
+                console.error('Payment error:', err);
+                document.getElementById('card-errors').textContent = 'An error occurred. Please try again.';
+                setLoading(false);
+            }
+        });
+
+        function setLoading(isLoading) {
+            const button = document.getElementById('submit-button');
+            const buttonText = document.getElementById('button-text');
+            const spinner = document.getElementById('spinner');
+
+            if (isLoading) {
+                button.disabled = true;
+                buttonText.style.display = 'none';
+                spinner.style.display = 'block';
+            } else {
+                button.disabled = false;
+                buttonText.style.display = 'block';
+                spinner.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>

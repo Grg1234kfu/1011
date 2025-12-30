@@ -1,39 +1,367 @@
-﻿@model IEnumerable<SolarConnect.Models.Product>
+﻿@model List<SolarConnect.Models.Product>
+
 @{
-    ViewData["Title"] = "Products - SolarConnect";
+    ViewData["Title"] = "My Products - SolarConnect";
 }
 
-<div class="dashboard-container">
-    <h1><i class="fas fa-box"></i> My Products</h1>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
-    @if (!Model.Any())
+<style>
+    body {
+        background: linear-gradient(135deg, #fff9e6 0%, #ffe8cc 100%);
+        font-family: 'Poppins', sans-serif;
+        min-height: 100vh;
+        padding: 2rem;
+        margin: 0;
+    }
+
+    .container {
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+
+    h1 {
+        color: #ff6b00;
+        margin-bottom: 2rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+        h1 i {
+            font-size: 2.5rem;
+            color: #ff8c00;
+        }
+
+    .header-actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+    }
+
+    .btn-add {
+        background: linear-gradient(135deg, #28a745, #20c997);
+        color: white;
+        border: none;
+        padding: 1rem 2rem;
+        border-radius: 12px;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+        .btn-add:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(40, 167, 69, 0.3);
+            color: white;
+            text-decoration: none;
+        }
+
+    .products-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        gap: 2rem;
+    }
+
+    .product-card {
+        background: white;
+        border-radius: 15px;
+        padding: 1.5rem;
+        box-shadow: 0 5px 20px rgba(255, 140, 0, 0.15);
+        transition: all 0.3s ease;
+        position: relative;
+    }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 140, 0, 0.25);
+        }
+
+        .product-card.unavailable {
+            opacity: 0.6;
+        }
+
+    .category-badge {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: white;
+    }
+
+        .category-badge.solarpanel {
+            background: linear-gradient(135deg, #ff8c00, #ffa500);
+        }
+
+        .category-badge.inverter {
+            background: linear-gradient(135deg, #1976d2, #1565c0);
+        }
+
+        .category-badge.battery {
+            background: linear-gradient(135deg, #28a745, #20c997);
+        }
+
+        .category-badge.accessory {
+            background: linear-gradient(135deg, #6c757d, #5a6268);
+        }
+
+    .product-image {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 10px;
+        margin-bottom: 1rem;
+        background: linear-gradient(135deg, #f0f0f0, #e0e0e0);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #999;
+        font-size: 3rem;
+    }
+
+    .product-title {
+        color: #333;
+        font-size: 1.2rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+    }
+
+    .product-brand {
+        color: #666;
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+    }
+
+    .product-price {
+        color: #ff6b00;
+        font-size: 1.8rem;
+        font-weight: 700;
+        margin: 1rem 0;
+    }
+
+    .product-specs {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.8rem;
+        margin: 1rem 0;
+        padding: 1rem;
+        background: #f8f9fa;
+        border-radius: 8px;
+    }
+
+    .spec-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.85rem;
+        color: #666;
+    }
+
+        .spec-item i {
+            color: #ff8c00;
+        }
+
+    .product-actions {
+        display: flex;
+        gap: 0.5rem;
+        margin-top: 1rem;
+    }
+
+    .btn-action {
+        flex: 1;
+        padding: 0.7rem;
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+
+    .btn-edit {
+        background: linear-gradient(135deg, #1976d2, #1565c0);
+        color: white;
+    }
+
+        .btn-edit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(25, 118, 210, 0.3);
+            color: white;
+            text-decoration: none;
+        }
+
+    .btn-toggle {
+        background: linear-gradient(135deg, #ffa500, #ff8c00);
+        color: white;
+    }
+
+        .btn-toggle:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 140, 0, 0.3);
+        }
+
+    .btn-delete {
+        background: linear-gradient(135deg, #dc3545, #c82333);
+        color: white;
+    }
+
+        .btn-delete:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
+        }
+
+    .availability-badge {
+        display: inline-block;
+        padding: 0.4rem 0.8rem;
+        border-radius: 12px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        margin-top: 0.5rem;
+    }
+
+        .availability-badge.available {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .availability-badge.unavailable {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+    .no-products {
+        text-align: center;
+        padding: 4rem;
+        background: white;
+        border-radius: 15px;
+        color: #999;
+    }
+
+        .no-products i {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: #ddd;
+        }
+</style>
+
+<div class="container">
+    <div class="header-actions">
+        <h1>
+            <i class="fas fa-boxes"></i>
+            My Products Catalog
+        </h1>
+        <a asp-action="AddProduct" class="btn-add">
+            <i class="fas fa-plus-circle"></i> Add New Product
+        </a>
+    </div>
+
+    @if (TempData["Success"] != null)
     {
-        <p>You haven’t added any products yet.</p>
+        <div class="alert alert-success">@TempData["Success"]</div>
+    }
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger">@TempData["Error"]</div>
+    }
+
+    @if (Model.Any())
+    {
+        <div class="products-grid">
+            @foreach (var product in Model)
+            {
+                <div class="product-card @(product.IsAvailable ? "" : "unavailable")">
+                    <span class="category-badge @product.Category.ToLower().Replace(" ", "")">
+                        @product.Category
+                    </span>
+
+                    <div class="product-image">
+                        @if (!string.IsNullOrEmpty(product.ImageUrl))
+                        {
+                            <img src="@product.ImageUrl" alt="@product.ProductName" style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px;" />
+                        }
+                        else
+                        {
+                            <i class="fas fa-image"></i>
+                        }
+                    </div>
+
+                    <h3 class="product-title">@product.ProductName</h3>
+                    <p class="product-brand">
+                        <i class="fas fa-tag"></i> @product.Brand @(!string.IsNullOrEmpty(product.Model) ? $"- {product.Model}" : "")
+                    </p>
+
+                    <div class="product-price">$@product.Price.ToString("N0")</div>
+
+                    <div class="product-specs">
+                        @if (!string.IsNullOrEmpty(product.PowerOutput))
+                        {
+                            <div class="spec-item">
+                                <i class="fas fa-bolt"></i>
+                                <span>@product.PowerOutput</span>
+                            </div>
+                        }
+                        <div class="spec-item">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>@product.WarrantyYears yr warranty</span>
+                        </div>
+                        <div class="spec-item">
+                            <i class="fas fa-warehouse"></i>
+                            <span>Stock: @product.StockQuantity</span>
+                        </div>
+                        <div class="spec-item">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>@product.CreatedAt.ToString("MMM yyyy")</span>
+                        </div>
+                    </div>
+
+                    <span class="availability-badge @(product.IsAvailable ? "available" : "unavailable")">
+                        <i class="fas fa-circle"></i> @(product.IsAvailable ? "Available" : "Unavailable")
+                    </span>
+
+                    <div class="product-actions">
+                        <a asp-action="EditProduct" asp-route-id="@product.Id" class="btn-action btn-edit">
+                            <i class="fas fa-edit"></i> Edit
+                        </a>
+
+                        <form asp-action="ToggleAvailability" asp-route-id="@product.Id" method="post" style="flex: 1;">
+                            @Html.AntiForgeryToken()
+                            <button type="submit" class="btn-action btn-toggle" style="width: 100%;">
+                                <i class="fas fa-toggle-on"></i> Toggle
+                            </button>
+                        </form>
+
+                        <form asp-action="DeleteProduct" asp-route-id="@product.Id" method="post"
+                              onsubmit="return confirm('Are you sure you want to delete this product?');" style="flex: 1;">
+                            @Html.AntiForgeryToken()
+                            <button type="submit" class="btn-action btn-delete" style="width: 100%;">
+                                <i class="fas fa-trash"></i> Delete
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            }
+        </div>
     }
     else
     {
-        <table class="table table-striped mt-4">
-            <thead style="color:#ff6b00;">
-                <tr>
-                    <th>Name</th>
-                    <th>Category</th>
-                    <th>Price ($)</th>
-                    <th>Stock</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var p in Model)
-                {
-                    <tr>
-                        <td>@p.Name</td>
-                        <td>@p.Category</td>
-                        <td>@p.Price</td>
-                        <td>@p.Stock</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+        <div class="no-products">
+            <i class="fas fa-box-open"></i>
+            <h3>No Products Yet</h3>
+            <p>Start building your product catalog to showcase your solar equipment!</p>
+            <a asp-action="AddProduct" class="btn-add" style="margin-top: 1.5rem;">
+                <i class="fas fa-plus-circle"></i> Add Your First Product
+            </a>
+        </div>
     }
-
-    <a asp-action="Dashboard" class="btn btn-secondary mt-3"><i class="fas fa-arrow-left"></i> Back</a>
 </div>

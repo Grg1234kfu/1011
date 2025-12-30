@@ -5,17 +5,19 @@
 }
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
 <style>
     body {
         background: linear-gradient(135deg, #fff9e6 0%, #ffe8cc 100%);
-        font-family: 'Poppins', sans-serif;
+        font-family: 'Poppons', sans-serif;
         min-height: 100vh;
         padding: 2rem;
+        margin: 0;
     }
 
     .form-container {
-        max-width: 800px;
+        max-width: 900px;
         margin: 0 auto;
         background-color: white;
         padding: 3rem;
@@ -51,6 +53,167 @@
         margin-bottom: 2rem;
     }
 
+    .location-methods {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .method-card {
+        background: linear-gradient(135deg, #fff, #f8f9fa);
+        padding: 1.5rem;
+        border-radius: 12px;
+        border: 2px solid #e0e0e0;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        text-align: center;
+    }
+
+        .method-card:hover {
+            border-color: #ff8c00;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 140, 0, 0.2);
+        }
+
+        .method-card.gps {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            border-color: #28a745;
+        }
+
+            .method-card.gps:hover {
+                border-color: #20c997;
+            }
+
+            .method-card.gps i,
+            .method-card.gps h4,
+            .method-card.gps p {
+                color: white;
+            }
+
+        .method-card i {
+            font-size: 2.5rem;
+            color: #ff8c00;
+            margin-bottom: 0.8rem;
+        }
+
+        .method-card h4 {
+            color: #333;
+            margin: 0.5rem 0;
+            font-size: 1.1rem;
+        }
+
+        .method-card p {
+            color: #666;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+    .search-box {
+        position: relative;
+        margin-bottom: 1rem;
+    }
+
+    #searchInput {
+        width: 100%;
+        padding: 1rem;
+        padding-right: 3rem;
+        border: 2px solid #e0e0e0;
+        border-radius: 10px;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+    }
+
+        #searchInput:focus {
+            border-color: #ff8c00;
+            box-shadow: 0 0 0 3px rgba(255, 140, 0, 0.1);
+            outline: none;
+        }
+
+    .search-icon {
+        position: absolute;
+        right: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #999;
+        font-size: 1.2rem;
+    }
+
+    #searchResults {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: white;
+        border: 2px solid #e0e0e0;
+        border-top: none;
+        border-radius: 0 0 10px 10px;
+        max-height: 250px;
+        overflow-y: auto;
+        z-index: 1000;
+        display: none;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .search-result-item {
+        padding: 1rem;
+        cursor: pointer;
+        border-bottom: 1px solid #f0f0f0;
+        transition: all 0.2s ease;
+    }
+
+        .search-result-item:hover {
+            background: #fff4d6;
+        }
+
+    .map-container {
+        margin-bottom: 1.5rem;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        height: 400px;
+    }
+
+    #map {
+        height: 100%;
+        width: 100%;
+    }
+
+    .accuracy-info {
+        background: #fff4d6;
+        padding: 1rem;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+        border-left: 4px solid #ffa500;
+        display: none;
+    }
+
+        .accuracy-info.active {
+            display: block;
+        }
+
+        .accuracy-info p {
+            margin: 0.3rem 0;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+    .accuracy-good {
+        color: #28a745 !important;
+        font-weight: 600;
+    }
+
+    .accuracy-medium {
+        color: #ffa500 !important;
+        font-weight: 600;
+    }
+
+    .accuracy-poor {
+        color: #dc3545 !important;
+        font-weight: 600;
+    }
+
     .form-row {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -58,57 +221,41 @@
         margin-bottom: 1.5rem;
     }
 
-    .form-floating {
-        position: relative;
-        margin-bottom: 1.5rem;
+    /* --------------- FIX: REMOVE WHITE BACKGROUND --------------- */
+
+    .form-floating input,
+    .form-floating select,
+    .form-floating textarea {
+        width: 100%;
+        padding: 1rem;
+        border: 2px solid #e0e0e0;
+        border-radius: 10px;
+        outline: none;
+        background: transparent !important; /* FIX */
+        transition: all 0.3s ease;
     }
 
-        .form-floating input,
-        .form-floating select,
-        .form-floating textarea {
-            width: 100%;
-            padding: 1rem;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
-            outline: none;
-            background: #fafafa;
-            transition: all 0.3s ease;
-        }
+    .form-floating label {
+        position: absolute;
+        top: 1rem;
+        left: 1rem;
+        pointer-events: none;
+        transition: 0.2s ease all;
+        color: #777;
+        background-color: transparent !important; /* FIX */
+        padding: 0 5px;
+    }
 
-        .form-floating textarea {
-            min-height: 100px;
-            resize: vertical;
-        }
-
-        .form-floating label {
-            position: absolute;
-            top: 1rem;
-            left: 1rem;
-            pointer-events: none;
-            transition: 0.2s ease all;
-            color: #777;
-            background-color: #fff;
-            padding: 0 5px;
-        }
-
-        .form-floating input:focus + label,
-        .form-floating input:not(:placeholder-shown) + label,
-        .form-floating select:focus + label,
-        .form-floating textarea:focus + label,
-        .form-floating textarea:not(:placeholder-shown) + label {
-            top: -0.5rem;
-            left: 0.75rem;
-            font-size: 0.8rem;
-            color: #ff8c00;
-        }
-
-        .form-floating input:focus,
-        .form-floating select:focus,
-        .form-floating textarea:focus {
-            border-color: #ff8c00;
-            background-color: #fff;
-            box-shadow: 0 0 0 3px rgba(255, 140, 0, 0.1);
-        }
+    .form-floating input:focus + label,
+    .form-floating input:not(:placeholder-shown) + label,
+    .form-floating select:focus + label,
+    .form-floating textarea:focus + label,
+    .form-floating textarea:not(:placeholder-shown) + label {
+        top: -0.5rem;
+        left: 0.75rem;
+        font-size: 0.8rem;
+        color: #ff8c00;
+    }
 
     .input-unit {
         position: absolute;
@@ -116,13 +263,6 @@
         top: 1rem;
         color: #999;
         font-size: 0.9rem;
-    }
-
-    .text-danger {
-        font-size: 0.85rem;
-        margin-top: 0.3rem;
-        display: block;
-        color: #dc3545;
     }
 
     .btn {
@@ -157,19 +297,34 @@
             background: #fff4d6;
         }
 
-    .actions {
-        display: flex;
-        gap: 1rem;
-        margin-top: 2rem;
+    .location-info {
+        background: linear-gradient(135deg, #d4edda, #c3e6cb);
+        padding: 1.2rem;
+        border-radius: 8px;
+        margin-bottom: 1.5rem;
+        display: none;
+        border-left: 4px solid #28a745;
     }
+
+        .location-info.active {
+            display: block;
+        }
+
+        .location-info p {
+            margin: 0.5rem 0;
+            color: #155724;
+        }
 
     @@media (max-width: 768px) {
         .form-row {
             grid-template-columns: 1fr;
         }
+
+        .location-methods {
+            grid-template-columns: 1fr;
+        }
     }
 </style>
-
 <div class="form-container">
     <a asp-action="Dashboard" class="btn btn-secondary" style="margin-bottom: 2rem;">
         <i class="fas fa-arrow-left"></i> Back to Dashboard
@@ -182,26 +337,72 @@
     </div>
 
     <div class="info-box">
-        <i class="fas fa-lightbulb"></i> <strong>How it works:</strong> Fill out this form with your property details.
-        Our approved vendors will review your request and send you personalized quotes!
+        <i class="fas fa-lightbulb"></i> <strong>Select Your Location:</strong> Use GPS for automatic detection (works best on mobile), search for your address, or click on the map!
     </div>
 
     <form asp-action="CreateRequest" method="post">
-        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
-
         <h3 style="color: #ff6b00; margin-bottom: 1rem;">
-            <i class="fas fa-home"></i> Property Information
+            <i class="fas fa-map-marker-alt"></i> Property Location
         </h3>
 
+        <div class="location-methods">
+            <div class="method-card gps" onclick="useGPS()" id="gpsCard">
+                <i class="fas fa-crosshairs"></i>
+                <h4 id="gpsText">Use GPS</h4>
+                <p>Auto-detect (Mobile)</p>
+            </div>
+            <div class="method-card" onclick="focusSearch()">
+                <i class="fas fa-search"></i>
+                <h4>Search</h4>
+                <p>Type your address</p>
+            </div>
+            <div class="method-card" onclick="focusMap()">
+                <i class="fas fa-map-marked-alt"></i>
+                <h4>Click Map</h4>
+                <p>Mark manually</p>
+            </div>
+        </div>
+
+        <div class="accuracy-info" id="accuracyInfo">
+            <p><i class="fas fa-satellite-dish"></i> <strong>GPS Status:</strong></p>
+            <p id="accuracyText"></p>
+            <p id="deviceInfo"></p>
+        </div>
+
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Search: Baabda, Beirut, your street..." />
+            <i class="fas fa-search search-icon"></i>
+            <div id="searchResults"></div>
+        </div>
+
+        <div class="map-container">
+            <div id="map"></div>
+        </div>
+
+        <div class="location-info" id="locationInfo">
+            <p><strong><i class="fas fa-check-circle"></i> Location Selected!</strong></p>
+            <p id="selectedAddress"></p>
+            <p style="font-size: 0.9rem;">
+                📍 Coordinates: <span id="coordinates"></span>
+            </p>
+        </div>
+
+        <input type="hidden" id="latitude" />
+        <input type="hidden" id="longitude" />
+
         <div class="form-floating">
-            <input asp-for="PropertyAddress" class="form-control" placeholder="Address" />
+            <input asp-for="PropertyAddress" id="propertyAddress" class="form-control" placeholder=" " required />
             <label asp-for="PropertyAddress">Property Address</label>
             <span asp-validation-for="PropertyAddress" class="text-danger"></span>
         </div>
 
+        <h3 style="color: #ff6b00; margin: 2rem 0 1rem 0;">
+            <i class="fas fa-home"></i> Property Information
+        </h3>
+
         <div class="form-row">
             <div class="form-floating">
-                <select asp-for="PropertyType" class="form-control">
+                <select asp-for="PropertyType" class="form-control" required>
                     <option value="">Select Type</option>
                     <option value="Residential">Residential</option>
                     <option value="Commercial">Commercial</option>
@@ -213,7 +414,7 @@
             </div>
 
             <div class="form-floating" style="position: relative;">
-                <input asp-for="RoofArea" class="form-control" type="number" step="0.1" placeholder="Roof Area" />
+                <input asp-for="RoofArea" class="form-control" type="number" step="0.1" placeholder=" " required />
                 <label asp-for="RoofArea">Available Roof Area</label>
                 <span class="input-unit">m²</span>
                 <span asp-validation-for="RoofArea" class="text-danger"></span>
@@ -226,14 +427,14 @@
 
         <div class="form-row">
             <div class="form-floating" style="position: relative;">
-                <input asp-for="MonthlyConsumption" class="form-control" type="number" step="0.1" placeholder="Consumption" />
+                <input asp-for="MonthlyConsumption" class="form-control" type="number" step="0.1" placeholder=" " required />
                 <label asp-for="MonthlyConsumption">Monthly Consumption</label>
                 <span class="input-unit">kWh</span>
                 <span asp-validation-for="MonthlyConsumption" class="text-danger"></span>
             </div>
 
             <div class="form-floating" style="position: relative;">
-                <input asp-for="MonthlyBill" class="form-control" type="number" step="0.01" placeholder="Bill" />
+                <input asp-for="MonthlyBill" class="form-control" type="number" step="0.01" placeholder=" " />
                 <label asp-for="MonthlyBill">Monthly Bill (Optional)</label>
                 <span class="input-unit">USD</span>
                 <span asp-validation-for="MonthlyBill" class="text-danger"></span>
@@ -241,9 +442,8 @@
         </div>
 
         <div class="form-floating">
-            <textarea asp-for="AdditionalNotes" class="form-control" placeholder="Notes"></textarea>
+            <textarea asp-for="AdditionalNotes" class="form-control" placeholder=" "></textarea>
             <label asp-for="AdditionalNotes">Additional Notes (Optional)</label>
-            <span asp-validation-for="AdditionalNotes" class="text-danger"></span>
         </div>
 
         <button type="submit" class="btn btn-primary">
@@ -251,6 +451,251 @@
         </button>
     </form>
 </div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+    let map;
+    let marker;
+    let searchTimeout;
+    let accuracyCircle;
+
+    // Initialize map centered on Beirut
+    const beirut = [33.8886, 35.4955];
+    map = L.map('map').setView(beirut, 12);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap',
+        maxZoom: 19
+    }).addTo(map);
+
+    // Click to place marker
+    map.on('click', function(e) {
+        placeMarker(e.latlng.lat, e.latlng.lng);
+        getAddress(e.latlng.lat, e.latlng.lng);
+    });
+
+    function placeMarker(lat, lng, accuracy) {
+        if (marker) {
+            marker.setLatLng([lat, lng]);
+        } else {
+            marker = L.marker([lat, lng], {
+                draggable: true,
+                icon: L.icon({
+                    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+                    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+                    iconSize: [25, 41],
+                    iconAnchor: [12, 41],
+                    popupAnchor: [1, -34],
+                    shadowSize: [41, 41]
+                })
+            }).addTo(map);
+
+            marker.on('dragend', function(e) {
+                const pos = e.target.getLatLng();
+                getAddress(pos.lat, pos.lng);
+            });
+        }
+
+        // Show accuracy circle if provided
+        if (accuracy) {
+            if (accuracyCircle) {
+                accuracyCircle.setLatLng([lat, lng]);
+                accuracyCircle.setRadius(accuracy);
+            } else {
+                accuracyCircle = L.circle([lat, lng], {
+                    color: '#28a745',
+                    fillColor: '#28a745',
+                    fillOpacity: 0.1,
+                    radius: accuracy
+                }).addTo(map);
+            }
+        }
+
+        document.getElementById('latitude').value = lat.toFixed(6);
+        document.getElementById('longitude').value = lng.toFixed(6);
+
+        map.setView([lat, lng], 16);
+    }
+
+    function getAddress(lat, lng) {
+        fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&zoom=18&addressdetails=1`)
+            .then(response => response.json())
+            .then(data => {
+                let address = '';
+                const addr = data.address;
+
+                if (addr.road) address += addr.road;
+                if (addr.neighbourhood) address += (address ? ', ' : '') + addr.neighbourhood;
+                if (addr.suburb) address += (address ? ', ' : '') + addr.suburb;
+                if (addr.city || addr.town) address += (address ? ', ' : '') + (addr.city || addr.town);
+
+                if (!address && data.display_name) address = data.display_name;
+                if (!address.toLowerCase().includes('lebanon')) address += ', Lebanon';
+
+                document.getElementById('propertyAddress').value = address;
+                document.getElementById('selectedAddress').textContent = address;
+                document.getElementById('coordinates').textContent = lat.toFixed(6) + ', ' + lng.toFixed(6);
+                document.getElementById('locationInfo').classList.add('active');
+            })
+            .catch(error => {
+                const fallbackAddress = `Location: ${lat.toFixed(4)}°, ${lng.toFixed(4)}°, Lebanon`;
+                document.getElementById('propertyAddress').value = fallbackAddress;
+                document.getElementById('selectedAddress').textContent = fallbackAddress;
+                document.getElementById('coordinates').textContent = lat.toFixed(6) + ', ' + lng.toFixed(6);
+                document.getElementById('locationInfo').classList.add('active');
+            });
+    }
+
+    function useGPS() {
+        const gpsCard = document.getElementById('gpsCard');
+        const gpsText = document.getElementById('gpsText');
+        const accuracyInfo = document.getElementById('accuracyInfo');
+        const accuracyText = document.getElementById('accuracyText');
+        const deviceInfo = document.getElementById('deviceInfo');
+
+        if (!navigator.geolocation) {
+            alert('❌ GPS not supported by your browser. Please use search or click on the map.');
+            return;
+        }
+
+        gpsText.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Getting GPS...';
+        accuracyInfo.classList.add('active');
+        accuracyText.textContent = 'Searching for GPS signal...';
+
+        // Detect device type
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        deviceInfo.textContent = isMobile ? '📱 Mobile device detected - GPS should be accurate!' : '💻 Desktop detected - GPS may use IP/WiFi (less accurate)';
+
+        navigator.geolocation.getCurrentPosition(
+            function(position) {
+                const lat = position.coords.latitude;
+                const lng = position.coords.longitude;
+                const accuracy = position.coords.accuracy;
+
+                console.log('GPS:', lat, lng, 'Accuracy:', accuracy + 'm');
+
+                placeMarker(lat, lng, accuracy);
+                getAddress(lat, lng);
+
+                gpsText.textContent = '✓ GPS Located!';
+
+                // Show accuracy feedback
+                let accuracyClass = '';
+                let accuracyMessage = '';
+
+                if (accuracy < 20) {
+                    accuracyClass = 'accuracy-good';
+                    accuracyMessage = `✓ Excellent accuracy: ±${accuracy.toFixed(0)}m`;
+                } else if (accuracy < 100) {
+                    accuracyClass = 'accuracy-medium';
+                    accuracyMessage = `⚠️ Good accuracy: ±${accuracy.toFixed(0)}m`;
+                } else {
+                    accuracyClass = 'accuracy-poor';
+                    accuracyMessage = `⚠️ Low accuracy: ±${accuracy.toFixed(0)}m - Consider using search or clicking on map`;
+                }
+
+                accuracyText.className = accuracyClass;
+                accuracyText.textContent = accuracyMessage;
+
+                setTimeout(() => {
+                    gpsText.textContent = 'Use GPS';
+                }, 2000);
+            },
+            function(error) {
+                console.error('GPS error:', error);
+                gpsText.textContent = 'Use GPS';
+
+                let errorMsg = '';
+                switch(error.code) {
+                    case error.PERMISSION_DENIED:
+                        errorMsg = '❌ Location permission denied. Please allow location access and try again.';
+                        accuracyText.textContent = 'Location access blocked';
+                        break;
+                    case error.POSITION_UNAVAILABLE:
+                        errorMsg = '❌ GPS unavailable. Try moving outside or use search/map.';
+                        accuracyText.textContent = 'GPS signal not found';
+                        break;
+                    case error.TIMEOUT:
+                        errorMsg = '❌ GPS timeout. Try again or use search/map.';
+                        accuracyText.textContent = 'GPS took too long';
+                        break;
+                    default:
+                        errorMsg = '❌ GPS error. Use search or click on map.';
+                        accuracyText.textContent = 'GPS failed';
+                }
+
+                alert(errorMsg);
+            },
+            {
+                enableHighAccuracy: true,  // ⭐ Use real GPS on mobile!
+                timeout: 15000,             // 15 seconds
+                maximumAge: 0               // Don't use cached location
+            }
+        );
+    }
+
+    function focusSearch() {
+        document.getElementById('searchInput').focus();
+    }
+
+    function focusMap() {
+        alert('👆 Click anywhere on the map below to mark your location!');
+    }
+
+    // Search functionality
+    document.getElementById('searchInput').addEventListener('input', function(e) {
+        clearTimeout(searchTimeout);
+        const query = e.target.value;
+
+        if (query.length < 2) {
+            document.getElementById('searchResults').style.display = 'none';
+            return;
+        }
+
+        searchTimeout = setTimeout(() => {
+            searchLocation(query);
+        }, 500);
+    });
+
+    function searchLocation(query) {
+        fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${enacodeURIComponent(query + ' Lebanon')}&countrycodes=lb&limit=8`)
+            .then(response => response.json())
+            .then(results => {
+                const resultsDiv = document.getElementById('searchResults');
+                resultsDiv.innerHTML = '';
+
+                if (results.length === 0) {
+                    resultsDiv.innerHTML = '<div class="search-result-item">No results found</div>';
+                    resultsDiv.style.display = 'block';
+                    return;
+                }
+
+                results.forEach(result => {
+                    const item = document.createElement('div');
+                    item.className = 'search-result-item';
+                    item.innerHTML = `<i class="fas fa-map-marker-alt" style="color: #ff8c00; margin-right: 0.5rem;"></i>${result.display_name}`;
+                    item.onclick = function() {
+                        const lat = parseFloat(result.lat);
+                        const lng = parseFloat(result.lon);
+                        placeMarker(lat, lng);
+                        getAddress(lat, lng);
+                        document.getElementById('searchInput').value = '';
+                        resultsDiv.style.display = 'none';
+                    };
+                    resultsDiv.appendChild(item);
+                });
+
+                resultsDiv.style.display = 'block';
+            });
+    }
+
+    // Hide search results when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.search-box')) {
+            document.getElementById('searchResults').style.display = 'none';
+        }
+    });
+</script>
 
 @section Scripts {
     @{

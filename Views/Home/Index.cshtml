@@ -8,206 +8,534 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SolarConnect Lebanon - Solar Power Solutions</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <style>
-        body {
+        * {
             margin: 0;
-            font-family: 'Poppins', sans-serif;
-            background-color: #fff9e6;
-            color: #2e2e2e;
+            padding: 0;
+            box-sizing: border-box;
         }
 
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0a0e27;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
         header {
-            background: linear-gradient(135deg, #ff8c00, #ffa500);
-            color: white;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+            padding: 1rem 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 2rem;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
         }
 
-            header .logo {
-                font-size: 1.8rem;
-                font-weight: bold;
-                display: flex;
-                align-items: center;
-                gap: 0.5rem;
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #fff;
+        }
+
+            .logo i {
+                font-size: 2rem;
+                color: #FFD700;
             }
 
-                header .logo i {
-                    color: #ffeb3b;
-                }
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1;
+        }
 
-            header nav a {
-                color: white;
+        .logo-tagline {
+            font-size: 0.5rem;
+            color: #FFD700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+            nav a, nav button {
+                color: rgba(255, 255, 255, 0.9);
                 text-decoration: none;
-                margin-left: 1.5rem;
-                font-weight: 500;
-                transition: opacity 0.3s;
+                font-weight: 600;
+                font-size: 0.95rem;
+                transition: all 0.3s;
+                position: relative;
+                background: none;
+                border: none;
+                cursor: pointer;
+                font-family: inherit;
             }
 
-                header nav a:hover {
-                    opacity: 0.8;
+                nav a::after {
+                    content: '';
+                    position: absolute;
+                    bottom: -5px;
+                    left: 0;
+                    width: 0;
+                    height: 2px;
+                    background: #FFD700;
+                    transition: width 0.3s;
                 }
 
+                nav a:hover::after {
+                    width: 100%;
+                }
+
+                nav a:hover, nav button:hover {
+                    color: #FFD700;
+                }
+
+        .nav-btn {
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            color: #1a1a1a;
+            padding: 0.7rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 700;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+        }
+
+            .nav-btn:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 6px 25px rgba(255, 215, 0, 0.5);
+            }
+
+        /* Hero Section */
         .hero {
-            padding: 5rem 2rem;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-align: center;
-            background: linear-gradient(135deg, #ffa500, #ff6b00);
-            color: white;
+            padding: 8rem 5% 4rem;
+            background: linear-gradient(135deg, rgba(10, 14, 39, 0.8), rgba(0, 20, 40, 0.9)), url('https://images.unsplash.com/photo-1509391366360-2e959784a276?w=1920') center/cover no-repeat;
             position: relative;
             overflow: hidden;
         }
 
             .hero::before {
-                content: '☀️';
+                content: '';
                 position: absolute;
-                font-size: 20rem;
-                opacity: 0.1;
-                top: -5rem;
-                right: -5rem;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 800px;
+                height: 800px;
+                background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
+                animation: pulse 4s ease-in-out infinite;
             }
 
-            .hero h1 {
-                font-size: 3.5rem;
-                margin-bottom: 1rem;
-                position: relative;
-                z-index: 1;
-            }
+        @@keyframes pulse {
+            0%, 100%
 
-            .hero p {
-                font-size: 1.3rem;
-                position: relative;
-                z-index: 1;
-            }
-
-        .features {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
-            gap: 2rem;
-            padding: 4rem 2rem;
-            background-color: #fffbf0;
+        {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 0.5;
         }
 
-        .feature-card {
-            background-color: #ffffff;
-            border-left: 6px solid #ff8c00;
-            border-radius: 12px;
-            box-shadow: 0 6px 12px rgba(255, 140, 0, 0.15);
-            padding: 2rem;
-            width: 280px;
+        50% {
+            transform: translate(-50%, -50%) scale(1.2);
+            opacity: 0.8;
+        }
+
+        }
+
+        .hero-content {
             position: relative;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            z-index: 2;
+            max-width: 900px;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            text-shadow: 2px 2px 20px rgba(0, 0, 0, 0.5);
+        }
+
+            .hero h1 span {
+                background: linear-gradient(135deg, #FFD700, #FFA500);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+            }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 3rem;
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            color: #1a1a1a;
+            padding: 1.2rem 3rem;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: all 0.3s;
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
+            border: none;
             cursor: pointer;
         }
 
-            .feature-card:hover {
-                transform: translateY(-5px);
-                box-shadow: 0 8px 20px rgba(255, 140, 0, 0.25);
+            .btn-primary:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 12px 35px rgba(255, 215, 0, 0.6);
             }
 
-            .feature-card i {
-                font-size: 2.5rem;
-                color: #ff8c00;
-                margin-bottom: 0.5rem;
-            }
-
-            .feature-card h3 {
-                margin-top: 0.2rem;
-                font-size: 1.4rem;
-                color: #ff6b00;
-            }
-
-        .actions {
-            background-color: #fff4d6;
-            padding: 4rem 2rem;
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            color: #fff;
+            padding: 1.2rem 3rem;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: all 0.3s;
+            border: 2px solid rgba(255, 215, 0, 0.3);
         }
 
-            .actions h2 {
-                text-align: center;
-                color: #ff6b00;
-                font-size: 2.2rem;
-                margin-bottom: 3rem;
+            .btn-secondary:hover {
+                background: rgba(255, 215, 0, 0.2);
+                border-color: #FFD700;
             }
 
-        .row {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
+        /* Stats Section */
+        .stats {
+            padding: 4rem 5%;
+            background: rgba(255, 215, 0, 0.05);
+            border-top: 1px solid rgba(255, 215, 0, 0.2);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .stat-item {
+            position: relative;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 6rem 5%;
+            background: linear-gradient(180deg, #0a0e27 0%, #121640 100%);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+            .section-header h2 {
+                font-size: 3rem;
+                font-weight: 800;
+                margin-bottom: 1rem;
+            }
+
+                .section-header h2 span {
+                    background: linear-gradient(135deg, #FFD700, #FFA500);
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                    background-clip: text;
+                }
+
+            .section-header p {
+                font-size: 1.1rem;
+                color: rgba(255, 255, 255, 0.7);
+            }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 2rem;
             max-width: 1200px;
             margin: 0 auto;
         }
 
-        .action-card {
-            background-color: white;
-            border-radius: 12px;
-            padding: 2rem;
-            text-align: center;
-            width: 280px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            transition: transform 0.3s ease;
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 20px;
+            padding: 2.5rem;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
         }
 
-            .action-card:hover {
-                transform: translateY(-5px);
+            .feature-card::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.1), transparent);
+                transition: left 0.5s;
             }
 
-            .action-card i {
-                font-size: 3rem;
-                color: #ff8c00;
-                margin-bottom: 1rem;
+            .feature-card:hover::before {
+                left: 100%;
             }
 
-            .action-card h4 {
-                color: #ff6b00;
-                font-size: 1.3rem;
-                margin-bottom: 0.8rem;
+            .feature-card:hover {
+                transform: translateY(-10px);
+                border-color: #FFD700;
+                box-shadow: 0 15px 40px rgba(255, 215, 0, 0.3);
             }
 
-            .action-card p {
-                font-size: 0.95rem;
-                margin-bottom: 1.5rem;
-                color: #666;
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 8px 20px rgba(255, 215, 0, 0.3);
+        }
+
+            .feature-icon i {
+                font-size: 2rem;
+                color: #1a1a1a;
             }
 
-            .action-card .btn {
-                background: linear-gradient(135deg, #ff8c00, #ffa500);
-                color: white;
-                border: none;
-                padding: 0.8rem 1.6rem;
-                border-radius: 6px;
-                cursor: pointer;
-                font-weight: 600;
-                text-decoration: none;
-                display: inline-block;
-                transition: transform 0.2s, box-shadow 0.2s;
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        .feature-card p {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 6rem 5%;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 165, 0, 0.1)), linear-gradient(180deg, #121640 0%, #0a0e27 100%);
+        }
+
+        .cta-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .cta-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 25px;
+            padding: 3rem 2rem;
+            text-align: center;
+            transition: all 0.4s;
+        }
+
+            .cta-card:hover {
+                transform: translateY(-10px);
+                background: rgba(255, 255, 255, 0.12);
+                border-color: #FFD700;
+                box-shadow: 0 20px 50px rgba(255, 215, 0, 0.4);
             }
 
-                .action-card .btn:hover {
-                    transform: scale(1.05);
-                    box-shadow: 0 4px 12px rgba(255, 140, 0, 0.3);
-                }
+        .cta-icon {
+            width: 90px;
+            height: 90px;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4);
+        }
 
+            .cta-icon i {
+                font-size: 2.5rem;
+                color: #1a1a1a;
+            }
+
+        .cta-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        .cta-card p {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .cta-card .btn-primary {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            font-size: 1rem;
+        }
+
+        /* Footer */
         footer {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 3rem 5%;
             text-align: center;
-            padding: 2rem;
-            font-size: 0.9rem;
-            background: linear-gradient(135deg, #ff8c00, #ffa500);
-            color: white;
+            border-top: 1px solid rgba(255, 215, 0, 0.2);
         }
 
-            footer a {
-                color: #ffeb3b;
-                text-decoration: none;
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+            .footer-logo i {
+                color: #FFD700;
+                font-size: 2rem;
             }
 
-                footer a:hover {
-                    text-decoration: underline;
+        footer p {
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+            .footer-links a {
+                color: rgba(255, 255, 255, 0.7);
+                text-decoration: none;
+                transition: color 0.3s;
+            }
+
+                .footer-links a:hover {
+                    color: #FFD700;
                 }
+
+        .copyright {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @@media (max-width: 768px) {
+            header
+
+        {
+            padding: 1rem 3%;
+        }
+
+        nav {
+            gap: 1rem;
+        }
+
+            nav a, nav button {
+                font-size: 0.85rem;
+            }
+
+        .hero {
+            padding: 6rem 3% 3rem;
+        }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+        .hero-buttons {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .btn-primary, .btn-secondary {
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .section-header h2 {
+            font-size: 2rem;
+        }
+
+        .features-grid, .cta-grid {
+            grid-template-columns: 1fr;
+        }
+
+        }
     </style>
 </head>
 <body>
@@ -215,131 +543,190 @@
     <header>
         <div class="logo">
             <i class="fas fa-solar-panel"></i>
-            SolarConnect
+            <div class="logo-text">
+                <span>SolarConnect</span>
+                <span class="logo-tagline">Clean Energy</span>
+            </div>
         </div>
         <nav>
-            <a href="/">Home</a>
-            <a href="#">About</a>
             @if (User?.Identity?.IsAuthenticated == true)
             {
+                @if (User.IsInRole("Client"))
+                {
+                    <a asp-controller="Client" asp-action="Dashboard">Dashboard</a>
+                }
+                else if (User.IsInRole("Vendor"))
+                {
+                    <a asp-controller="Vendor" asp-action="Dashboard">Dashboard</a>
+                }
+                else if (User.IsInRole("Admin"))
+                {
+                    <a asp-controller="Admin" asp-action="Dashboard">Dashboard</a>
+                }
                 <form asp-controller="Auth" asp-action="Logout" method="post" style="display: inline;">
-                    <button type="submit" style="background: none; border: none; color: white; cursor: pointer; font-weight: 500; margin-left: 1.5rem;">
-                        Logout
-                    </button>
+                    <button type="submit" class="nav-btn">Logout</button>
                 </form>
             }
             else
             {
                 <a asp-controller="Auth" asp-action="Login">Login</a>
-                <a asp-controller="Auth" asp-action="Register">Register</a>
+                <a asp-controller="Auth" asp-action="Register" class="nav-btn">Get Started</a>
             }
         </nav>
     </header>
 
     <section class="hero">
-        <h1>Power Lebanon with Solar Energy</h1>
-        <p>Compare quotes. Choose trusted suppliers. Track your solar installation.</p>
+        <div class="hero-content">
+            <h1>Power Lebanon with <span>Solar Energy</span></h1>
+            <p>Connect with trusted solar vendors, compare quotes, and track your installation journey—all in one platform.</p>
+            <div class="hero-buttons">
+                @if (User?.Identity?.IsAuthenticated != true)
+                {
+                    <a asp-controller="Auth" asp-action="RegisterClient" class="btn-primary">
+                        <i class="fas fa-home"></i> Get Solar Quotes
+                    </a>
+                    <a asp-controller="Auth" asp-action="RegisterVendor" class="btn-secondary">
+                        <i class="fas fa-briefcase"></i> Join as Vendor
+                    </a>
+                }
+                else
+                {
+                    @if (User.IsInRole("Client"))
+                    {
+                        <a asp-controller="Client" asp-action="Dashboard" class="btn-primary">
+                            <i class="fas fa-tachometer-alt"></i> Go to Dashboard
+                        </a>
+                    }
+                    else if (User.IsInRole("Vendor"))
+                    {
+                        <a asp-controller="Vendor" asp-action="Dashboard" class="btn-primary">
+                            <i class="fas fa-tachometer-alt"></i> Go to Dashboard
+                        </a>
+                    }
+                   
+                }
+            </div>
+        </div>
     </section>
 
-    <!-- ✅ CLICKABLE FEATURES -->
+    <section class="stats">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-number">500+</div>
+                <div class="stat-label">Solar Installations</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">50+</div>
+                <div class="stat-label">Verified Vendors</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">15MW</div>
+                <div class="stat-label">Total Capacity</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">98%</div>
+                <div class="stat-label">Satisfaction Rate</div>
+            </div>
+        </div>
+    </section>
+
     <section class="features">
-        <div class="feature-card" onclick="location.href='@Url.Action("SmartEnergyCalculator", "Home")'">
-            <i class="fas fa-calculator"></i>
-            <h3>Smart Energy Calculator</h3>
-            <p>Get accurate sizing recommendations based on your consumption patterns and location in Lebanon.</p>
+        <div class="section-header">
+            <h2>Why Choose <span>SolarConnect</span>?</h2>
+            <p>Everything you need for your solar journey in one platform</p>
         </div>
-
-        <div class="feature-card" onclick="location.href='@Url.Action("MultipleQuotes", "Home")'">
-            <i class="fas fa-handshake"></i>
-            <h3>Multiple Quotes</h3>
-            <p>Receive competitive offers from verified solar vendors and installers across Lebanon.</p>
-        </div>
-
-        <div class="feature-card" onclick="location.href='@Url.Action("TrackInstallation", "Home")'">
-            <i class="fas fa-chart-line"></i>
-            <h3>Track Installation</h3>
-            <p>Monitor your solar project from approval to completion with real-time updates and photos.</p>
-        </div>
-
-        <div class="feature-card" onclick="location.href='@Url.Action("VerifiedReviews", "Home")'">
-            <i class="fas fa-star"></i>
-            <h3>Verified Reviews</h3>
-            <p>Read authentic reviews from Lebanese customers about suppliers and system performance.</p>
-        </div>
-
-        <div class="feature-card" onclick="location.href='@Url.Action("TransparentPricing", "Home")'">
-            <i class="fas fa-shield-alt"></i>
-            <h3>Transparent Pricing</h3>
-            <p>Access market analytics, pricing trends, and supplier performance data to make informed decisions.</p>
-        </div>
-
-        <div class="feature-card" onclick="location.href='@Url.Action("GreenFuture", "Home")'">
-            <i class="fas fa-leaf"></i>
-            <h3>Green Future</h3>
-            <p>Join Lebanon's energy transition and reduce your dependence on traditional power sources.</p>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-calculator"></i>
+                </div>
+                <h3>Smart Calculator</h3>
+                <p>Get accurate system sizing based on your consumption patterns and location in Lebanon.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-handshake"></i>
+                </div>
+                <h3>Multiple Quotes</h3>
+                <p>Receive competitive offers from verified solar vendors across Lebanon.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3>Track Progress</h3>
+                <p>Monitor your installation from approval to completion with real-time updates.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>Verified Vendors</h3>
+                <p>Work with trusted, pre-screened solar installers with proven track records.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-star"></i>
+                </div>
+                <h3>Authentic Reviews</h3>
+                <p>Read real feedback from Lebanese customers about performance and service.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-leaf"></i>
+                </div>
+                <h3>Green Future</h3>
+                <p>Join Lebanon's energy transition and reduce dependence on traditional power.</p>
+            </div>
         </div>
     </section>
 
-    <section class="actions">
-        <h2>Get Started Today</h2>
-        <div class="row">
-            @if (User?.Identity?.IsAuthenticated != true)
-            {
-                <div class="action-card">
-                    <i class="fas fa-user"></i>
-                    <h4>Homeowner / Business</h4>
-                    <p>Request solar quotes and compare suppliers</p>
-                    <a asp-controller="Auth" asp-action="RegisterClient" class="btn">Register as Client</a>
-                </div>
-                <div class="action-card">
-                    <i class="fas fa-tools"></i>
-                    <h4>Solar Vendor / Installer</h4>
-                    <p>Join our network and grow your business</p>
-                    <a asp-controller="Auth" asp-action="RegisterVendor" class="btn">Register as Vendor</a>
-                </div>
-                <div class="action-card">
-                    <i class="fas fa-sign-in-alt"></i>
-                    <h4>Already Have an Account?</h4>
-                    <p>Access your dashboard and manage requests</p>
-                    <a asp-controller="Auth" asp-action="Login" class="btn">Login</a>
-                </div>
-            }
-            else
-            {
-                @if (User.IsInRole("Client"))
-                {
-                    <div class="action-card">
-                        <i class="fas fa-file-alt"></i>
-                        <h4>My Solar Requests</h4>
-                        <p>View all your solar system requests and quotes</p>
-                        <a asp-controller="Client" asp-action="Dashboard" class="btn">Go to Dashboard</a>
+    @if (User?.Identity?.IsAuthenticated != true)
+    {
+        <section class="cta-section">
+            <div class="section-header">
+                <h2>Ready to Get <span>Started</span>?</h2>
+                <p>Choose your path to solar energy</p>
+            </div>
+            <div class="cta-grid">
+                <div class="cta-card">
+                    <div class="cta-icon">
+                        <i class="fas fa-home"></i>
                     </div>
-                }
-                else if (User.IsInRole("Vendor"))
-                {
-                    <div class="action-card">
-                        <i class="fas fa-inbox"></i>
-                        <h4>Vendor Dashboard</h4>
-                        <p>Browse and respond to client requests</p>
-                        <a asp-controller="Vendor" asp-action="Dashboard" class="btn">Go to Dashboard</a>
+                    <h3>Homeowners</h3>
+                    <p>Get solar quotes, compare vendors, and track your installation from start to finish.</p>
+                    <a asp-controller="Auth" asp-action="RegisterClient" class="btn-primary">Register as Client</a>
+                </div>
+                <div class="cta-card">
+                    <div class="cta-icon">
+                        <i class="fas fa-solar-panel"></i>
                     </div>
-                }
-                else if (User.IsInRole("Admin"))
-                {
-                    <div class="action-card">
-                        <i class="fas fa-tachometer-alt"></i>
-                        <h4>Admin Dashboard</h4>
-                        <p>View platform statistics and analytics</p>
-                        <a asp-controller="Admin" asp-action="Dashboard" class="btn">Go to Dashboard</a>
-                    </div>
-                }
-            }
-        </div>
-    </section>
+                    <h3>Solar Vendors</h3>
+                    <p>Grow your business by connecting with customers across Lebanon looking for solar solutions.</p>
+                    <a asp-controller="Auth" asp-action="RegisterVendor" class="btn-primary">Register as Vendor</a>
+                </div>
+            </div>
+        </section>
+    }
 
     <footer>
-        &copy; 2025 SolarConnect Lebanon. Powering Lebanon's Green Future. |
-        <a href="#">Privacy Policy</a>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <i class="fas fa-solar-panel"></i>
+                <span>SolarConnect</span>
+            </div>
+            <p>Powering Lebanon's Green Future</p>
+            <div class="footer-links">
+                <a href="#">About Us</a>
+                <a href="#">How It Works</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Contact</a>
+            </div>
+            <div class="copyright">
+                &copy; 2025 SolarConnect Lebanon. All rights reserved.
+            </div>
+        </div>
     </footer>
 
 </body>

@@ -1,0 +1,142 @@
+@model SolarConnect.Models.ViewModels.AdminActionsPageViewModel
+
+@{
+    ViewData["Title"] = "System Actions - Requests & Quotes";
+}
+
+<style>
+    body { font-family: Poppins, Arial, sans-serif; background:#fff9e6; padding:20px; }
+    .wrap { max-width: 1300px; margin:0 auto; background:#fff; padding:20px; border-radius:14px; box-shadow:0 8px 25px rgba(0,0,0,.08); }
+    .top { display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; align-items:center; }
+    .btn { padding:8px 12px; border-radius:10px; border:1px solid #ff8c00; color:#ff6b00; background:#fff; text-decoration:none; font-weight:600; }
+    .btn-primary { background:#ff8c00; color:#fff; border-color:#ff8c00; }
+    .filters { margin-top:14px; display:grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap:10px; }
+    .field label { display:block; font-weight:600; font-size:12px; color:#444; margin-bottom:6px; }
+    .field input, .field select { width:100%; padding:10px; border:1px solid #ddd; border-radius:10px; }
+    .field-check { display:flex; align-items:center; gap:8px; margin-top:22px; }
+    .req { border: 1px solid #f1d6b8; border-radius: 12px; padding: 14px; margin-top: 14px; background: #fffdf7; }
+    .title { display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap; }
+    .badge { padding: 4px 10px; border-radius: 999px; background: #ff8c00; color: #fff; font-size: 12px; }
+    .meta { color: #666; font-size: 13px; margin-top: 6px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 12px; background: #fff; }
+    th, td { border: 1px solid #f2e1cf; padding: 10px; text-align: left; vertical-align: top; }
+    th { background: #fff4d6; }
+    .empty { color:#777; padding: 10px; background: #fff; border: 1px dashed #e6c9a8; border-radius: 10px; margin-top: 10px; }
+    .count { font-weight:700; color:#ff6b00; }
+</style>
+
+<div class="wrap">
+    <div class="top">
+        <div>
+            <h2 style="margin:0;">System Actions (Requests & Quotes)</h2>
+            <div class="meta">Filter by client/vendor, search by email, show quote counts.</div>
+        </div>
+        <a class="btn" asp-action="Dashboard">← Dashboard</a>
+    </div>
+
+    <form method="get" asp-action="Actions">
+        <div class="filters">
+            <div class="field">
+                <label>Search by Email (client or vendor)</label>
+                <input name="searchEmail" value="@Model.Filter.SearchEmail" placeholder="example@email.com" />
+            </div>
+
+            <div class="field">
+                <label>Filter by Client</label>
+                <select name="clientId">
+                    <option value="">(All Clients)</option>
+                    @foreach (var c in Model.Clients)
+                    {
+                        <option value="@c.Id" selected="@(Model.Filter.ClientId == c.Id)">@c.Email - @c.Name</option>
+                    }
+                </select>
+            </div>
+
+            <div class="field">
+                <label>Filter by Vendor</label>
+                <select name="vendorId">
+                    <option value="">(All Vendors)</option>
+                    @foreach (var v in Model.Vendors)
+                    {
+                        <option value="@v.Id" selected="@(Model.Filter.VendorId == v.Id)">@v.Email - @v.Name</option>
+                    }
+                </select>
+            </div>
+
+            <div class="field">
+                <div class="field-check">
+                    <input type="checkbox" name="onlyNoQuotes" value="true" @(Model.Filter.OnlyNoQuotes ? "checked" : "") />
+                    <label style="margin:0;">Requests with no quotes only</label>
+                </div>
+                <div style="margin-top:10px;">
+                    <button type="submit" class="btn btn-primary">Apply</button>
+                    <a class="btn" asp-action="Actions">Reset</a>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    @if (Model.Rows == null || !Model.Rows.Any())
+    {
+        <div class="empty" style="margin-top:14px;">No matching requests found.</div>
+    }
+    else
+    {
+        <div class="meta" style="margin-top:14px;">
+            Showing <span class="count">@Model.Rows.Count</span> request(s).
+        </div>
+
+        foreach (var r in Model.Rows)
+        {
+            <div class="req">
+                <div class="title">
+                    <div>
+                        <b>Request #@r.RequestId</b>
+                        <span class="badge">@r.Status</span>
+                        <span class="meta">Quotes: <span class="count">@r.QuotesCount</span></span>
+                    </div>
+                    <div class="meta">Created: <b>@r.CreatedAt</b></div>
+                </div>
+
+                <div class="meta">
+                    Client: <b>@r.ClientEmail</b> | @r.ClientName
+                </div>
+
+                <div class="meta">
+                    Property: <b>@r.PropertyType</b> — @r.PropertyAddress
+                </div>
+
+                @if (r.QuotesCount == 0)
+                {
+                    <div class="empty">No quotes received yet.</div>
+                }
+                else
+                {
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Vendor</th>
+                                <th>Email</th>
+                                <th>Submitted</th>
+                                <th>Total Price</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var q in r.Quotes)
+                            {
+                                <tr>
+                                    <td>@q.CompanyName</td>
+                                    <td>@q.VendorEmail</td>
+                                    <td>@q.SubmittedAt</td>
+                                    <td>@q.TotalPrice</td>
+                                    <td>@q.Status</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+            </div>
+        }
+    }
+</div>

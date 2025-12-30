@@ -1,0 +1,204 @@
+﻿@model SolarConnect.Models.Product
+
+@{
+    ViewData["Title"] = "Add Product - SolarConnect";
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+<style>
+    body {
+        background: linear-gradient(135deg, #fff9e6 0%, #ffe8cc 100%);
+        font-family: 'Poppins', sans-serif;
+        min-height: 100vh;
+        padding: 2rem;
+        margin: 0;
+    }
+
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        background: white;
+        padding: 3rem;
+        border-radius: 20px;
+        box-shadow: 0 10px 40px rgba(255, 140, 0, 0.15);
+    }
+
+    h1 {
+        color: #ff6b00;
+        margin-bottom: 2rem;
+    }
+
+    .btn-back {
+        background: white;
+        color: #ff6b00;
+        border: 2px solid #ff8c00;
+        padding: 0.8rem 1.5rem;
+        border-radius: 10px;
+        text-decoration: none;
+        display: inline-block;
+        margin-bottom: 2rem;
+        font-weight: 600;
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+        .form-group label {
+            display: block;
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.9rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+
+            .form-group input:focus,
+            .form-group select:focus,
+            .form-group textarea:focus {
+                border-color: #ff8c00;
+                outline: none;
+            }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+    .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+    }
+
+    .btn-submit {
+        width: 100%;
+        padding: 1.2rem;
+        background: linear-gradient(135deg, #28a745, #20c997);
+        color: white;
+        border: none;
+        border-radius: 12px;
+        font-size: 1.1rem;
+        font-weight: 700;
+        cursor: pointer;
+        margin-top: 1rem;
+    }
+
+    .alert-danger {
+        background: #f8d7da;
+        color: #721c24;
+        padding: 1rem;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+    }
+
+    .alert-success {
+        background: #d4edda;
+        color: #155724;
+        padding: 1rem;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+    }
+
+    .required {
+        color: red;
+    }
+</style>
+
+<div class="container">
+    <a asp-action="Products" class="btn-back">
+        <i class="fas fa-arrow-left"></i> Back to Products
+    </a>
+
+    <h1><i class="fas fa-plus-circle"></i> Add New Product</h1>
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert-danger">@TempData["Error"]</div>
+    }
+
+    <form action="/Vendor/AddProduct" method="post" enctype="multipart/form-data">
+        @Html.AntiForgeryToken()
+
+        <div class="form-group">
+            <label>Product Name <span class="required">*</span></label>
+            <input type="text" name="ProductName" placeholder="e.g., Premium Solar Panel" required />
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label>Category <span class="required">*</span></label>
+                <select name="Category" required>
+                    <option value="">-- Select Category --</option>
+                    <option value="SolarPanel">Solar Panel</option>
+                    <option value="Inverter">Inverter</option>
+                    <option value="Battery">Battery</option>
+                    <option value="Accessory">Accessory</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Brand <span class="required">*</span></label>
+                <input type="text" name="Brand" placeholder="e.g., SunPower, LG" required />
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label>Model</label>
+                <input type="text" name="Model" placeholder="e.g., X22-370" />
+            </div>
+
+            <div class="form-group">
+                <label>Power Output</label>
+                <input type="text" name="PowerOutput" placeholder="e.g., 400W, 5kW" />
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label>Price (USD) <span class="required">*</span></label>
+                <input type="number" name="Price" step="0.01" min="0.01" placeholder="0.00" required />
+            </div>
+
+            <div class="form-group">
+                <label>Warranty (Years)</label>
+                <input type="number" name="WarrantyYears" value="0" min="0" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Stock Quantity</label>
+            <input type="number" name="StockQuantity" value="0" min="0" />
+        </div>
+
+        <div class="form-group">
+            <label>Description <span class="required">*</span></label>
+            <textarea name="Description" placeholder="Describe the product features and benefits..." required></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>Specifications</label>
+            <textarea name="Specifications" placeholder="e.g., Efficiency: 21.7%, Dimensions: 1755 x 1038 x 40 mm"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>Product Image</label>
+            <input type="file" name="ProductImage" accept="image/*" />
+        </div>
+
+        <button type="submit" class="btn-submit">
+            <i class="fas fa-save"></i> Add Product
+        </button>
+    </form>
+</div>

@@ -1,0 +1,152 @@
+@model SolarConnect.Models.ViewModels.AdminCreateUserViewModel
+
+@{
+    ViewData["Title"] = "Create User";
+}
+
+<style>
+    .wrap { max-width: 900px; margin: 0 auto; padding: 30px; }
+    .card { background:#fff; padding:20px; border-radius:12px; }
+    .row2 { display:grid; grid-template-columns: 1fr 1fr; gap:12px; }
+    .field { margin-bottom: 12px; }
+    label { display:block; font-weight:600; margin-bottom:6px; }
+    input, select, textarea { width:100%; padding:10px; border-radius:10px; border:1px solid #ddd; }
+    .btn { padding:10px 14px; border-radius:10px; font-weight:600; border:1px solid #ff8c00; cursor:pointer; }
+    .btn-primary { background:#ff8c00; color:#fff; }
+    .btn-light { background:#fff; color:#ff6b00; text-decoration:none; display:inline-block; border:1px solid #ff8c00; padding:10px 14px; border-radius:10px; }
+    .hint { color:#666; font-size:12px; }
+    .text-danger { color:#b00020; font-size: 13px; }
+</style>
+
+<div class="wrap">
+    <a asp-action="Users" class="btn-light">← Back to Users</a>
+    <h2>Create User</h2>
+
+    <div class="card">
+        <form asp-action="CreateUser" method="post">
+            @Html.AntiForgeryToken()
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="row2">
+                <div class="field">
+                    <label asp-for="FirstName"></label>
+                    <input asp-for="FirstName" />
+                    <span class="text-danger" asp-validation-for="FirstName"></span>
+                </div>
+                <div class="field">
+                    <label asp-for="LastName"></label>
+                    <input asp-for="LastName" />
+                    <span class="text-danger" asp-validation-for="LastName"></span>
+                </div>
+            </div>
+
+            <div class="row2">
+                <div class="field">
+                    <label asp-for="Email"></label>
+                    <input asp-for="Email" />
+                    <span class="text-danger" asp-validation-for="Email"></span>
+                </div>
+                <div class="field">
+                    <label asp-for="PhoneNumber"></label>
+                    <input asp-for="PhoneNumber" />
+                    <span class="text-danger" asp-validation-for="PhoneNumber"></span>
+                </div>
+            </div>
+
+            <div class="row2">
+                <div class="field">
+                    <label asp-for="Role"></label>
+                    <select asp-for="Role">
+                        <option value="Client">Client</option>
+                        <option value="Vendor">Vendor</option>
+                        <option value="Admin">Admin</option>
+                    </select>
+                    <span class="text-danger" asp-validation-for="Role"></span>
+                </div>
+                <div class="field">
+                    <label asp-for="Password"></label>
+                    <input asp-for="Password" type="password" />
+                    <span class="text-danger" asp-validation-for="Password"></span>
+                    <div class="hint">Minimum 6 characters.</div>
+                </div>
+            </div>
+
+            <hr />
+
+            <p class="hint">
+                Optional fields (used only if Role = Client or Vendor). You can leave them empty.
+            </p>
+
+            <div class="row2">
+                <div class="field">
+                    <label asp-for="Address"></label>
+                    <input asp-for="Address" />
+                </div>
+                <div class="field">
+                    <label asp-for="PropertyType"></label>
+                    <input asp-for="PropertyType" />
+                </div>
+            </div>
+
+            <div class="field">
+                <label asp-for="AdditionalNotes"></label>
+                <textarea asp-for="AdditionalNotes" rows="3"></textarea>
+            </div>
+
+            <div class="row2">
+                <div class="field">
+                    <label asp-for="CompanyName"></label>
+                    <input asp-for="CompanyName" />
+                </div>
+                <div class="field">
+                    <label asp-for="BusinessLicense"></label>
+                    <input asp-for="BusinessLicense" />
+                </div>
+            </div>
+
+            <div class="row2">
+                <div class="field">
+                    <label asp-for="YearsOfExperience"></label>
+                    <input asp-for="YearsOfExperience" type="number" />
+                </div>
+                <div class="field">
+                    <label asp-for="IsApproved"></label>
+                    <select asp-for="IsApproved">
+                        <option value="">(auto)</option>
+                        <option value="true">Approved</option>
+                        <option value="false">Not Approved</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row2">
+                <div class="field">
+                    <label asp-for="ServiceArea"></label>
+                    <input asp-for="ServiceArea" />
+                </div>
+                <div class="field">
+                    <label asp-for="Specialization"></label>
+                    <input asp-for="Specialization" />
+                </div>
+            </div>
+
+            <div class="row2">
+                <div class="field">
+                    <label asp-for="Website"></label>
+                    <input asp-for="Website" />
+                </div>
+                <div class="field">
+                    <label asp-for="CompanyDescription"></label>
+                    <input asp-for="CompanyDescription" />
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Create</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
