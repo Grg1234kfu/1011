@@ -1,0 +1,90 @@
+﻿@model List<SolarConnect.Models.Quote>
+
+@{
+    ViewData["Title"] = "AI Quote Analysis - SolarConnect";
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+<style>
+    body {
+        background: linear-gradient(135deg, #fff9e6 0%, #ffe8cc 100%);
+        font-family: 'Poppins', sans-serif;
+        min-height: 100vh;
+        padding: 2rem;
+    }
+
+    .container {
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+
+    .ai-header {
+        background: linear-gradient(135deg, #6f42c1, #5a32a3);
+        color: white;
+        padding: 2.5rem;
+        border-radius: 15px;
+        text-align: center;
+        margin-bottom: 2rem;
+        box-shadow: 0 8px 24px rgba(111, 66, 193, 0.3);
+    }
+
+        .ai-header h1 {
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            font-size: 2rem;
+        }
+
+    .ai-analysis {
+        background: white;
+        padding: 2.5rem;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        line-height: 1.9;
+        white-space: pre-wrap;
+        color: #333;
+        font-size: 1.05rem;
+    }
+
+    .btn-back {
+        background: white;
+        color: #6f42c1;
+        border: 2px solid #6f42c1;
+        padding: 0.8rem 1.5rem;
+        border-radius: 10px;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 2rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+        .btn-back:hover {
+            background: #6f42c1;
+            color: white;
+            text-decoration: none;
+        }
+</style>
+
+<div class="container">
+    <a asp-action="RequestDetails" asp-route-id="@ViewBag.Request.Id" class="btn-back">
+        <i class="fas fa-arrow-left"></i> Back to Quotes
+    </a>
+
+    <div class="ai-header">
+        <h1>
+            <i class="fas fa-robot"></i>
+            AI-Powered Quote Analysis
+        </h1>
+        <p style="margin: 0.5rem 0 0 0; opacity: 0.9;">Powered by Google Gemini AI</p>
+    </div>
+
+    <div class="ai-analysis">
+        @ViewBag.Analysis
+    </div>
+</div>

@@ -1,0 +1,622 @@
+﻿@model SolarConnect.Models.Quote
+
+@{
+    ViewData["Title"] = "Update Project Progress";
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        min-height: 100vh;
+        padding: 2rem;
+    }
+
+    .container {
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    .back-button {
+        background: white;
+        color: #667eea;
+        padding: 0.8rem 1.5rem;
+        border-radius: 10px;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-weight: 600;
+        margin-bottom: 2rem;
+        transition: transform 0.2s;
+    }
+
+        .back-button:hover {
+            transform: translateX(-5px);
+            text-decoration: none;
+        }
+
+    .page-title {
+        background: white;
+        padding: 2rem;
+        border-radius: 15px;
+        margin-bottom: 2rem;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+        .page-title h1 {
+            color: #667eea;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+    .project-card {
+        background: white;
+        border-radius: 15px;
+        padding: 2rem;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        margin-bottom: 2rem;
+    }
+
+    .project-header {
+        border-left: 5px solid #28a745;
+        padding-left: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+        .project-header h2 {
+            color: #667eea;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+    .info-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .info-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: #666;
+    }
+
+        .info-item i {
+            color: #667eea;
+            width: 20px;
+        }
+
+    .payment-status-section {
+        background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+        border: 2px solid #4caf50;
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+        .payment-status-section h3 {
+            color: #2e7d32;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+    .payment-milestones {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 0.5rem;
+    }
+
+    .milestone {
+        text-align: center;
+        padding: 0.8rem 0.5rem;
+        background: white;
+        border-radius: 8px;
+        font-size: 0.85rem;
+    }
+
+        .milestone.paid {
+            background: linear-gradient(135deg, #4caf50, #66bb6a);
+            color: white;
+            font-weight: bold;
+        }
+
+        .milestone.pending {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            color: #856404;
+        }
+
+        .milestone.locked {
+            background: #f5f5f5;
+            color: #999;
+        }
+
+    .milestone-icon {
+        font-size: 1.5rem;
+        display: block;
+        margin-bottom: 0.3rem;
+    }
+
+    .progress-form {
+        background: #f8f9fa;
+        padding: 2rem;
+        border-radius: 12px;
+    }
+
+    .form-section {
+        margin-bottom: 2rem;
+    }
+
+        .form-section h3 {
+            color: #333;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+    .milestone-selector {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .milestone-btn {
+        padding: 1rem;
+        border: 2px solid #e0e0e0;
+        background: white;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.3s;
+        text-align: center;
+    }
+
+        .milestone-btn:hover {
+            border-color: #667eea;
+            transform: translateY(-2px);
+        }
+
+        .milestone-btn.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-color: #667eea;
+        }
+
+        .milestone-btn.locked {
+            background: #f5f5f5;
+            color: #999;
+            cursor: not-allowed;
+            border-color: #e0e0e0;
+        }
+
+            .milestone-btn.locked:hover {
+                transform: none;
+            }
+
+        .milestone-btn .icon {
+            font-size: 1.5rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .milestone-btn .label {
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .milestone-btn .progress {
+            font-size: 0.75rem;
+            opacity: 0.8;
+        }
+
+    .range-slider {
+        width: 100%;
+        margin: 1.5rem 0;
+    }
+
+    .progress-display {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+    }
+
+    .progress-value {
+        font-size: 3rem;
+        font-weight: bold;
+        color: #667eea;
+    }
+
+    .progress-bar-container {
+        height: 30px;
+        background: #e0e0e0;
+        border-radius: 15px;
+        overflow: hidden;
+        margin-bottom: 1rem;
+    }
+
+    .progress-bar {
+        height: 100%;
+        background: linear-gradient(90deg, #667eea, #764ba2);
+        transition: width 0.3s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+    }
+
+    input[type="range"] {
+        width: 100%;
+        height: 8px;
+        background: #e0e0e0;
+        border-radius: 5px;
+        outline: none;
+    }
+
+        input[type="range"]::-webkit-slider-thumb {
+            appearance: none;
+            width: 25px;
+            height: 25px;
+            background: #667eea;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+    textarea {
+        width: 100%;
+        min-height: 120px;
+        padding: 1rem;
+        border: 2px solid #e0e0e0;
+        border-radius: 10px;
+        font-family: inherit;
+        font-size: 1rem;
+        resize: vertical;
+    }
+
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+    .submit-button {
+        width: 100%;
+        padding: 1.2rem;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-size: 1.2rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: transform 0.2s;
+    }
+
+        .submit-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .submit-button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+    .alert {
+        padding: 1rem;
+        border-radius: 10px;
+        margin-bottom: 1rem;
+    }
+
+    .alert-warning {
+        background: #fff3cd;
+        border: 2px solid #ffc107;
+        color: #856404;
+    }
+
+    .alert-info {
+        background: #d1ecf1;
+        border: 2px solid #0dcaf0;
+        color: #0c5460;
+    }
+</style>
+
+<div class="container">
+    <a href="@Url.Action("MyProjects", "Vendor")" class="back-button">
+        <i class="fas fa-arrow-left"></i> Back to My Projects
+    </a>
+
+    <div class="page-title">
+        <h1><i class="fas fa-chart-line"></i> Update Project Progress</h1>
+        <p style="color: #666; margin-top: 0.5rem;">Track installation progress and communicate with your client</p>
+    </div>
+
+    <div class="project-card">
+        <div class="project-header">
+            <h2><i class="fas fa-solar-panel"></i> @Model.Request.PropertyType Solar Installation</h2>
+        </div>
+
+        <div class="info-grid">
+            <div class="info-item">
+                <i class="fas fa-user"></i>
+                <span><strong>Client:</strong> @Model.Request.Client.User.FirstName @Model.Request.Client.User.LastName</span>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span><strong>Location:</strong> @Model.Request.PropertyAddress</span>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-bolt"></i>
+                <span><strong>System Size:</strong> @Model.SystemSize kW</span>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-dollar-sign"></i>
+                <span><strong>Project Value:</strong> $@Model.TotalPrice.ToString("N2")</span>
+            </div>
+        </div>
+
+        <!-- Payment Status Section -->
+        <div class="payment-status-section">
+            <h3><i class="fas fa-credit-card"></i> Payment Milestones Status</h3>
+            <div class="payment-milestones">
+                <div class="milestone @(Model.DepositPaid ? "paid" : "pending")">
+                    <span class="milestone-icon">@(Model.DepositPaid ? "✅" : "⏳")</span>
+                    <strong>Deposit</strong><br />
+                    <small>30%</small><br />
+                    <small>$@Model.DepositAmount.ToString("N0")</small>
+                </div>
+                <div class="milestone @(Model.DesignPaid ? "paid" : (Model.DepositPaid ? "pending" : "locked"))">
+                    <span class="milestone-icon">@(Model.DesignPaid ? "✅" : Model.DepositPaid ? "⏳" : "🔒")</span>
+                    <strong>Design</strong><br />
+                    <small>15%</small><br />
+                    <small>$@Model.DesignPayment.ToString("N0")</small>
+                </div>
+                <div class="milestone @(Model.ProcurementPaid ? "paid" : (Model.DesignPaid ? "pending" : "locked"))">
+                    <span class="milestone-icon">@(Model.ProcurementPaid ? "✅" : Model.DesignPaid ? "⏳" : "🔒")</span>
+                    <strong>Procurement</strong><br />
+                    <small>20%</small><br />
+                    <small>$@Model.ProcurementPayment.ToString("N0")</small>
+                </div>
+                <div class="milestone @(Model.InstallationPaid ? "paid" : (Model.ProcurementPaid ? "pending" : "locked"))">
+                    <span class="milestone-icon">@(Model.InstallationPaid ? "✅" : Model.ProcurementPaid ? "⏳" : "🔒")</span>
+                    <strong>Installation</strong><br />
+                    <small>25%</small><br />
+                    <small>$@Model.InstallationPayment.ToString("N0")</small>
+                </div>
+                <div class="milestone @(Model.InspectionPaid ? "paid" : (Model.InstallationPaid ? "pending" : "locked"))">
+                    <span class="milestone-icon">@(Model.InspectionPaid ? "✅" : Model.InstallationPaid ? "⏳" : "🔒")</span>
+                    <strong>Inspection</strong><br />
+                    <small>10%</small><br />
+                    <small>$@Model.InspectionPayment.ToString("N0")</small>
+                </div>
+            </div>
+        </div>
+
+        <form asp-action="UpdateProgress" method="post" id="progressForm">
+            <input type="hidden" name="quoteId" value="@Model.Id" />
+            <input type="hidden" name="projectStatus" id="projectStatus" value="@Model.ProjectStatus" />
+
+            <div class="progress-form">
+                <div class="form-section">
+                    <h3><i class="fas fa-tasks"></i> Select Project Phase</h3>
+
+                    <div class="milestone-selector">
+                        <div class="milestone-btn @(Model.ProgressPercentage < 10 ? "active" : "")" data-status="Pending Start" data-progress="0">
+                            <span class="icon">⏸️</span>
+                            <div class="label">Pending</div>
+                            <div class="progress">0%</div>
+                        </div>
+                        <div class="milestone-btn @(!Model.DepositPaid ? "locked" : (Model.ProgressPercentage >= 1 && Model.ProgressPercentage <= 20 ? "active" : ""))" data-status="Design Phase" data-progress="20">
+                            <span class="icon">📐</span>
+                            <div class="label">Design</div>
+                            <div class="progress">0-20%</div>
+                        </div>
+                        <div class="milestone-btn @(!Model.DesignPaid ? "locked" : (Model.ProgressPercentage >= 21 && Model.ProgressPercentage <= 40 ? "active" : ""))" data-status="Procurement Phase" data-progress="40">
+                            <span class="icon">🛒</span>
+                            <div class="label">Procurement</div>
+                            <div class="progress">20-40%</div>
+                        </div>
+                        <div class="milestone-btn @(!Model.ProcurementPaid ? "locked" : (Model.ProgressPercentage >= 41 && Model.ProgressPercentage <= 80 ? "active" : ""))" data-status="Installation Phase" data-progress="80">
+                            <span class="icon">🔧</span>
+                            <div class="label">Installation</div>
+                            <div class="progress">40-80%</div>
+                        </div>
+                        <div class="milestone-btn @(!Model.InstallationPaid ? "locked" : (Model.ProgressPercentage >= 81 && Model.ProgressPercentage <= 99 ? "active" : ""))" data-status="Inspection Phase" data-progress="99">
+                            <span class="icon">✅</span>
+                            <div class="label">Inspection</div>
+                            <div class="progress">80-99%</div>
+                        </div>
+                        <div class="milestone-btn @(!Model.InspectionPaid ? "locked" : (Model.ProgressPercentage >= 100 ? "active" : ""))" data-status="Completed" data-progress="100">
+                            <span class="icon">🎉</span>
+                            <div class="label">Complete</div>
+                            <div class="progress">100%</div>
+                        </div>
+                    </div>
+
+                    @if (!Model.DepositPaid)
+                    {
+                        <div class="alert alert-warning">
+                            <strong>⚠️ Waiting for Deposit Payment</strong><br />
+                            Client must pay $@Model.DepositAmount.ToString("N2") (30%) deposit before you can start work.
+                        </div>
+                    }
+                    else if (Model.ProgressPercentage >= 20 && !Model.DesignPaid)
+                    {
+                        <div class="alert alert-warning">
+                            <strong>⚠️ Waiting for Design Payment</strong><br />
+                            Client must pay $@Model.DesignPayment.ToString("N2") (15%) before you can proceed past 20%.
+                        </div>
+                    }
+                    else if (Model.ProgressPercentage >= 40 && !Model.ProcurementPaid)
+                    {
+                        <div class="alert alert-warning">
+                            <strong>⚠️ Waiting for Procurement Payment</strong><br />
+                            Client must pay $@Model.ProcurementPayment.ToString("N2") (20%) before you can proceed past 40%.
+                        </div>
+                    }
+                    else if (Model.ProgressPercentage >= 80 && !Model.InstallationPaid)
+                    {
+                        <div class="alert alert-warning">
+                            <strong>⚠️ Waiting for Installation Payment</strong><br />
+                            Client must pay $@Model.InstallationPayment.ToString("N2") (25%) before you can proceed past 80%.
+                        </div>
+                    }
+                    else if (Model.ProgressPercentage >= 99 && !Model.InspectionPaid)
+                    {
+                        <div class="alert alert-warning">
+                            <strong>⚠️ Waiting for Final Payment</strong><br />
+                            Client must pay $@Model.InspectionPayment.ToString("N2") (10%) before you can mark as complete.
+                        </div>
+                    }
+                </div>
+
+                <div class="form-section">
+                    <h3><i class="fas fa-percentage"></i> Fine-Tune Progress Percentage</h3>
+
+                    <div class="progress-display">
+                        <div class="progress-value" id="progressValue">@Model.ProgressPercentage%</div>
+                        <div style="flex: 1; margin-left: 2rem;">
+                            <div class="progress-bar-container">
+                                <div class="progress-bar" id="progressBar" style="width: @Model.ProgressPercentage%">
+                                    @Model.ProgressPercentage%
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <input type="range"
+                           name="progressPercentage"
+                           id="progressSlider"
+                           min="0"
+                           max="100"
+                           value="@Model.ProgressPercentage"
+                           step="1" />
+
+                    <div class="alert alert-info" style="margin-top: 1rem;">
+                        <strong>💡 Tip:</strong> Use the phase buttons above for quick jumps, then fine-tune with the slider.
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3><i class="fas fa-comment-alt"></i> Progress Notes for Client</h3>
+                    <textarea name="vendorNotes"
+                              placeholder="Enter notes about current progress, any issues, or updates for the client...">@Model.VendorNotes</textarea>
+                </div>
+
+                <button type="submit" class="submit-button">
+                    <i class="fas fa-save"></i> Update Progress
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    const slider = document.getElementById('progressSlider');
+    const progressValue = document.getElementById('progressValue');
+    const progressBar = document.getElementById('progressBar');
+    const projectStatusInput = document.getElementById('projectStatus');
+    const milestoneButtons = document.querySelectorAll('.milestone-btn:not(.locked)');
+
+    // Current payment status
+    const depositPaid = @Model.DepositPaid.ToString().ToLower();
+    const designPaid = @Model.DesignPaid.ToString().ToLower();
+    const procurementPaid = @Model.ProcurementPaid.ToString().ToLower();
+    const installationPaid = @Model.InstallationPaid.ToString().ToLower();
+    const inspectionPaid = @Model.InspectionPaid.ToString().ToLower();
+
+    // Update progress display
+    slider.addEventListener('input', function() {
+        const value = parseInt(this.value);
+        progressValue.textContent = value + '%';
+        progressBar.style.width = value + '%';
+        progressBar.textContent = value + '%';
+
+        // Auto-update status based on percentage
+        updateStatus(value);
+    });
+
+    // Milestone button clicks
+    milestoneButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            if (this.classList.contains('locked')) return;
+
+            const progress = parseInt(this.dataset.progress);
+            const status = this.dataset.status;
+
+            slider.value = progress;
+            progressValue.textContent = progress + '%';
+            progressBar.style.width = progress + '%';
+            progressBar.textContent = progress + '%';
+            projectStatusInput.value = status;
+
+            // Update active button
+            milestoneButtons.forEach(btn => btn.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
+
+    // Auto-update status based on progress
+    function updateStatus(progress) {
+        if (progress === 0) {
+            projectStatusInput.value = 'Pending Start';
+        } else if (progress > 0 && progress <= 20) {
+            projectStatusInput.value = 'Design Phase - In Progress';
+        } else if (progress > 20 && progress <= 40) {
+            projectStatusInput.value = 'Procurement Phase - In Progress';
+        } else if (progress > 40 && progress <= 80) {
+            projectStatusInput.value = 'Installation Phase - In Progress';
+        } else if (progress > 80 && progress < 100) {
+            projectStatusInput.value = 'Inspection Phase - In Progress';
+        } else if (progress === 100) {
+            projectStatusInput.value = 'Project Completed';
+        }
+    }
+
+    // Form validation before submit
+    document.getElementById('progressForm').addEventListener('submit', function(e) {
+        const progress = parseInt(slider.value);
+
+        // Validate against payment status
+        if (!depositPaid && progress > 0) {
+            e.preventDefault();
+            alert('⛔ Cannot start work! Waiting for client deposit payment.');
+            return false;
+        }
+        if (progress > 20 && !designPaid) {
+            e.preventDefault();
+            alert('⛔ Cannot proceed past 20%! Waiting for Design payment.');
+            return false;
+        }
+        if (progress > 40 && !procurementPaid) {
+            e.preventDefault();
+            alert('⛔ Cannot proceed past 40%! Waiting for Procurement payment.');
+            return false;
+        }
+        if (progress > 80 && !installationPaid) {
+            e.preventDefault();
+            alert('⛔ Cannot proceed past 80%! Waiting for Installation payment.');
+            return false;
+        }
+        if (progress >= 100 && !inspectionPaid) {
+            e.preventDefault();
+            alert('⛔ Cannot mark complete! Waiting for final Inspection payment.');
+            return false;
+        }
+    });
+</script>

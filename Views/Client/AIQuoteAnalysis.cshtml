@@ -1,0 +1,394 @@
+﻿@{
+    ViewData["Title"] = "AI Quote Analysis - SolarConnect";
+    var request = ViewBag.Request as SolarConnect.Models.Request;
+    var quotes = ViewBag.Quotes as List<SolarConnect.Models.Quote>;
+    var analysis = ViewBag.AIAnalysis as string;
+    var quotesCount = ViewBag.QuotesCount;
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+    body {
+        background: linear-gradient(135deg, #fff9e6 0%, #ffe8cc 100%);
+        font-family: 'Poppins', sans-serif;
+        min-height: 100vh;
+        padding: 2rem;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .back-btn {
+        background: white;
+        color: #ff6b00;
+        border: 2px solid #ff8c00;
+        padding: 0.8rem 1.5rem;
+        border-radius: 10px;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 2rem;
+        font-weight: 600;
+        transition: all 0.3s;
+    }
+
+        .back-btn:hover {
+            background: #fff4d6;
+            transform: translateX(-5px);
+        }
+
+    .header-section {
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+
+        .header-section h1 {
+            color: #ff6b00;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+    .ai-badge {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .request-summary {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 15px;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        border-left: 5px solid #17a2b8;
+    }
+
+        .request-summary h3 {
+            color: #0c5460;
+            margin-bottom: 1rem;
+        }
+
+        .request-summary p {
+            margin: 0.5rem 0;
+            color: #666;
+        }
+
+    .quotes-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .quote-card {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 15px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        transition: transform 0.3s;
+    }
+
+        .quote-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .quote-card h4 {
+            color: #ff6b00;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+    .quote-price {
+        font-size: 2rem;
+        color: #28a745;
+        font-weight: bold;
+        margin: 1rem 0;
+    }
+
+    .quote-details {
+        color: #666;
+        font-size: 0.9rem;
+    }
+
+        .quote-details p {
+            margin: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+    .ai-analysis-section {
+        background: white;
+        padding: 2.5rem;
+        border-radius: 20px;
+        box-shadow: 0 10px 40px rgba(102, 126, 234, 0.15);
+        border: 3px solid #667eea;
+        position: relative;
+        overflow: hidden;
+    }
+
+        .ai-analysis-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+        }
+
+    .ai-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 2rem;
+        padding-bottom: 1rem;
+        border-bottom: 2px solid #f0f0f0;
+    }
+
+    .ai-icon {
+        font-size: 3rem;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: pulse 2s infinite;
+    }
+
+    @@keyframes pulse {
+        0%, 100%
+
+    {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    }
+
+    .ai-header h2 {
+        color: #667eea;
+        margin: 0;
+    }
+
+    .ai-content {
+        line-height: 1.8;
+        color: #333;
+        font-size: 1.05rem;
+    }
+
+        .ai-content h1, .ai-content h2, .ai-content h3 {
+            color: #667eea;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .ai-content strong {
+            color: #ff6b00;
+        }
+
+        .ai-content ul, .ai-content ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .ai-content li {
+            margin: 0.5rem 0;
+        }
+
+        .ai-content blockquote {
+            border-left: 4px solid #667eea;
+            padding-left: 1rem;
+            margin: 1rem 0;
+            color: #666;
+            font-style: italic;
+            background: #f8f9ff;
+            padding: 1rem;
+            border-radius: 5px;
+        }
+
+    .loading-spinner {
+        text-align: center;
+        padding: 3rem;
+    }
+
+    .spinner {
+        border: 4px solid #f3f3f3;
+        border-top: 4px solid #667eea;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        animation: spin 1s linear infinite;
+        margin: 0 auto 1rem;
+    }
+
+    @@keyframes spin {
+        0%
+
+    {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+
+    }
+
+    .rating-stars {
+        color: #ffc107;
+    }
+
+    .badge {
+        display: inline-block;
+        padding: 0.3rem 0.8rem;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        margin-left: 0.5rem;
+    }
+
+    .badge-best {
+        background: linear-gradient(135deg, #28a745, #20c997);
+        color: white;
+    }
+
+    .badge-cheapest {
+        background: linear-gradient(135deg, #17a2b8, #20c997);
+        color: white;
+    }
+
+    .badge-fastest {
+        background: linear-gradient(135deg, #fd7e14, #ffc107);
+        color: white;
+    }
+</style>
+
+<div class="container">
+    <a asp-action="MyRequests" class="back-btn">
+        <i class="fas fa-arrow-left"></i> Back to My Requests
+    </a>
+
+    <div class="header-section">
+        <h1>
+            <i class="fas fa-robot"></i>
+            AI Quote Analysis
+            <span class="ai-badge">
+                <i class="fas fa-sparkles"></i>
+                Powered by Claude AI
+            </span>
+        </h1>
+        <p style="color: #666;">Intelligent comparison of @quotesCount solar installation quotes</p>
+    </div>
+
+    @if (request != null)
+    {
+        <div class="request-summary">
+            <h3><i class="fas fa-info-circle"></i> Your Request Details</h3>
+            <p><strong>Property:</strong> @request.PropertyType - @request.PropertyAddress</p>
+            <p><strong>Monthly Consumption:</strong> @request.MonthlyConsumption kWh</p>
+            @if (request.RecommendedSystemSize.HasValue)
+            {
+                <p><strong>Recommended System:</strong> @request.RecommendedSystemSize.Value.ToString("F2") kW</p>
+            }
+        </div>
+    }
+
+    @if (quotes != null && quotes.Count > 0)
+    {
+        <h3 style="color: #ff6b00; margin-bottom: 1rem;">
+            <i class="fas fa-list"></i> Quotes Received (@quotes.Count)
+        </h3>
+
+        <div class="quotes-grid">
+            @foreach (var quote in quotes)
+            {
+                <div class="quote-card">
+                    <h4>
+                        <i class="fas fa-building"></i>
+                        @quote.Vendor.CompanyName
+                        @if (quote.TotalPrice == quotes.Min(q => q.TotalPrice))
+                        {
+                            <span class="badge badge-cheapest">Lowest Price</span>
+                        }
+                    </h4>
+
+                    <div class="rating-stars">
+                        @for (int i = 0; i < (int)quote.Vendor.Rating; i++)
+                        {
+                            <i class="fas fa-star"></i>
+                        }
+                        @if (quote.Vendor.Rating % 1 != 0)
+                        {
+                            <i class="fas fa-star-half-alt"></i>
+                        }
+                        <span style="color: #666; margin-left: 0.5rem;">@quote.Vendor.Rating.ToString("F1")</span>
+                    </div>
+
+                    <div class="quote-price">$@quote.TotalPrice.ToString("N2")</div>
+
+                    <div class="quote-details">
+                        <p><i class="fas fa-solar-panel" style="color: #ff8c00;"></i> <strong>System:</strong> @quote.SystemSize kW</p>
+                        <p><i class="fas fa-dollar-sign" style="color: #28a745;"></i> <strong>Price/kW:</strong> $@((quote.TotalPrice / quote.SystemSize).ToString("N2"))</p>
+                        <p><i class="fas fa-microchip" style="color: #17a2b8;"></i> <strong>Panel:</strong> @quote.PanelBrand</p>
+                        <p><i class="fas fa-bolt" style="color: #ffc107;"></i> <strong>Inverter:</strong> @quote.InverterBrand</p>
+                        <p><i class="fas fa-calendar-alt" style="color: #6c757d;"></i> <strong>Timeline:</strong> @quote.EstimatedInstallationDays days</p>
+                        <p><i class="fas fa-shield-alt" style="color: #28a745;"></i> <strong>Warranty:</strong> @quote.WarrantyYears years</p>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+
+    <div class="ai-analysis-section">
+        <div class="ai-header">
+            <i class="fas fa-brain ai-icon"></i>
+            <div>
+                <h2>AI Analysis & Recommendation</h2>
+                <p style="margin: 0; color: #666;">Claude analyzed all quotes based on price, quality, warranty, and value</p>
+            </div>
+        </div>
+
+        <div class="ai-content">
+            @Html.Raw(Markdig.Markdown.ToHtml(analysis ?? "Analyzing..."))
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Add smooth scroll and animations
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.quote-card');
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(20px)';
+                    card.style.transition = 'all 0.5s ease';
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, 100);
+                }, index * 100);
+            });
+        });
+    </script>
+}

@@ -1,12 +1,18 @@
-﻿@model SolarConnect.Models.ViewModels.AdminDashboardViewModel
-@{
+﻿@{
     ViewData["Title"] = "Admin Dashboard - SolarConnect";
+
+    int totalClients = ViewBag.TotalClients ?? 0;
+    int totalVendors = ViewBag.TotalVendors ?? 0;
+    int pendingApprovals = ViewBag.PendingApprovals ?? 0;
+    int activeRequests = ViewBag.ActiveRequests ?? 0;
+
+    // Safe user name extraction
+    var userName = User.Identity?.Name ?? User.FindFirst(System.Security.Claims.ClaimTypes.Name)?.Value ?? "Admin";
 }
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
 <style>
-    /* keep your entire CSS exactly as you sent before */
     body {
         background: linear-gradient(135deg, #fff9e6 0%, #ffe8cc 100%);
         font-family: 'Poppins', sans-serif;
@@ -69,11 +75,6 @@
             margin-bottom: 0.5rem;
         }
 
-        .stat-card p {
-            font-size: 1rem;
-            opacity: 0.9;
-        }
-
     .cards {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -84,6 +85,7 @@
     .card-link {
         text-decoration: none;
         color: inherit;
+        display: block;
     }
 
     .card {
@@ -121,6 +123,7 @@
         margin-top: 2rem;
         display: flex;
         gap: 1rem;
+        flex-wrap: wrap;
     }
 
     .btn {
@@ -141,7 +144,7 @@
 
         .btn-primary:hover {
             transform: scale(1.05);
-            box-shadow: 0 4px 12px rgba(255,140,0,0.3);
+            box-shadow: 0 4px 12px rgba(255, 140, 0, 0.3);
         }
 
     .btn-secondary {
@@ -153,6 +156,24 @@
         .btn-secondary:hover {
             background: #fff4d6;
         }
+
+    .alert-success {
+        background: #eaffea;
+        border: 1px solid #a6e3a6;
+        padding: 12px;
+        border-radius: 10px;
+        margin-bottom: 15px;
+        color: #2d7a2d;
+    }
+
+    .alert-error {
+        background: #ffeaea;
+        border: 1px solid #f2b3b3;
+        padding: 12px;
+        border-radius: 10px;
+        margin-bottom: 15px;
+        color: #8a1f1f;
+    }
 </style>
 
 <div class="dashboard-container">
@@ -161,93 +182,61 @@
         Admin Dashboard
     </h1>
 
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert-success">@TempData["Success"]</div>
+    }
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert-error">@TempData["Error"]</div>
+    }
+
+
     <p class="welcome">
-        Welcome back, <strong>@User.Identity.Name</strong>! Manage your solar platform. 👨‍💼
+        Welcome back, <strong>@userName</strong>! Manage your solar platform. 👨‍💼
     </p>
 
     <div class="stats">
-        <div class="stat-card">
-            <i class="fas fa-users"></i>
-            <h2>@Model.TotalClients</h2>
-            <p>Total Clients</p>
-        </div>
-        <div class="stat-card">
-            <i class="fas fa-briefcase"></i>
-            <h2>@Model.TotalVendors</h2>
-            <p>Total Vendors</p>
-        </div>
-        <div class="stat-card">
-            <i class="fas fa-clock"></i>
-            <h2>@Model.PendingApprovals</h2>
-            <p>Pending Approvals</p>
-        </div>
-        <div class="stat-card">
-            <i class="fas fa-file-alt"></i>
-            <h2>@Model.ActiveRequests</h2>
-            <p>Active Requests</p>
-        </div>
+        <div class="stat-card"><i class="fas fa-users"></i><h2>@totalClients</h2><p>Total Clients</p></div>
+        <div class="stat-card"><i class="fas fa-briefcase"></i><h2>@totalVendors</h2><p>Total Vendors</p></div>
+        <div class="stat-card"><i class="fas fa-clock"></i><h2>@pendingApprovals</h2><p>Pending Approvals</p></div>
+        <div class="stat-card"><i class="fas fa-file-alt"></i><h2>@activeRequests</h2><p>Active Requests</p></div>
     </div>
 
-    <h2 style="color:#ff6b00; margin-bottom:1.5rem;">Quick Actions</h2>
+    <h2 style="color: #ff6b00; margin-bottom: 1.5rem;">Quick Actions</h2>
 
     <div class="cards">
-        <a asp-action="ManageUsers" class="card-link">
-            <div class="card">
-                <i class="fas fa-users-cog"></i>
-                <h3>Manage Users</h3>
-                <p>View and manage all users</p>
-            </div>
+        <a asp-action="Users" class="card-link">
+            <div class="card"><i class="fas fa-users-cog"></i><h3>Manage Users</h3><p>View and manage all users</p></div>
         </a>
 
         <a asp-action="PendingVendors" class="card-link">
-            <div class="card">
-                <i class="fas fa-user-check"></i>
-                <h3>Approve Vendors</h3>
-                <p>Review and approve vendor accounts</p>
-            </div>
+            <div class="card"><i class="fas fa-user-check"></i><h3>Approve Vendors</h3><p>Review and approve vendor accounts</p></div>
         </a>
 
-        <a asp-action="Products" class="card-link">
-            <div class="card">
-                <i class="fas fa-box"></i>
-                <h3>Products</h3>
-                <p>Manage solar products catalog</p>
-            </div>
-        </a>
-
-        <a asp-action="AllRequests" class="card-link">
-            <div class="card">
-                <i class="fas fa-file-invoice"></i>
-                <h3>All Requests</h3>
-                <p>View all client requests</p>
-            </div>
+        <a asp-action="Requests" class="card-link">
+            <div class="card"><i class="fas fa-file-invoice"></i><h3>All Requests</h3><p>View all client requests</p></div>
         </a>
 
         <a asp-action="Projects" class="card-link">
-            <div class="card">
-                <i class="fas fa-tasks"></i>
-                <h3>Projects</h3>
-                <p>Monitor installation projects</p>
-            </div>
+            <div class="card"><i class="fas fa-tasks"></i><h3>Projects</h3><p>Track quotes and installations</p></div>
         </a>
 
         <a asp-action="Reports" class="card-link">
-            <div class="card">
-                <i class="fas fa-chart-bar"></i>
-                <h3>Reports & Analytics</h3>
-                <p>Pricing trends and statistics</p>
-            </div>
+            <div class="card"><i class="fas fa-chart-bar"></i><h3>Reports</h3><p>System statistics overview</p></div>
+        </a>
+
+        <a asp-action="Actions" class="card-link">
+            <div class="card"><i class="fas fa-list"></i><h3>System Actions</h3><p>Requests + Quotes (filter/search)</p></div>
         </a>
     </div>
 
     <div class="actions">
-        <a href="/" class="btn btn-secondary">
-            <i class="fas fa-home"></i> Home
-        </a>
+        <a href="/" class="btn btn-secondary"><i class="fas fa-home"></i> Home</a>
+
         <form asp-controller="Auth" asp-action="Logout" method="post" style="display:inline;">
-            <button type="submit" class="btn btn-primary">
-                <i class="fas fa-sign-out-alt"></i> Logout
-            </button>
+            @Html.AntiForgeryToken()
+            <button type="submit" class="btn btn-primary"><i class="fas fa-sign-out-alt"></i> Logout</button>
         </form>
     </div>
 </div>

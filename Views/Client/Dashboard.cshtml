@@ -1,10 +1,18 @@
-﻿@{
+﻿@model dynamic
+
+@{
     ViewData["Title"] = "Client Dashboard - SolarConnect";
 }
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
 <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
     body {
         background: linear-gradient(135deg, #fff9e6 0%, #ffe8cc 100%);
         font-family: 'Poppins', sans-serif;
@@ -12,156 +20,311 @@
         padding: 2rem;
     }
 
-    .dashboard-container {
-        max-width: 1200px;
+    .container {
+        max-width: 1400px;
         margin: 0 auto;
-        background-color: white;
-        padding: 3rem;
+    }
+
+    .welcome-section {
+        background: white;
+        padding: 2.5rem;
         border-radius: 20px;
+        margin-bottom: 2rem;
         box-shadow: 0 10px 40px rgba(255, 140, 0, 0.15);
+        border-left: 6px solid #ff8c00;
     }
 
-    h1 {
-        color: #ff6b00;
-        margin-bottom: 1rem;
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-    }
-
-        h1 i {
-            font-size: 2.5rem;
-            color: #ff8c00;
+        .welcome-section h1 {
+            color: #ff6b00;
+            margin: 0 0 0.5rem 0;
+            font-size: 2.2rem;
         }
 
-    .welcome {
-        color: #666;
-        margin-bottom: 2rem;
-        font-size: 1.1rem;
-    }
+        .welcome-section p {
+            color: #666;
+            margin: 0;
+            font-size: 1.1rem;
+        }
 
-    .alert-success {
-        background-color: #d4edda;
-        border-left: 4px solid #28a745;
-        color: #155724;
-        padding: 1rem;
-        border-radius: 8px;
-        margin-bottom: 2rem;
-    }
-
-    .cards {
+    .stats-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 2rem;
-        margin-top: 2rem;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 2rem;
     }
 
-    .card-link {
-        text-decoration: none;
-        color: inherit;
-    }
-
-    .card {
-        background: linear-gradient(135deg, #fff4d6, #ffe8cc);
+    .stat-card {
+        background: white;
         padding: 2rem;
         border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
         text-align: center;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        cursor: pointer;
+        transition: all 0.3s ease;
     }
 
-        .card:hover {
+        .stat-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 6px 18px rgba(255, 140, 0, 0.25);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
         }
 
-        .card i {
-            font-size: 3rem;
-            color: #ff8c00;
-            margin-bottom: 1rem;
+        .stat-card.orange {
+            border-top: 4px solid #ff8c00;
         }
 
-        .card h3 {
-            color: #ff6b00;
-            margin-bottom: 0.5rem;
+        .stat-card.blue {
+            border-top: 4px solid #1976d2;
         }
 
-        .card p {
-            color: #666;
-            font-size: 0.9rem;
+        .stat-card.green {
+            border-top: 4px solid #28a745;
         }
 
-    .btn-logout {
-        background: linear-gradient(135deg, #ff6b00, #ff8c00);
-        color: white;
-        border: none;
-        padding: 0.8rem 1.5rem;
-        border-radius: 10px;
-        cursor: pointer;
-        font-weight: 600;
-        margin-top: 2rem;
+        .stat-card.purple {
+            border-top: 4px solid #9c27b0;
+        }
+
+    .stat-icon {
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
+        opacity: 0.3;
     }
 
-        .btn-logout:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 12px rgba(255, 140, 0, 0.3);
+    .stat-card.orange .stat-icon {
+        color: #ff8c00;
+    }
+
+    .stat-card.blue .stat-icon {
+        color: #1976d2;
+    }
+
+    .stat-card.green .stat-icon {
+        color: #28a745;
+    }
+
+    .stat-card.purple .stat-icon {
+        color: #9c27b0;
+    }
+
+    .stat-number {
+        font-size: 3rem;
+        font-weight: 700;
+        margin: 0.5rem 0;
+    }
+
+    .stat-card.orange .stat-number {
+        color: #ff8c00;
+    }
+
+    .stat-card.blue .stat-number {
+        color: #1976d2;
+    }
+
+    .stat-card.green .stat-number {
+        color: #28a745;
+    }
+
+    .stat-card.purple .stat-number {
+        color: #9c27b0;
+    }
+
+    .stat-label {
+        color: #666;
+        font-size: 1rem;
+        margin-top: 0.5rem;
+    }
+
+    .section-title {
+        color: #333;
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+        .section-title i {
+            color: #ff8c00;
         }
+
+    .actions-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .action-card {
+        background: white;
+        padding: 2rem;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        transition: all 0.3s ease;
+        text-decoration: none;
+        color: inherit;
+        display: block;
+        cursor: pointer;
+    }
+
+        .action-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 140, 0, 0.2);
+            text-decoration: none;
+        }
+
+        .action-card h3 {
+            color: #333;
+            margin: 1rem 0 0.5rem 0;
+            font-size: 1.3rem;
+        }
+
+        .action-card p {
+            color: #666;
+            margin: 0;
+            font-size: 0.95rem;
+        }
+
+    .action-icon {
+        font-size: 2.5rem;
+        text-align: center;
+    }
+
+    .action-card.create .action-icon {
+        color: #ff8c00;
+    }
+
+    .action-card.requests .action-icon {
+        color: #1976d2;
+    }
+
+    .action-card.quotes .action-icon {
+        color: #ffc107;
+    }
+
+    .action-card.projects .action-icon {
+        color: #28a745;
+    }
+
+    .logout-btn {
+        background: linear-gradient(135deg, #dc3545, #c82333);
+        color: white;
+        padding: 0.8rem 1.5rem;
+        border: none;
+        border-radius: 10px;
+        font-weight: 600;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: all 0.3s ease;
+    }
+
+        .logout-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(220, 53, 69, 0.3);
+            color: white;
+            text-decoration: none;
+        }
+
+    footer {
+        text-align: center;
+        color: #999;
+        font-size: 0.85rem;
+        margin-top: 3rem;
+        padding-top: 2rem;
+        border-top: 1px solid #eee;
+    }
 </style>
 
-<div class="dashboard-container">
-    <h1>
-        <i class="fas fa-solar-panel"></i>
-        Client Dashboard
-    </h1>
+<div class="container">
+    <!-- Welcome Section -->
+    <div class="welcome-section">
+        <h1>👋 Welcome, @ViewBag.UserName!</h1>
+        <p>Manage your solar installation requests and track your projects</p>
+    </div>
 
-    @if (TempData["Success"] != null)
-    {
-        <div class="alert-success">
-            <i class="fas fa-check-circle"></i> @TempData["Success"]
-        </div>
-    }
-
-    <p class="welcome">
-        Welcome, <strong>@User.Identity.Name</strong>! Your solar journey starts here. 🌞
-    </p>
-
-    <div class="cards">
-        <a asp-action="NewRequest" class="card-link">
-            <div class="card">
-                <i class="fas fa-plus-circle"></i>
-                <h3>New Solar Request</h3>
-                <p>Request quotes from solar vendors</p>
-            </div>
-        </a>
-
-        <a asp-action="MyRequests" class="card-link">
-            <div class="card">
+    <!-- Statistics -->
+    <div class="stats-grid">
+        <div class="stat-card orange">
+            <div class="stat-icon">
                 <i class="fas fa-file-alt"></i>
-                <h3>My Requests</h3>
-                <p>View and manage your requests</p>
             </div>
+            <div class="stat-number">@ViewBag.TotalRequests</div>
+            <div class="stat-label">Total Requests</div>
+        </div>
+
+        <div class="stat-card blue">
+            <div class="stat-icon">
+                <i class="fas fa-comment-dollar"></i>
+            </div>
+            <div class="stat-number">@ViewBag.ReceivedQuotes</div>
+            <div class="stat-label">Received Quotes</div>
+        </div>
+
+        <div class="stat-card purple">
+            <div class="stat-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <div class="stat-number">@ViewBag.AcceptedProjects</div>
+            <div class="stat-label">Active Projects</div>
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <h2 class="section-title">
+        <i class="fas fa-bolt"></i> Quick Actions
+    </h2>
+
+    <div class="actions-grid">
+        <!-- Create Request -->
+        <a asp-action="CreateRequest" asp-controller="Client" class="action-card create">
+            <div class="action-icon">
+                <i class="fas fa-plus-circle"></i>
+            </div>
+            <h3>Create New Request</h3>
+            <p>Request quotes for solar installation</p>
         </a>
 
-        <a asp-action="ReceivedQuotes" class="card-link">
-            <div class="card">
-                <i class="fas fa-clipboard-list"></i>
-                <h3>Received Quotes</h3>
-                <p>Compare vendor offers</p>
+        <!-- My Requests -->
+        <a asp-action="MyRequests" asp-controller="Client" class="action-card requests">
+            <div class="action-icon">
+                <i class="fas fa-list"></i>
             </div>
+            <h3>My Requests</h3>
+            <p>View and manage all your requests</p>
         </a>
 
-        <a asp-action="MyProjects" class="card-link">
-            <div class="card">
+        <!-- Received Quotes -->
+        <a asp-action="MyRequests" asp-controller="Client" class="action-card quotes">
+            <div class="action-icon">
+                <i class="fas fa-comment-dollar"></i>
+            </div>
+            <h3>Received Quotes</h3>
+            <p>Compare vendor offers and accept</p>
+        </a>
+
+        <!-- My Projects -->
+        <a asp-action="MyProjects" asp-controller="Client" class="action-card projects">
+            <div class="action-icon">
                 <i class="fas fa-tasks"></i>
-                <h3>My Projects</h3>
-                <p>Track installation progress</p>
             </div>
+            <h3>My Projects</h3>
+            <p>Track your active solar installations</p>
         </a>
     </div>
 
-    <form asp-controller="Auth" asp-action="Logout" method="post">
-        <button type="submit" class="btn-logout">
-            <i class="fas fa-sign-out-alt"></i> Logout
-        </button>
-    </form>
+    <!-- Logout -->
+    <div style="margin-top: 2rem;">
+        <form asp-action="Logout" asp-controller="Auth" method="post" style="display: inline;">
+            @Html.AntiForgeryToken()
+            <button type="submit" class="logout-btn">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+        </form>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 - SolarConnect. All rights reserved.</p>
+    </footer>
 </div>

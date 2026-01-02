@@ -1,0 +1,263 @@
+﻿@model SolarConnect.Models.Quote
+
+@{
+    ViewData["Title"] = "Request Extension";
+    var penaltyPerDay = Model.TotalPrice * (Model.PenaltyRate / 100m);
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+<style>
+    body {
+        background: linear-gradient(135deg, #fff9e6 0%, #ffe8cc 100%);
+        font-family: 'Poppins', sans-serif;
+        min-height: 100vh;
+        padding: 2rem;
+    }
+
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 30px;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+        color: #ff6b00;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 2rem;
+    }
+
+        h1 i {
+            font-size: 2.5rem;
+            color: #3498db;
+        }
+
+    .info-box {
+        background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+        padding: 20px;
+        border-radius: 10px;
+        border-left: 4px solid #27ae60;
+        margin-bottom: 25px;
+    }
+
+        .info-box h3 {
+            margin-top: 0;
+            color: #27ae60;
+        }
+
+    .info-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+    }
+
+    .penalty-box {
+        background: linear-gradient(135deg, #fee, #fdd);
+        padding: 20px;
+        border-radius: 10px;
+        border-left: 4px solid #e74c3c;
+        margin-bottom: 25px;
+    }
+
+        .penalty-box h3 {
+            margin-top: 0;
+            color: #e74c3c;
+        }
+
+    .form-group {
+        margin-bottom: 25px;
+    }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+
+            .form-group input:focus,
+            .form-group textarea:focus {
+                border-color: #3498db;
+                outline: none;
+            }
+
+    .tips-box {
+        background: #e3f2fd;
+        padding: 20px;
+        border-radius: 10px;
+        border-left: 4px solid #2196f3;
+        margin-bottom: 25px;
+    }
+
+        .tips-box h4 {
+            margin-top: 0;
+            color: #1976d2;
+        }
+
+    .button-group {
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+        margin-top: 30px;
+    }
+
+    .btn {
+        padding: 15px 40px;
+        border: none;
+        border-radius: 10px;
+        font-weight: 600;
+        font-size: 1rem;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: transform 0.2s;
+    }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+    .btn-primary {
+        background: linear-gradient(135deg, #3498db, #2980b9);
+        color: white;
+    }
+
+    .btn-secondary {
+        background: #95a5a6;
+        color: white;
+    }
+</style>
+
+<div class="container">
+    <a href="@Url.Action("MyProjects", "Vendor")" style="display: inline-block; margin-bottom: 20px; color: #3498db; text-decoration: none;">
+        <i class="fas fa-arrow-left"></i> Back to Projects
+    </a>
+
+    <h1>
+        <i class="fas fa-calendar-plus"></i>
+        Request Deadline Extension
+    </h1>
+
+    <p style="color: #666; margin-bottom: 30px;">
+        Project: <strong>@Model.Request.PropertyAddress</strong>
+    </p>
+
+    <!-- Current Status -->
+    <div class="info-box">
+        <h3><i class="fas fa-info-circle"></i> Current Status</h3>
+        <div class="info-grid">
+            <div>
+                <strong>Original Deadline:</strong><br>
+                @Model.ProjectDeadline?.ToString("MMM dd, yyyy")
+            </div>
+            <div>
+                <strong>Current Progress:</strong><br>
+                @Model.ProgressPercentage%
+            </div>
+            @if (Model.IsOverdue)
+            {
+                <div style="grid-column: 1 / -1; color: #e74c3c;">
+                    <strong>⚠️ Currently Overdue:</strong> @Model.DaysOverdue days<br>
+                    <strong>Accumulated Penalty:</strong> $@Model.AccumulatedPenalty.ToString("N2")
+                </div>
+            }
+        </div>
+    </div>
+
+    <!-- Penalty Warning -->
+    @if (Model.IsOverdue)
+    {
+        <div class="penalty-box">
+            <h3><i class="fas fa-exclamation-triangle"></i> Active Penalties</h3>
+            <p style="margin: 0;">
+                Daily Penalty: <strong>$@penaltyPerDay.ToString("N2")</strong> (@Model.PenaltyRate% of total)
+            </p>
+            <p style="margin: 10px 0 0 0; font-size: 0.95em;">
+                If your extension is approved, the client may choose to waive accumulated penalties.
+            </p>
+        </div>
+    }
+    else
+    {
+        <div class="penalty-box" style="background: #fff3cd; border-left-color: #f39c12;">
+            <h3 style="color: #f39c12;"><i class="fas fa-clock"></i> Penalty System</h3>
+            <p style="margin: 0;">
+                If you miss the deadline, a penalty of <strong>$@penaltyPerDay.ToString("N2") per day</strong> will apply.
+            </p>
+            <p style="margin: 10px 0 0 0; font-size: 0.95em;">
+                Request an extension before the deadline to avoid penalties.
+            </p>
+        </div>
+    }
+
+    <!-- Extension Form -->
+    <form asp-action="RequestExtension" method="post">
+        <input type="hidden" name="quoteId" value="@Model.Id" />
+
+        <div class="form-group">
+            <label>
+                <i class="fas fa-calendar-alt"></i> Additional Days Needed *
+            </label>
+            <input type="number" name="extensionDays" min="1" max="30" required
+                   placeholder="Enter number of days (1-30)">
+            <small style="color: #666; display: block; margin-top: 5px;">
+                Maximum 30 days per request
+            </small>
+        </div>
+
+        <div class="form-group">
+            <label>
+                <i class="fas fa-file-alt"></i> Detailed Reason for Extension *
+            </label>
+            <textarea name="reason" required minlength="20" rows="6"
+                      placeholder="Provide a detailed explanation (minimum 20 characters)&#10;Examples:&#10;- Unexpected weather delays&#10;- Equipment delivery postponed&#10;- Permit approval taking longer than expected&#10;- Material shortages"></textarea>
+            <small style="color: #666; display: block; margin-top: 5px;">
+                Be specific and honest. The client will review your request.
+            </small>
+        </div>
+
+        <div class="tips-box">
+            <h4><i class="fas fa-lightbulb"></i> Tips for Approval</h4>
+            <ul style="margin: 10px 0; padding-left: 20px; line-height: 1.8;">
+                <li>Be honest and transparent about the delays</li>
+                <li>Provide specific reasons beyond your control</li>
+                <li>Show commitment to completing the project</li>
+                <li>Request only what you actually need</li>
+                <li>Request BEFORE the deadline when possible</li>
+            </ul>
+        </div>
+
+        <div class="button-group">
+            <a href="@Url.Action("MyProjects", "Vendor")" class="btn btn-secondary">
+                <i class="fas fa-times"></i> Cancel
+            </a>
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-paper-plane"></i> Submit Extension Request
+            </button>
+        </div>
+    </form>
+
+    <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-top: 30px; text-align: center;">
+        <p style="margin: 0; color: #6c757d; font-size: 0.95em;">
+            <i class="fas fa-info-circle"></i> The client will be notified and can approve or deny your request.
+            You'll receive an email with their decision.
+        </p>
+    </div>
+</div>
