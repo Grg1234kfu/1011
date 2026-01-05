@@ -6,6 +6,23 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <!-- Exclude the legacy duplicate sources in the project root; we only build from the SolarConnect/ folder -->
+  <ItemGroup>
+    <Compile Remove="Controllers\**\*.cs" />
+    <Compile Remove="Data\**\*.cs" />
+    <Compile Remove="Models\**\*.cs" />
+    <Compile Remove="Views\**\*.cs" />
+    <Compile Remove="Migrations\**\*.cs" />
+    <Compile Remove="Program.cs" />
+    <Content Remove="Views\**\*" />
+    <None Remove="Views\**\*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="SolarConnect\appsettings.json" CopyToOutputDirectory="PreserveNewest" />
+    <Content Update="SolarConnect\appsettings.Development.json" CopyToOutputDirectory="PreserveNewest" Condition="Exists('SolarConnect\appsettings.Development.json')" />
+  </ItemGroup>
+
   <ItemGroup>
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.10">
